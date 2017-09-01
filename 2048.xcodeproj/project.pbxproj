@@ -17,6 +17,9 @@
 		A4864DC21F58A75B00645483 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4864DC01F58A75B00645483 /* LaunchScreen.storyboard */; };
 		A4864DCD1F58A75B00645483 /* _048Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DCC1F58A75B00645483 /* _048Tests.swift */; };
 		A4864DD81F58A75B00645483 /* _048UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DD71F58A75B00645483 /* _048UITests.swift */; };
+		A4864DEE1F59437100645483 /* SplashLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DEB1F59437100645483 /* SplashLogo.png */; };
+		A4864DEF1F59437100645483 /* SplashLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DEC1F59437100645483 /* SplashLogo@2x.png */; };
+		A4864DF01F59437100645483 /* SplashLogo@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DED1F59437100645483 /* SplashLogo@4x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		A4864DD31F58A75B00645483 /* 2048UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 2048UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4864DD71F58A75B00645483 /* _048UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _048UITests.swift; sourceTree = "<group>"; };
 		A4864DD91F58A75B00645483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4864DEB1F59437100645483 /* SplashLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashLogo.png; sourceTree = "<group>"; };
+		A4864DEC1F59437100645483 /* SplashLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashLogo@2x.png"; sourceTree = "<group>"; };
+		A4864DED1F59437100645483 /* SplashLogo@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashLogo@4x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,9 @@
 				A4864DB91F58A75B00645483 /* GameViewController.swift */,
 				A4864DBB1F58A75B00645483 /* Main.storyboard */,
 				A4864DBE1F58A75B00645483 /* Assets.xcassets */,
+				A4864DEB1F59437100645483 /* SplashLogo.png */,
+				A4864DEC1F59437100645483 /* SplashLogo@2x.png */,
+				A4864DED1F59437100645483 /* SplashLogo@4x.png */,
 				A4864DC01F58A75B00645483 /* LaunchScreen.storyboard */,
 				A4864DC31F58A75B00645483 /* Info.plist */,
 			);
@@ -245,10 +254,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4864DBD1F58A75B00645483 /* Main.storyboard in Resources */,
+				A4864DEF1F59437100645483 /* SplashLogo@2x.png in Resources */,
 				A4864DB41F58A75B00645483 /* GameScene.sks in Resources */,
 				A4864DBF1F58A75B00645483 /* Assets.xcassets in Resources */,
+				A4864DF01F59437100645483 /* SplashLogo@4x.png in Resources */,
 				A4864DC21F58A75B00645483 /* LaunchScreen.storyboard in Resources */,
 				A4864DB61F58A75B00645483 /* Actions.sks in Resources */,
+				A4864DEE1F59437100645483 /* SplashLogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +540,7 @@
 				A4864DDE1F58A75B00645483 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4864DDF1F58A75B00645483 /* Build configuration list for PBXNativeTarget "2048Tests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +549,7 @@
 				A4864DE11F58A75B00645483 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4864DE21F58A75B00645483 /* Build configuration list for PBXNativeTarget "2048UITests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +558,7 @@
 				A4864DE41F58A75B00645483 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
