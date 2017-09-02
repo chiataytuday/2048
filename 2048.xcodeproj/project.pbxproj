@@ -21,6 +21,11 @@
 		A4D18BF91F594E5D00D93B03 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BF81F594E5D00D93B03 /* HomeScene.swift */; };
 		A4D18BFB1F5954C600D93B03 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFA1F5954C600D93B03 /* Globals.swift */; };
 		A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */; };
+		A4D18C021F5B3EC300D93B03 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C011F5B3EC300D93B03 /* TileView.swift */; };
+		A4D18C041F5B42D800D93B03 /* AuxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C031F5B42D800D93B03 /* AuxModel.swift */; };
+		A4D18C061F5B43A000D93B03 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C051F5B43A000D93B03 /* GameModel.swift */; };
+		A4D18C081F5B466E00D93B03 /* ComponentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C071F5B466E00D93B03 /* ComponentsView.swift */; };
+		A4D18C0A1F5B46BC00D93B03 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C091F5B46BC00D93B03 /* GameBoardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,11 @@
 		A4D18BF81F594E5D00D93B03 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 		A4D18BFA1F5954C600D93B03 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleDefinitions.swift; sourceTree = "<group>"; };
+		A4D18C011F5B3EC300D93B03 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		A4D18C031F5B42D800D93B03 /* AuxModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuxModel.swift; sourceTree = "<group>"; };
+		A4D18C051F5B43A000D93B03 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		A4D18C071F5B466E00D93B03 /* ComponentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsView.swift; sourceTree = "<group>"; };
+		A4D18C091F5B46BC00D93B03 /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +169,9 @@
 		A4D18BFD1F5957E900D93B03 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4D18C011F5B3EC300D93B03 /* TileView.swift */,
+				A4D18C071F5B466E00D93B03 /* ComponentsView.swift */,
+				A4D18C091F5B46BC00D93B03 /* GameBoardView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -166,6 +179,8 @@
 		A4D18BFE1F5957F100D93B03 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A4D18C031F5B42D800D93B03 /* AuxModel.swift */,
+				A4D18C051F5B43A000D93B03 /* GameModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -310,7 +325,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4D18C081F5B466E00D93B03 /* ComponentsView.swift in Sources */,
+				A4D18C041F5B42D800D93B03 /* AuxModel.swift in Sources */,
 				A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */,
+				A4D18C0A1F5B46BC00D93B03 /* GameBoardView.swift in Sources */,
+				A4D18C061F5B43A000D93B03 /* GameModel.swift in Sources */,
+				A4D18C021F5B3EC300D93B03 /* TileView.swift in Sources */,
 				A4864DB81F58A75B00645483 /* GameScene.swift in Sources */,
 				A4D18BF91F594E5D00D93B03 /* HomeScene.swift in Sources */,
 				A4864DBA1F58A75B00645483 /* GameViewController.swift in Sources */,
