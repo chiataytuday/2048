@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A4864DB21F58A75B00645483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB11F58A75B00645483 /* AppDelegate.swift */; };
-		A4864DB41F58A75B00645483 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4864DB31F58A75B00645483 /* GameScene.sks */; };
-		A4864DB61F58A75B00645483 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4864DB51F58A75B00645483 /* Actions.sks */; };
 		A4864DB81F58A75B00645483 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB71F58A75B00645483 /* GameScene.swift */; };
 		A4864DBA1F58A75B00645483 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB91F58A75B00645483 /* GameViewController.swift */; };
 		A4864DBD1F58A75B00645483 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4864DBB1F58A75B00645483 /* Main.storyboard */; };
@@ -20,6 +18,9 @@
 		A4864DEE1F59437100645483 /* SplashLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DEB1F59437100645483 /* SplashLogo.png */; };
 		A4864DEF1F59437100645483 /* SplashLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DEC1F59437100645483 /* SplashLogo@2x.png */; };
 		A4864DF01F59437100645483 /* SplashLogo@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DED1F59437100645483 /* SplashLogo@4x.png */; };
+		A4D18BF91F594E5D00D93B03 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BF81F594E5D00D93B03 /* HomeScene.swift */; };
+		A4D18BFB1F5954C600D93B03 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFA1F5954C600D93B03 /* Globals.swift */; };
+		A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +43,6 @@
 /* Begin PBXFileReference section */
 		A4864DAE1F58A75B00645483 /* 2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4864DB11F58A75B00645483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A4864DB31F58A75B00645483 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		A4864DB51F58A75B00645483 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		A4864DB71F58A75B00645483 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		A4864DB91F58A75B00645483 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A4864DBC1F58A75B00645483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +58,9 @@
 		A4864DEB1F59437100645483 /* SplashLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashLogo.png; sourceTree = "<group>"; };
 		A4864DEC1F59437100645483 /* SplashLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashLogo@2x.png"; sourceTree = "<group>"; };
 		A4864DED1F59437100645483 /* SplashLogo@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashLogo@4x.png"; sourceTree = "<group>"; };
+		A4D18BF81F594E5D00D93B03 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
+		A4D18BFA1F5954C600D93B03 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleDefinitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,18 +111,19 @@
 		A4864DB01F58A75B00645483 /* 2048 */ = {
 			isa = PBXGroup;
 			children = (
+				A4D18BFE1F5957F100D93B03 /* Models */,
+				A4D18BFD1F5957E900D93B03 /* Views */,
+				A4D18BFC1F5957D000D93B03 /* Images */,
 				A4864DB11F58A75B00645483 /* AppDelegate.swift */,
-				A4864DB31F58A75B00645483 /* GameScene.sks */,
-				A4864DB51F58A75B00645483 /* Actions.sks */,
 				A4864DB71F58A75B00645483 /* GameScene.swift */,
 				A4864DB91F58A75B00645483 /* GameViewController.swift */,
 				A4864DBB1F58A75B00645483 /* Main.storyboard */,
 				A4864DBE1F58A75B00645483 /* Assets.xcassets */,
-				A4864DEB1F59437100645483 /* SplashLogo.png */,
-				A4864DEC1F59437100645483 /* SplashLogo@2x.png */,
-				A4864DED1F59437100645483 /* SplashLogo@4x.png */,
 				A4864DC01F58A75B00645483 /* LaunchScreen.storyboard */,
 				A4864DC31F58A75B00645483 /* Info.plist */,
+				A4D18BF81F594E5D00D93B03 /* HomeScene.swift */,
+				A4D18BFA1F5954C600D93B03 /* Globals.swift */,
+				A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */,
 			);
 			path = 2048;
 			sourceTree = "<group>";
@@ -141,6 +144,30 @@
 				A4864DD91F58A75B00645483 /* Info.plist */,
 			);
 			path = 2048UITests;
+			sourceTree = "<group>";
+		};
+		A4D18BFC1F5957D000D93B03 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A4864DEB1F59437100645483 /* SplashLogo.png */,
+				A4864DEC1F59437100645483 /* SplashLogo@2x.png */,
+				A4864DED1F59437100645483 /* SplashLogo@4x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		A4D18BFD1F5957E900D93B03 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A4D18BFE1F5957F100D93B03 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,11 +282,9 @@
 			files = (
 				A4864DBD1F58A75B00645483 /* Main.storyboard in Resources */,
 				A4864DEF1F59437100645483 /* SplashLogo@2x.png in Resources */,
-				A4864DB41F58A75B00645483 /* GameScene.sks in Resources */,
 				A4864DBF1F58A75B00645483 /* Assets.xcassets in Resources */,
 				A4864DF01F59437100645483 /* SplashLogo@4x.png in Resources */,
 				A4864DC21F58A75B00645483 /* LaunchScreen.storyboard in Resources */,
-				A4864DB61F58A75B00645483 /* Actions.sks in Resources */,
 				A4864DEE1F59437100645483 /* SplashLogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +310,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */,
 				A4864DB81F58A75B00645483 /* GameScene.swift in Sources */,
+				A4D18BF91F594E5D00D93B03 /* HomeScene.swift in Sources */,
 				A4864DBA1F58A75B00645483 /* GameViewController.swift in Sources */,
+				A4D18BFB1F5954C600D93B03 /* Globals.swift in Sources */,
 				A4864DB21F58A75B00645483 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
