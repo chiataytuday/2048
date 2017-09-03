@@ -22,7 +22,7 @@ var gameScreenH = gameScene.frame.size.height
 
 // Scenes
 var gameScene: SKScene!
-var menuScene: SKScene!
+var homeScene: SKScene!
 var settingsScene: SKScene!
 var infoScene: SKScene!
 var highscoreScene: SKScene!
