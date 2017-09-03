@@ -11,13 +11,24 @@ import GameplayKit
 
 class HomeScene: SKScene {
     
+    var playBtn: SKSpriteNode! = nil
+    
     override func didMove(to view: SKView) {
         
         homeScene = self;
-        
+        addNav()
     }
     
-    
+    func addNav() {
+        playBtn = SKSpriteNode(texture: homePlayBtn)
+        let playBtnRatio = (screenSize.width*0.55) / playBtn.size.width
+        playBtn.size.width = (screenSize.width*0.55)
+        playBtn.size.height = playBtn.size.height * playBtnRatio
+        playBtn.name = "playBtn"
+        playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.midY);
+        playBtn.zPosition = layers.navigation;
+        self.addChild(playBtn);
+    }
     
     
     func touchDown(atPoint pos : CGPoint) {

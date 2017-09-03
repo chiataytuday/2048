@@ -26,3 +26,10 @@ var homeScene: SKScene!
 var settingsScene: SKScene!
 var infoScene: SKScene!
 var highscoreScene: SKScene!
+
+// Animation and transition timings
+
+let scaleUpAction = SKAction.scale(to: 1.5, duration: 0.3)
+let scaleDownAction = SKAction.scale(to: 1, duration: 0.3)
+let waitAction = SKAction.wait(forDuration: 2)
+let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction, waitAction])
