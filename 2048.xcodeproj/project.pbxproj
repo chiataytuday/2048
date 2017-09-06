@@ -42,6 +42,9 @@
 		A4D18C2C1F606B2200D93B03 /* tex512.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C211F606B2200D93B03 /* tex512.png */; };
 		A4D18C2D1F606B2200D93B03 /* tex1024.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C221F606B2200D93B03 /* tex1024.png */; };
 		A4D18C2E1F606B2200D93B03 /* tex2048.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C231F606B2200D93B03 /* tex2048.png */; };
+		A4D18C311F609D6F00D93B03 /* GameLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C301F609D6F00D93B03 /* GameLogo.png */; };
+		A4D18C351F60A46800D93B03 /* NewGame.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C341F60A46800D93B03 /* NewGame.png */; };
+		A4D18C371F60AAE900D93B03 /* MetalMap.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C361F60AAE900D93B03 /* MetalMap.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,9 @@
 		A4D18C211F606B2200D93B03 /* tex512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tex512.png; sourceTree = "<group>"; };
 		A4D18C221F606B2200D93B03 /* tex1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tex1024.png; sourceTree = "<group>"; };
 		A4D18C231F606B2200D93B03 /* tex2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tex2048.png; sourceTree = "<group>"; };
+		A4D18C301F609D6F00D93B03 /* GameLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameLogo.png; sourceTree = "<group>"; };
+		A4D18C341F60A46800D93B03 /* NewGame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewGame.png; sourceTree = "<group>"; };
+		A4D18C361F60AAE900D93B03 /* MetalMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MetalMap.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +196,9 @@
 		A4D18BFC1F5957D000D93B03 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A4D18C361F60AAE900D93B03 /* MetalMap.png */,
+				A4D18C341F60A46800D93B03 /* NewGame.png */,
+				A4D18C301F609D6F00D93B03 /* GameLogo.png */,
 				A4D18C2F1F606B6400D93B03 /* CubeTextures */,
 				A4D18C121F5DA43800D93B03 /* homePlayBtn.png */,
 				A4864DEB1F59437100645483 /* SplashLogo.png */,
@@ -367,13 +376,16 @@
 				A4864DBF1F58A75B00645483 /* Assets.xcassets in Resources */,
 				A4D18C2C1F606B2200D93B03 /* tex512.png in Resources */,
 				A4D18C2D1F606B2200D93B03 /* tex1024.png in Resources */,
+				A4D18C311F609D6F00D93B03 /* GameLogo.png in Resources */,
 				A4864DF01F59437100645483 /* SplashLogo@4x.png in Resources */,
+				A4D18C351F60A46800D93B03 /* NewGame.png in Resources */,
 				A4D18C271F606B2200D93B03 /* tex16.png in Resources */,
 				A4D18C261F606B2200D93B03 /* tex8.png in Resources */,
 				A4D18C2E1F606B2200D93B03 /* tex2048.png in Resources */,
 				A4D18C2A1F606B2200D93B03 /* tex128.png in Resources */,
 				A4864DC21F58A75B00645483 /* LaunchScreen.storyboard in Resources */,
 				A4D18C241F606B2200D93B03 /* tex2.png in Resources */,
+				A4D18C371F60AAE900D93B03 /* MetalMap.png in Resources */,
 				A4864DEE1F59437100645483 /* SplashLogo.png in Resources */,
 				A4D18C2B1F606B2200D93B03 /* tex256.png in Resources */,
 				A4D18C291F606B2200D93B03 /* tex64.png in Resources */,

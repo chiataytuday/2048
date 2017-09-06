@@ -12,8 +12,10 @@ import SceneKit
 import UIKit
 
 // Textures
-let GameLogo = SKTexture(imageNamed: "2048Logo.png")
-let homePlayBtn = SKTexture(imageNamed: "homePlayBtn.png")
+let GameLogo = SKTexture(imageNamed: "GameLogo.png")
+let homePlayBtn = SKTexture(imageNamed: "NewGame.png")
+let metalMapTexture = SKTexture(imageNamed: "MetalMap.png")
+
 
 
 // Material textures

@@ -13,6 +13,7 @@ import SceneKit
 class HomeScene: SKScene {
     
     var playBtn: SKSpriteNode! = nil
+    var logo: SKSpriteNode! = nil
     var overlayView:SKView! = nil
     var overlayScene:SKScene! = nil
     
@@ -34,18 +35,30 @@ class HomeScene: SKScene {
         
         addScenes()
         setupBg()
-//        addNav()
+        addLogo()
+        addNav()
         
     }
 
     
+    func addLogo(){
+        logo = SKSpriteNode(texture: GameLogo)
+        let logoRatio = (screenSize.width*0.55) / logo.size.width
+        logo.size.width = (screenSize.width*0.55)
+        logo.size.height = logo.size.height * logoRatio
+        logo.name = "logo"
+        logo.position = CGPoint(x:self.frame.midX, y:self.frame.maxY*0.83);
+        logo.zPosition = 30;
+        overlayScene.addChild(logo);
+    }
+    
     func addNav() {
         playBtn = SKSpriteNode(texture: homePlayBtn)
-        let playBtnRatio = (screenSize.width*0.55) / playBtn.size.width
-        playBtn.size.width = (screenSize.width*0.55)
+        let playBtnRatio = (screenSize.width*0.65) / playBtn.size.width
+        playBtn.size.width = (screenSize.width*0.65)
         playBtn.size.height = playBtn.size.height * playBtnRatio
         playBtn.name = "playBtn"
-        playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.midY*0.1);
+        playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.maxY*0.15);
         playBtn.zPosition = 99;
         overlayScene.addChild(playBtn);
     }
@@ -93,6 +106,21 @@ class HomeScene: SKScene {
         floorMaterial.diffuse.contents = UIColor.white
         planeGeometry.materials = [floorMaterial]
         
+        
+   
+        
+        
+        let myFloor = SCNFloor()
+        let myFloorNode = SCNNode(geometry: myFloor)
+        myFloorNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
+
+        
+        myFloor.reflectivity = 0.9
+        myFloor.reflectionResolutionScaleFactor = 1.0
+        myFloor.reflectionFalloffStart = 2.0
+        myFloor.reflectionFalloffEnd = 10.0
+        
+        
         let light = SCNLight()
         light.type = SCNLight.LightType.spot
         light.spotInnerAngle = 30.0
@@ -133,6 +161,8 @@ class HomeScene: SKScene {
         mat2048.locksAmbientWithDiffuse = true
         mat128.locksAmbientWithDiffuse = true
         
+//        metalMapTexture
+        
         cubeNode.geometry?.materials = [mat1024, mat512, mat8, mat64, mat2048, mat128]
         
         let constraint = SCNLookAtConstraint(target: cubeNode)
@@ -143,7 +173,7 @@ class HomeScene: SKScene {
         scnScene.rootNode.addChildNode(lightNode)
         scnScene.rootNode.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cubeNode)
-        scnScene.rootNode.addChildNode(planeNode)
+        scnScene.rootNode.addChildNode(myFloorNode)
         
     }
     
