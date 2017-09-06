@@ -34,7 +34,7 @@ class HomeScene: SKScene {
         
         addScenes()
         setupBg()
-        addNav()
+//        addNav()
         
     }
 
@@ -110,12 +110,17 @@ class HomeScene: SKScene {
         cubeNode.physicsBody?.isAffectedByGravity = false
         cubeNode.physicsBody?.mass = 80
         
+        mat2.diffuse.contents = text2
         mat4.diffuse.contents = text4
-        mat512.diffuse.contents = text512
+        mat8.diffuse.contents = text8
         mat16.diffuse.contents = text16
+        mat32.diffuse.contents = text32
         mat64.diffuse.contents = text64
-        mat2048.diffuse.contents = text2048
         mat128.diffuse.contents = text128
+        mat256.diffuse.contents = text256
+        mat512.diffuse.contents = text512
+        mat1024.diffuse.contents = text1024
+        mat2048.diffuse.contents = text2048
         
         mat4.selfIllumination.contents = UIColor.clear
         mat512.selfIllumination.contents = UIColor.clear
@@ -128,7 +133,7 @@ class HomeScene: SKScene {
         mat2048.locksAmbientWithDiffuse = true
         mat128.locksAmbientWithDiffuse = true
         
-        cubeNode.geometry?.materials = [mat4, mat512, mat16, mat64, mat2048, mat128]
+        cubeNode.geometry?.materials = [mat1024, mat512, mat8, mat64, mat2048, mat128]
         
         let constraint = SCNLookAtConstraint(target: cubeNode)
         constraint.isGimbalLockEnabled = true
