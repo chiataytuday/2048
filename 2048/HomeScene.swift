@@ -13,6 +13,11 @@ import SceneKit
 class HomeScene: SKScene {
     
     var playBtn: SKSpriteNode! = nil
+    var overlayView:SKView! = nil
+    var overlayScene:SKScene! = nil
+    
+    var sceneView:SCNView! = nil
+    var scnScene:SCNScene! = nil
     
     struct TouchInfo {
         var location:CGPoint
@@ -25,10 +30,14 @@ class HomeScene: SKScene {
     override func didMove(to view: SKView) {
         
         homeScene = self;
-        addNav()
+        self.view?.backgroundColor = UIColor.clear
+        
+        addScenes()
         setupBg()
-        addSceneView()
+        addNav()
+        
     }
+
     
     func addNav() {
         playBtn = SKSpriteNode(texture: homePlayBtn)
@@ -37,34 +46,61 @@ class HomeScene: SKScene {
         playBtn.size.height = playBtn.size.height * playBtnRatio
         playBtn.name = "playBtn"
         playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.midY*0.1);
-//        playBtn.zPosition = layers.navigation;
-        self.addChild(playBtn);
+        playBtn.zPosition = 99;
+        overlayScene.addChild(playBtn);
     }
     
     func setupBg() {
-        let bg = SKSpriteNode(color: UIColor.white, size: CGSize(width: screenW, height: screenH))
+        let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
     }
     
-    func addSceneView() {
-        let sceneView = SCNView(frame: (homeScene.view?.frame)!)
+    func addScenes() {
+        sceneView = SCNView(frame: (self.view?.frame)!)
         sceneView.backgroundColor = UIColor.clear
-        self.view?.addSubview(sceneView)
         
-        let scene = SCNScene()
-        sceneView.scene = scene
+        self.view?.insertSubview(sceneView, at: 0)
+        
+        scnScene = SCNScene()
+        sceneView.scene = scnScene
+        
+        
+        
+        overlayScene = SKScene(size: (self.view?.bounds.size)!)
+        
+        sceneView.overlaySKScene = overlayScene
+        
+        sceneView.overlaySKScene!.isUserInteractionEnabled = false;
+        
+        addCubeAnim()
+        
+    }
+    
+    func addCubeAnim(){
         
         let camera = SCNCamera()
         let cameraNode = SCNNode()
         cameraNode.camera = camera
         cameraNode.position = homeCamera
         
+        let planeGeometry = SCNPlane(width: 100.0, height: 100.0)
+        let planeNode = SCNNode(geometry: planeGeometry)
+        planeNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-90), y: 0, z: 0)
+        planeNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
+        
+        let floorMaterial = SCNMaterial()
+        floorMaterial.diffuse.contents = UIColor.white
+        planeGeometry.materials = [floorMaterial]
+        
         let light = SCNLight()
-        light.type = SCNLight.LightType.omni
+        light.type = SCNLight.LightType.spot
+        light.spotInnerAngle = 30.0
+        light.spotOuterAngle = 200.0
+        light.castsShadow = true
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: 1.5, y: 1.5, z: 1.5)
+        lightNode.position = SCNVector3(x: 1.5, y: 2.0, z: 1.5)
         
         let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)
         cubeNode = SCNNode(geometry: cubeGeometry)
@@ -72,28 +108,45 @@ class HomeScene: SKScene {
         
         cubeNode.physicsBody=SCNPhysicsBody(type: .dynamic, shape: nil)
         cubeNode.physicsBody?.isAffectedByGravity = false
-        cubeNode.physicsBody?.mass = 200
+        cubeNode.physicsBody?.mass = 80
+        
+        mat4.diffuse.contents = text4
+        mat512.diffuse.contents = text512
+        mat16.diffuse.contents = text16
+        mat64.diffuse.contents = text64
+        mat2048.diffuse.contents = text2048
+        mat128.diffuse.contents = text128
+        
+        mat4.selfIllumination.contents = UIColor.clear
+        mat512.selfIllumination.contents = UIColor.clear
+        mat16.selfIllumination.contents = UIColor.clear
+        mat64.selfIllumination.contents = UIColor.clear
+        mat2048.selfIllumination.contents = UIColor.clear
+        mat128.selfIllumination.contents = UIColor.clear
+        
+        mat64.locksAmbientWithDiffuse = true
+        mat2048.locksAmbientWithDiffuse = true
+        mat128.locksAmbientWithDiffuse = true
         
         cubeNode.geometry?.materials = [mat4, mat512, mat16, mat64, mat2048, mat128]
         
-        scene.rootNode.addChildNode(lightNode)
-        scene.rootNode.addChildNode(cameraNode)
-        scene.rootNode.addChildNode(cubeNode)
+        let constraint = SCNLookAtConstraint(target: cubeNode)
+        constraint.isGimbalLockEnabled = true
+        cameraNode.constraints = [constraint]
+        lightNode.constraints = [constraint]
+        
+        scnScene.rootNode.addChildNode(lightNode)
+        scnScene.rootNode.addChildNode(cameraNode)
+        scnScene.rootNode.addChildNode(cubeNode)
+        scnScene.rootNode.addChildNode(planeNode)
         
     }
     
-    func touchDown(atPoint pos : CGPoint) {
-        print("touchDown", pos.x," <> ",pos.y)
-    }
+    func touchDown(atPoint pos : CGPoint) {print("touchDown")}
     
-    func touchMoved(toPoint pos : CGPoint) {
-//        print("touchMoved", pos.x," <> ",pos.y)
-        
-    }
+    func touchMoved(toPoint pos : CGPoint) {print("touchMoved")}
     
-    func touchUp(atPoint pos : CGPoint) {
-        
-    }
+    func touchUp(atPoint pos : CGPoint) {print("touchUp")}
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
@@ -116,35 +169,25 @@ class HomeScene: SKScene {
             var vx:CGFloat = 0.0
             var vy:CGFloat = 0.0
             var previousTouchInfo:TouchInfo?
-            // Adjust this value as needed
             let maxIterations = 3
             let numElts:Int = min(history!.count, maxIterations)
-            // Loop over touch history
             let count = CGFloat(numElts-1)
             if count > 1 {
                 for index in 1...numElts {
                     let touchInfo = history![index]
                     let location = touchInfo.location
                     if let previousLocation = previousTouchInfo?.location {
-                        // Step 1
                         let dx = location.x - previousLocation.x
                         let dy = location.y - previousLocation.y
-                        // Step 2
                         let dt = CGFloat(touchInfo.time - previousTouchInfo!.time)
-                        // Step 3
                         vx += dx / dt
                         vy += dy / dt
                     }
                     previousTouchInfo = touchInfo
                 }
-                
-                // Step 4
-                print("count: ",count)
                 let velocity = CGVector(dx: vx/count, dy: vy/count)
                 let impulseFactor = velocity.dx / 10.0
-                print("impulseFactor : ",impulseFactor)
                 cubeNode?.physicsBody?.applyTorque(SCNVector4Make(0, 1, 0, Float(impulseFactor)), asImpulse: true)
-                // Step 5
                 history = nil
             }
             
