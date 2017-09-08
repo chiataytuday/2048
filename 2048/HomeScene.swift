@@ -78,8 +78,6 @@ class HomeScene: SKScene {
         scnScene = SCNScene()
         sceneView.scene = scnScene
         
-        
-        
         overlayScene = SKScene(size: (self.view?.bounds.size)!)
         
         sceneView.overlaySKScene = overlayScene
@@ -87,7 +85,6 @@ class HomeScene: SKScene {
         sceneView.overlaySKScene!.isUserInteractionEnabled = false;
         
         addCubeAnim()
-        
     }
     
     func addCubeAnim(){
@@ -97,38 +94,28 @@ class HomeScene: SKScene {
         cameraNode.camera = camera
         cameraNode.position = homeCamera
         
-        let planeGeometry = SCNPlane(width: 100.0, height: 100.0)
-        let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-90), y: 0, z: 0)
-        planeNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
         
-        let floorMaterial = SCNMaterial()
-        floorMaterial.diffuse.contents = UIColor.white
-        planeGeometry.materials = [floorMaterial]
-        
-        
-   
-        
-        
-        let myFloor = SCNFloor()
-        let myFloorNode = SCNNode(geometry: myFloor)
+        let sceneFloor = SCNFloor()
+        let myFloorNode = SCNNode(geometry: sceneFloor)
         myFloorNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
 
-        
-        myFloor.reflectivity = 0.9
-        myFloor.reflectionResolutionScaleFactor = 1.0
-        myFloor.reflectionFalloffStart = 2.0
-        myFloor.reflectionFalloffEnd = 10.0
+        sceneFloor.reflectivity = 0.5
+        sceneFloor.reflectionResolutionScaleFactor = 0.7
+        sceneFloor.reflectionFalloffStart = 2.0
+        sceneFloor.reflectionFalloffEnd = 10.0
         
         
         let light = SCNLight()
         light.type = SCNLight.LightType.spot
-        light.spotInnerAngle = 30.0
-        light.spotOuterAngle = 200.0
+        light.spotInnerAngle = 50.0
+        light.spotOuterAngle = 300.0
         light.castsShadow = true
+//        light.attenuationStartDistance = 1.0
+//        light.attenuationEndDistance = 30.0
+//        light.attenuationFalloffExponent = 1.5
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: 1.5, y: 2.0, z: 1.5)
+        lightNode.position = SCNVector3(x: -1.0, y: 2.0, z: 3.5)
         
         let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)
         cubeNode = SCNNode(geometry: cubeGeometry)
@@ -137,6 +124,18 @@ class HomeScene: SKScene {
         cubeNode.physicsBody=SCNPhysicsBody(type: .dynamic, shape: nil)
         cubeNode.physicsBody?.isAffectedByGravity = false
         cubeNode.physicsBody?.mass = 80
+        
+        mat2.selfIllumination.contents = UIColor.clear
+        mat4.selfIllumination.contents = UIColor.clear
+        mat8.selfIllumination.contents = UIColor.clear
+        mat16.selfIllumination.contents = UIColor.clear
+        mat32.selfIllumination.contents = UIColor.clear
+        mat64.selfIllumination.contents = UIColor.clear
+        mat128.selfIllumination.contents = UIColor.clear
+        mat256.selfIllumination.contents = UIColor.clear
+        mat512.selfIllumination.contents = UIColor.clear
+        mat1024.selfIllumination.contents = UIColor.clear
+        mat2048.selfIllumination.contents = UIColor.clear
         
         mat2.diffuse.contents = text2
         mat4.diffuse.contents = text4
@@ -150,16 +149,30 @@ class HomeScene: SKScene {
         mat1024.diffuse.contents = text1024
         mat2048.diffuse.contents = text2048
         
-        mat4.selfIllumination.contents = UIColor.clear
-        mat512.selfIllumination.contents = UIColor.clear
-        mat16.selfIllumination.contents = UIColor.clear
-        mat64.selfIllumination.contents = UIColor.clear
-        mat2048.selfIllumination.contents = UIColor.clear
-        mat128.selfIllumination.contents = UIColor.clear
+//        mat2.reflective.contents = UIColor.white
+//        mat4.reflective.contents = UIColor.white
+//        mat8.reflective.contents = UIColor.white
+//        mat16.reflective.contents = UIColor.white
+//        mat32.reflective.contents = UIColor.white
+//        mat64.reflective.contents = UIColor.white
+//        mat128.reflective.contents = UIColor.white
+//        mat256.reflective.contents = UIColor.white
+//        mat512.reflective.contents = UIColor.white
+//        mat1024.reflective.contents = UIColor.white
+//        mat2048.reflective.contents = UIColor.white
+//        
+//
+//        mat4.selfIllumination.contents = UIColor.clear
+//        mat512.selfIllumination.contents = UIColor.clear
+//        mat16.selfIllumination.contents = UIColor.clear
+//        mat64.selfIllumination.contents = UIColor.clear
+//        mat2048.selfIllumination.contents = UIColor.clear
+//        mat128.selfIllumination.contents = UIColor.clear
+//        
         
-        mat64.locksAmbientWithDiffuse = true
-        mat2048.locksAmbientWithDiffuse = true
-        mat128.locksAmbientWithDiffuse = true
+//        mat64.locksAmbientWithDiffuse = true
+//        mat2048.locksAmbientWithDiffuse = true
+//        mat128.locksAmbientWithDiffuse = true
         
 //        metalMapTexture
         

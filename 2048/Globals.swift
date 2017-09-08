@@ -14,7 +14,7 @@ import UIKit
 // Textures
 let GameLogo = SKTexture(imageNamed: "GameLogo.png")
 let homePlayBtn = SKTexture(imageNamed: "NewGame.png")
-let metalMapTexture = SKTexture(imageNamed: "MetalMap.png")
+let metalMapTexture = SKTexture(imageNamed: "kMetalMap.png")
 
 
 
