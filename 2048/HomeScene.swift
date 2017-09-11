@@ -190,7 +190,15 @@ class HomeScene: SKScene {
         
     }
     
-    func touchDown(atPoint pos : CGPoint) {print("touchDown")}
+    func touchDown(atPoint pos : CGPoint) {
+        // detect object at point
+        print("touchDown")
+        
+        if playBtn.contains(pos) {
+            print("playBtn Touched")
+        }
+        
+    }
     
     func touchMoved(toPoint pos : CGPoint) {print("touchMoved")}
     
@@ -245,6 +253,16 @@ class HomeScene: SKScene {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    }
+    
+    func moveToScene(to:String){
+        
+        let transition = SKTransition.reveal(with: .down, duration: 1.0)
+        
+        let nextScene = GameScene(size: scene!.size)
+        nextScene.scaleMode = .aspectFill
+        
+        scene?.view?.presentScene(nextScene, transition: transition)
     }
     
     
