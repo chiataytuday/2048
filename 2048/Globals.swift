@@ -98,6 +98,9 @@ let mat512 = SCNMaterial()
 let mat1024 = SCNMaterial()
 let mat2048 = SCNMaterial()
 
+// Logo Materials
+let logoMat = SCNMaterial()
+let logoTextMat = SCNMaterial()
 
 // Cube Properties
 let side: CGFloat = 1 // one side of the cube
@@ -110,4 +113,7 @@ let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 
 let homefloorIn = SCNVector3(x: 0, y: -0.5, z: 0)
 let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
+
+let homeLogoIn = SCNVector3(x: 0, y: 1.0, z: 1.4)
+let homeLogoOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 

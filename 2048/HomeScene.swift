@@ -96,7 +96,6 @@ class HomeScene: SKScene {
         SCNTransaction.animationDuration = 1.0
         cameraNode.position = homeCameraOut
         SCNTransaction.commit()
-        
         // animate logo out
     }
     
@@ -144,6 +143,7 @@ class HomeScene: SKScene {
         
         let light = SCNLight()                          // Light
         light.type = SCNLight.LightType.spot
+        light.intensity = 1200
         light.spotInnerAngle = 50.0
         light.spotOuterAngle = 300.0
         light.castsShadow = true
@@ -192,6 +192,13 @@ class HomeScene: SKScene {
         
     }
     
+    
+    
+    
+    
+    
+    // TOUCHES
+    // -----------------------------------------------------------------------------
     func touchMoved(toPoint pos : CGPoint) {print("touchMoved")}
     
     func touchUp(atPoint pos : CGPoint) {print("touchUp")}
@@ -213,7 +220,6 @@ class HomeScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchUp(atPoint: t.location(in: self))
-            
             var vx:CGFloat = 0.0
             var vy:CGFloat = 0.0
             var previousTouchInfo:TouchInfo?
@@ -238,14 +244,15 @@ class HomeScene: SKScene {
                 cubeNode?.physicsBody?.applyTorque(SCNVector4Make(0, 1, 0, Float(impulseFactor)), asImpulse: true)
                 history = nil
             }
-            
-        
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
+    // -----------------------------------------------------------------------------
+    
+    
     
     
     override func update(_ currentTime: TimeInterval) {
