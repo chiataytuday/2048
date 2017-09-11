@@ -15,8 +15,17 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        // Get label node from scene and store it for use later
+        gameScene = self;
+        self.view?.backgroundColor = UIColor.red
+        print("GameScene")
+        setupBg()
 
+    }
+    
+    func setupBg() {
+        let bg = SKSpriteNode(color: UIColor.blue, size: CGSize(width: screenW, height: screenH))
+        bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
+        self.addChild(bg)
     }
     
     

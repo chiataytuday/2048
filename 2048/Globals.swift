@@ -59,11 +59,22 @@ var settingsScene: SKScene!
 var infoScene: SKScene!
 var highscoreScene: SKScene!
 
+struct scenes {
+    static let game: CGFloat = 0
+    static let home: CGFloat = 1
+    static let settings: CGFloat = 2
+    static let info: CGFloat = 3
+    static let score: CGFloat = 4
+}
+
 // Animation and transition timings
 let scaleUpAction = SKAction.scale(to: 1.5, duration: 0.3)
 let scaleDownAction = SKAction.scale(to: 1, duration: 0.3)
 let waitAction = SKAction.wait(forDuration: 2)
 let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction, waitAction])
+
+let sceneTransitionFade = SKTransition.fade(with: UIColor.black, duration: 1.0)
+let sceneTransitionCrossFade = SKTransition.crossFade(withDuration: 1.0)
 
 // Layers
 struct layers {
@@ -92,6 +103,11 @@ let mat2048 = SCNMaterial()
 let side: CGFloat = 1 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
 // Camera Properties
-let homeCamera = SCNVector3(x: 0.0, y: 0.5, z: 4.0)
-let gameCamera = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
+let homeCameraIn = SCNVector3(x: 0.0, y: 0.5, z: 4.0)
+let homeCameraOut = SCNVector3(x: 0.0, y: 60, z: -5.0)
+let gameCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
+let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
+
+let homefloorIn = SCNVector3(x: 0, y: -0.5, z: 0)
+let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 

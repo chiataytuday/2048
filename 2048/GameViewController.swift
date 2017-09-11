@@ -11,19 +11,54 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
+    var viewRef:SKView! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
             let scene = HomeScene(size: self.view.bounds.size);
-            view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
-            view.presentScene(scene)
+            
+            scene.gameViewController = self
+            
+            viewRef = view
+            
+            viewRef.ignoresSiblingOrder = true
+            viewRef.showsFPS = true
+            viewRef.showsNodeCount = true
+            viewRef.presentScene(scene)
         }
         
     }
+    
+    func moveToScene(to:CGFloat){
+        var nextScene:SKScene! = nil
+        
+        print("moveToScene")
+        
+        switch to {
+        case scenes.game:
+            nextScene = GameScene(size: viewRef.bounds.size)
+            break
+        case scenes.info:
+            nextScene = InfoScene(size: CGSize(width: screenW, height: screenH))
+            break
+        case scenes.score:
+            nextScene = HighscoreScene(size: CGSize(width: screenW, height: screenH))
+            break
+        case scenes.settings:
+            nextScene = SettingsScene(size: CGSize(width: screenW, height: screenH))
+            break
+        default:
+            nextScene = HomeScene(size: CGSize(width: screenW, height: screenH))
+        }
+        
+//        viewRef.presentScene(nextScene)
+        
+//        viewRef?.presentScene(nextScene, transition: sceneTransitionFade)
+    }
+    
 
     override var shouldAutorotate: Bool {
         return true

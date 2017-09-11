@@ -20,6 +20,10 @@ class HomeScene: SKScene {
     var sceneView:SCNView! = nil
     var scnScene:SCNScene! = nil
     
+    var cameraNode:SCNNode! = nil
+    var floorNode:SCNNode! = nil
+    var sceneFloor:SCNFloor! = nil
+    
     struct TouchInfo {
         var location:CGPoint
         var time:TimeInterval
@@ -28,13 +32,15 @@ class HomeScene: SKScene {
     var cubeNode:SCNNode! = nil
     var history:[TouchInfo]?
     
+    var gameViewController : GameViewController!
+    
     override func didMove(to view: SKView) {
         
         homeScene = self;
         self.view?.backgroundColor = UIColor.clear
-        
-        addScenes()
-        setupBg()
+        print("HomeScene - didMove")
+        addStructure()
+//        setupBg()
         addLogo()
         addNav()
         
@@ -69,62 +75,32 @@ class HomeScene: SKScene {
         self.addChild(bg)
     }
     
-    func addScenes() {
+    func addStructure() {
         sceneView = SCNView(frame: (self.view?.frame)!)
         sceneView.backgroundColor = UIColor.clear
-        
-        self.view?.insertSubview(sceneView, at: 0)
+        self.view?.insertSubview(sceneView, at: 0)                  // add sceneView as SubView
         
         scnScene = SCNScene()
         sceneView.scene = scnScene
         
-        overlayScene = SKScene(size: (self.view?.bounds.size)!)
-        
+        overlayScene = SKScene(size: (self.view?.bounds.size)!)     // create overlay and add to sceneView
         sceneView.overlaySKScene = overlayScene
         
         sceneView.overlaySKScene!.isUserInteractionEnabled = false;
-        
-        addCubeAnim()
+        add3Delements()
     }
     
-    func addCubeAnim(){
+    func removeSceneAnim(){
+        // animate cube out
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1.0
+        cameraNode.position = homeCameraOut
+        SCNTransaction.commit()
         
-        let camera = SCNCamera()
-        let cameraNode = SCNNode()
-        cameraNode.camera = camera
-        cameraNode.position = homeCamera
-        
-        
-        let sceneFloor = SCNFloor()
-        let myFloorNode = SCNNode(geometry: sceneFloor)
-        myFloorNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
-
-        sceneFloor.reflectivity = 0.5
-        sceneFloor.reflectionResolutionScaleFactor = 0.7
-        sceneFloor.reflectionFalloffStart = 2.0
-        sceneFloor.reflectionFalloffEnd = 10.0
-        
-        
-        let light = SCNLight()
-        light.type = SCNLight.LightType.spot
-        light.spotInnerAngle = 50.0
-        light.spotOuterAngle = 300.0
-        light.castsShadow = true
-//        light.attenuationStartDistance = 1.0
-//        light.attenuationEndDistance = 30.0
-//        light.attenuationFalloffExponent = 1.5
-        let lightNode = SCNNode()
-        lightNode.light = light
-        lightNode.position = SCNVector3(x: -1.0, y: 2.0, z: 3.5)
-        
-        let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)
-        cubeNode = SCNNode(geometry: cubeGeometry)
-        cubeNode.name = "cube"
-        
-        cubeNode.physicsBody=SCNPhysicsBody(type: .dynamic, shape: nil)
-        cubeNode.physicsBody?.isAffectedByGravity = false
-        cubeNode.physicsBody?.mass = 80
-        
+        // animate logo out
+    }
+    
+    func assignTextures(){
         mat2.selfIllumination.contents = UIColor.clear
         mat4.selfIllumination.contents = UIColor.clear
         mat8.selfIllumination.contents = UIColor.clear
@@ -136,7 +112,6 @@ class HomeScene: SKScene {
         mat512.selfIllumination.contents = UIColor.clear
         mat1024.selfIllumination.contents = UIColor.clear
         mat2048.selfIllumination.contents = UIColor.clear
-        
         mat2.diffuse.contents = text2
         mat4.diffuse.contents = text4
         mat8.diffuse.contents = text8
@@ -148,45 +123,51 @@ class HomeScene: SKScene {
         mat512.diffuse.contents = text512
         mat1024.diffuse.contents = text1024
         mat2048.diffuse.contents = text2048
+    }
+    
+    
+    func add3Delements(){
+        assignTextures()
         
-//        mat2.reflective.contents = UIColor.white
-//        mat4.reflective.contents = UIColor.white
-//        mat8.reflective.contents = UIColor.white
-//        mat16.reflective.contents = UIColor.white
-//        mat32.reflective.contents = UIColor.white
-//        mat64.reflective.contents = UIColor.white
-//        mat128.reflective.contents = UIColor.white
-//        mat256.reflective.contents = UIColor.white
-//        mat512.reflective.contents = UIColor.white
-//        mat1024.reflective.contents = UIColor.white
-//        mat2048.reflective.contents = UIColor.white
-//        
-//
-//        mat4.selfIllumination.contents = UIColor.clear
-//        mat512.selfIllumination.contents = UIColor.clear
-//        mat16.selfIllumination.contents = UIColor.clear
-//        mat64.selfIllumination.contents = UIColor.clear
-//        mat2048.selfIllumination.contents = UIColor.clear
-//        mat128.selfIllumination.contents = UIColor.clear
-//        
+        let camera = SCNCamera()                        // Camera
+        cameraNode = SCNNode()
+        cameraNode.camera = camera
+        cameraNode.position = homeCameraIn
         
-//        mat64.locksAmbientWithDiffuse = true
-//        mat2048.locksAmbientWithDiffuse = true
-//        mat128.locksAmbientWithDiffuse = true
+        sceneFloor = SCNFloor()                         // Floor
+        floorNode = SCNNode(geometry: sceneFloor)
+        floorNode.position = homefloorIn
+        sceneFloor.reflectivity = 0.5
+        sceneFloor.reflectionResolutionScaleFactor = 0.7
+        sceneFloor.reflectionFalloffStart = 2.0
+        sceneFloor.reflectionFalloffEnd = 10.0
         
-//        metalMapTexture
+        let light = SCNLight()                          // Light
+        light.type = SCNLight.LightType.spot
+        light.spotInnerAngle = 50.0
+        light.spotOuterAngle = 300.0
+        light.castsShadow = true
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(x: -1.0, y: 2.0, z: 3.5)
         
+        let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)  // Cube Anim
+        cubeNode = SCNNode(geometry: cubeGeometry)
+        cubeNode.name = "cube"
+        cubeNode.physicsBody=SCNPhysicsBody(type: .dynamic, shape: nil)
+        cubeNode.physicsBody?.isAffectedByGravity = false
+        cubeNode.physicsBody?.mass = 80
         cubeNode.geometry?.materials = [mat1024, mat512, mat8, mat64, mat2048, mat128]
         
-        let constraint = SCNLookAtConstraint(target: cubeNode)
+        let constraint = SCNLookAtConstraint(target: cubeNode)                  // Constraints
         constraint.isGimbalLockEnabled = true
         cameraNode.constraints = [constraint]
         lightNode.constraints = [constraint]
-        
+                                                                                // Adding Elements
         scnScene.rootNode.addChildNode(lightNode)
         scnScene.rootNode.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cubeNode)
-        scnScene.rootNode.addChildNode(myFloorNode)
+        scnScene.rootNode.addChildNode(floorNode)
         
     }
     
@@ -196,6 +177,17 @@ class HomeScene: SKScene {
         
         if playBtn.contains(pos) {
             print("playBtn Touched")
+            run(SKAction.sequence([
+                SKAction.run() {
+                    self.cameraNode.constraints = nil
+                    self.removeSceneAnim()
+                },
+                SKAction.wait(forDuration: 1.0),
+                SKAction.run() {
+                    self.gameViewController.moveToScene(to: scenes.game)
+                }
+                ]), withKey:"transitioning")
+            
         }
         
     }
@@ -253,16 +245,6 @@ class HomeScene: SKScene {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    func moveToScene(to:String){
-        
-        let transition = SKTransition.reveal(with: .down, duration: 1.0)
-        
-        let nextScene = GameScene(size: scene!.size)
-        nextScene.scaleMode = .aspectFill
-        
-        scene?.view?.presentScene(nextScene, transition: transition)
     }
     
     
