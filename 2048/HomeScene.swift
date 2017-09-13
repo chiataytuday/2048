@@ -41,8 +41,7 @@ class HomeScene: SKScene {
         self.view?.backgroundColor = UIColor.clear
         print("HomeScene - didMove")
         addStructure()
-//        setupBg()
-//        addLogo()
+        setupBg()
         addNav()
         printFonts()
         
@@ -56,18 +55,6 @@ class HomeScene: SKScene {
             let names = UIFont.fontNames(forFamilyName: familyName )
             print("Font Names = [\(names)]")
         }
-    }
-
-    
-    func addLogo(){
-        logo = SKSpriteNode(texture: GameLogo)
-        let logoRatio = (screenSize.width*0.55) / logo.size.width
-        logo.size.width = (screenSize.width*0.55)
-        logo.size.height = logo.size.height * logoRatio
-        logo.name = "logo"
-        logo.position = CGPoint(x:self.frame.midX, y:self.frame.maxY*0.83);
-        logo.zPosition = 30;
-        overlayScene.addChild(logo);
     }
     
     func addNav() {
@@ -177,21 +164,21 @@ class HomeScene: SKScene {
         lightNode.constraints = [constraint]
                                                                                 // Adding Elements
         
-        
+        logoMat.diffuse.contents = UIColor(red:0.40, green:0.74, blue:0.88, alpha:1.0)
         let logoGeometry = SCNBox(width: side/2, height: side/2, length: side/2, chamferRadius: radius/2)  // Cube Anim
         logoNode = SCNNode(geometry: logoGeometry)
         logoNode.name = "logo"
         logoNode.geometry?.materials = [logoMat]
         logoNode.position = homeLogoIn
         logoNode.pivot = SCNMatrix4MakeRotation(0.785398, 0, 1, 0);
+        logoNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
         
         
- 
         let twentyText = SCNText(string: "20", extrusionDepth: 5)
         twentyText.font = UIFont(name: "Hangar-Flat", size: 30)
         let twentyTextNode = SCNNode(geometry: twentyText)
         twentyTextNode.scale = SCNVector3Make(0.017, 0.017, 0.017)
-        twentyTextNode.position = SCNVector3Make(-0.023, -0.11, 0.31)
+        twentyTextNode.position = SCNVector3Make(-0.02, -0.11, 0.31)
         twentyText.flatness = 0.01
         twentyText.chamferRadius = 0.1
         var twminVec = SCNVector3Zero
@@ -203,14 +190,14 @@ class HomeScene: SKScene {
                 z: twmaxVec.z - twminVec.z)
             twentyTextNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 2, distance.z / 2)
         }
-        twentyText.firstMaterial!.diffuse.contents = UIColor(red: 245/255, green: 216/255, blue: 0, alpha: 1)
+        twentyText.firstMaterial!.diffuse.contents = UIColor.white
         twentyText.firstMaterial!.specular.contents = UIColor.white
         // -------------------------------------------------------------------------------------------------
         let fortyText = SCNText(string: "48", extrusionDepth: 5)
         fortyText.font = UIFont(name: "Hangar-Flat", size: 30)
         let fortyTextNode = SCNNode(geometry: fortyText)
         fortyTextNode.scale = SCNVector3Make(0.017, 0.017, 0.017)    // Scale it to 20% on all axes
-        fortyTextNode.position = SCNVector3Make(-0.023, -0.11, 0.31) // Axes: (left/right, low/high, close/far)
+        fortyTextNode.position = SCNVector3Make(0.25, -0.29, 0.2) // Axes: (left/right, low/high, close/far)
         fortyText.flatness = 0.01
         fortyText.chamferRadius = 0.1
         var fortyMinVec = SCNVector3Zero
@@ -222,9 +209,9 @@ class HomeScene: SKScene {
                 z: fortyMaxVec.z - fortyMinVec.z)
             fortyTextNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 2, distance.z / 2)
         }
-        fortyText.firstMaterial!.diffuse.contents = UIColor(red: 245/255, green: 216/255, blue: 0, alpha: 1)
+        fortyText.firstMaterial!.diffuse.contents = UIColor.white
         fortyText.firstMaterial!.specular.contents = UIColor.white
-        fortyTextNode.pivot = SCNMatrix4MakeRotation(-0.785398, 0, 1, 0);
+        fortyTextNode.pivot = SCNMatrix4MakeRotation(-1.5708, 0, 1, 0);
         
         
         

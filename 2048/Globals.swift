@@ -106,7 +106,7 @@ let logoTextMat = SCNMaterial()
 let side: CGFloat = 1 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
 // Camera Properties
-let homeCameraIn = SCNVector3(x: 0.0, y: 0.5, z: 4.0)
+let homeCameraIn = SCNVector3(x: 0.0, y: 0.7, z: 3.5)
 let homeCameraOut = SCNVector3(x: 0.0, y: 60, z: -5.0)
 let gameCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
@@ -114,6 +114,6 @@ let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 let homefloorIn = SCNVector3(x: 0, y: -0.5, z: 0)
 let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 
-let homeLogoIn = SCNVector3(x: 0, y: 1.0, z: 1.4)
+let homeLogoIn = SCNVector3(x: 0, y: 1.1, z: 0.6)
 let homeLogoOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 
