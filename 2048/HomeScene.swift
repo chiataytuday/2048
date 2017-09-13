@@ -30,6 +30,7 @@ class HomeScene: SKScene {
     }
     
     var cubeNode:SCNNode! = nil
+    var logoNode:SCNNode! = nil
     var history:[TouchInfo]?
     
     var gameViewController : GameViewController!
@@ -41,9 +42,20 @@ class HomeScene: SKScene {
         print("HomeScene - didMove")
         addStructure()
 //        setupBg()
-        addLogo()
+//        addLogo()
         addNav()
+        printFonts()
         
+    }
+    
+    func printFonts() {
+        let fontFamilyNames = UIFont.familyNames
+        for familyName in fontFamilyNames {
+            print("------------------------------")
+            print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNames(forFamilyName: familyName )
+            print("Font Names = [\(names)]")
+        }
     }
 
     
@@ -164,10 +176,67 @@ class HomeScene: SKScene {
         cameraNode.constraints = [constraint]
         lightNode.constraints = [constraint]
                                                                                 // Adding Elements
+        
+        
+        let logoGeometry = SCNBox(width: side/2, height: side/2, length: side/2, chamferRadius: radius/2)  // Cube Anim
+        logoNode = SCNNode(geometry: logoGeometry)
+        logoNode.name = "logo"
+        logoNode.geometry?.materials = [logoMat]
+        logoNode.position = homeLogoIn
+        logoNode.pivot = SCNMatrix4MakeRotation(0.785398, 0, 1, 0);
+        
+        
+ 
+        let twentyText = SCNText(string: "20", extrusionDepth: 5)
+        twentyText.font = UIFont(name: "Hangar-Flat", size: 30)
+        let twentyTextNode = SCNNode(geometry: twentyText)
+        twentyTextNode.scale = SCNVector3Make(0.017, 0.017, 0.017)
+        twentyTextNode.position = SCNVector3Make(-0.023, -0.11, 0.31)
+        twentyText.flatness = 0.01
+        twentyText.chamferRadius = 0.1
+        var twminVec = SCNVector3Zero
+        var twmaxVec = SCNVector3Zero
+        if twentyTextNode.__getBoundingBoxMin(&twminVec, max: &twmaxVec) {
+            let distance = SCNVector3(
+                x: twmaxVec.x - twminVec.x,
+                y: twmaxVec.y - twminVec.y,
+                z: twmaxVec.z - twminVec.z)
+            twentyTextNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 2, distance.z / 2)
+        }
+        twentyText.firstMaterial!.diffuse.contents = UIColor(red: 245/255, green: 216/255, blue: 0, alpha: 1)
+        twentyText.firstMaterial!.specular.contents = UIColor.white
+        // -------------------------------------------------------------------------------------------------
+        let fortyText = SCNText(string: "48", extrusionDepth: 5)
+        fortyText.font = UIFont(name: "Hangar-Flat", size: 30)
+        let fortyTextNode = SCNNode(geometry: fortyText)
+        fortyTextNode.scale = SCNVector3Make(0.017, 0.017, 0.017)    // Scale it to 20% on all axes
+        fortyTextNode.position = SCNVector3Make(-0.023, -0.11, 0.31) // Axes: (left/right, low/high, close/far)
+        fortyText.flatness = 0.01
+        fortyText.chamferRadius = 0.1
+        var fortyMinVec = SCNVector3Zero
+        var fortyMaxVec = SCNVector3Zero
+        if fortyTextNode.__getBoundingBoxMin(&fortyMinVec, max: &fortyMaxVec) {
+            let distance = SCNVector3(
+                x: fortyMaxVec.x - fortyMinVec.x,
+                y: fortyMaxVec.y - fortyMinVec.y,
+                z: fortyMaxVec.z - fortyMinVec.z)
+            fortyTextNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 2, distance.z / 2)
+        }
+        fortyText.firstMaterial!.diffuse.contents = UIColor(red: 245/255, green: 216/255, blue: 0, alpha: 1)
+        fortyText.firstMaterial!.specular.contents = UIColor.white
+        fortyTextNode.pivot = SCNMatrix4MakeRotation(-0.785398, 0, 1, 0);
+        
+        
+        
+        
         scnScene.rootNode.addChildNode(lightNode)
         scnScene.rootNode.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cubeNode)
         scnScene.rootNode.addChildNode(floorNode)
+        scnScene.rootNode.addChildNode(logoNode)
+        
+        logoNode.addChildNode(twentyTextNode)
+        logoNode.addChildNode(fortyTextNode)
         
     }
     

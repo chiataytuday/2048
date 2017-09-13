@@ -45,6 +45,7 @@
 		A4D18C311F609D6F00D93B03 /* GameLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C301F609D6F00D93B03 /* GameLogo.png */; };
 		A4D18C351F60A46800D93B03 /* NewGame.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C341F60A46800D93B03 /* NewGame.png */; };
 		A4D18C371F60AAE900D93B03 /* MetalMap.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C361F60AAE900D93B03 /* MetalMap.png */; };
+		A4D18C3B1F69A2A800D93B03 /* HANGAR_flat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4D18C3A1F69A2A800D93B03 /* HANGAR_flat.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		A4D18C301F609D6F00D93B03 /* GameLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameLogo.png; sourceTree = "<group>"; };
 		A4D18C341F60A46800D93B03 /* NewGame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewGame.png; sourceTree = "<group>"; };
 		A4D18C361F60AAE900D93B03 /* MetalMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MetalMap.png; sourceTree = "<group>"; };
+		A4D18C3A1F69A2A800D93B03 /* HANGAR_flat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HANGAR_flat.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		A4864DA51F58A75B00645483 = {
 			isa = PBXGroup;
 			children = (
+				A4D18C3A1F69A2A800D93B03 /* HANGAR_flat.ttf */,
 				A4864DB01F58A75B00645483 /* 2048 */,
 				A4864DCB1F58A75B00645483 /* 2048Tests */,
 				A4864DD61F58A75B00645483 /* 2048UITests */,
@@ -374,6 +377,7 @@
 				A4D18C251F606B2200D93B03 /* tex4.png in Resources */,
 				A4D18C131F5DA43800D93B03 /* homePlayBtn.png in Resources */,
 				A4864DBF1F58A75B00645483 /* Assets.xcassets in Resources */,
+				A4D18C3B1F69A2A800D93B03 /* HANGAR_flat.ttf in Resources */,
 				A4D18C2C1F606B2200D93B03 /* tex512.png in Resources */,
 				A4D18C2D1F606B2200D93B03 /* tex1024.png in Resources */,
 				A4D18C311F609D6F00D93B03 /* GameLogo.png in Resources */,
