@@ -115,5 +115,5 @@ let homefloorIn = SCNVector3(x: 0, y: -0.5, z: 0)
 let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 
 let homeLogoIn = SCNVector3(x: 0, y: 1.1, z: 0.6)
-let homeLogoOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
+let homeLogoOut = SCNVector3(x: 5, y: 0.0, z: -10.0)
 

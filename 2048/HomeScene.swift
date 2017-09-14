@@ -41,9 +41,11 @@ class HomeScene: SKScene {
         self.view?.backgroundColor = UIColor.clear
         print("HomeScene - didMove")
         addStructure()
-        setupBg()
-        addNav()
-        printFonts()
+        setupBg()  //  background addition
+        addNav() //  2D spritekit elements
+        assignTextures() // prepare textures
+        animateSceneIn()
+        //printFonts()
         
     }
     
@@ -86,8 +88,14 @@ class HomeScene: SKScene {
         sceneView.overlaySKScene = overlayScene
         
         sceneView.overlaySKScene!.isUserInteractionEnabled = false;
-        add3Delements()
+        addCubeElement()
+        addLogo()
     }
+    
+    func animateSceneIn() {
+        
+    }
+    
     
     func removeSceneAnim(){
         // animate cube out
@@ -123,53 +131,13 @@ class HomeScene: SKScene {
         mat2048.diffuse.contents = text2048
     }
     
-    
-    func add3Delements(){
-        assignTextures()
-        
-        let camera = SCNCamera()                        // Camera
-        cameraNode = SCNNode()
-        cameraNode.camera = camera
-        cameraNode.position = homeCameraIn
-        
-        sceneFloor = SCNFloor()                         // Floor
-        floorNode = SCNNode(geometry: sceneFloor)
-        floorNode.position = homefloorIn
-        sceneFloor.reflectivity = 0.5
-        sceneFloor.reflectionResolutionScaleFactor = 0.7
-        sceneFloor.reflectionFalloffStart = 2.0
-        sceneFloor.reflectionFalloffEnd = 10.0
-        
-        let light = SCNLight()                          // Light
-        light.type = SCNLight.LightType.spot
-        light.intensity = 1200
-        light.spotInnerAngle = 50.0
-        light.spotOuterAngle = 300.0
-        light.castsShadow = true
-        let lightNode = SCNNode()
-        lightNode.light = light
-        lightNode.position = SCNVector3(x: -1.0, y: 2.0, z: 3.5)
-        
-        let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)  // Cube Anim
-        cubeNode = SCNNode(geometry: cubeGeometry)
-        cubeNode.name = "cube"
-        cubeNode.physicsBody=SCNPhysicsBody(type: .dynamic, shape: nil)
-        cubeNode.physicsBody?.isAffectedByGravity = false
-        cubeNode.physicsBody?.mass = 80
-        cubeNode.geometry?.materials = [mat1024, mat512, mat8, mat64, mat2048, mat128]
-        
-        let constraint = SCNLookAtConstraint(target: cubeNode)                  // Constraints
-        constraint.isGimbalLockEnabled = true
-        cameraNode.constraints = [constraint]
-        lightNode.constraints = [constraint]
-                                                                                // Adding Elements
-        
+    func addLogo() {
         logoMat.diffuse.contents = UIColor(red:0.40, green:0.74, blue:0.88, alpha:1.0)
         let logoGeometry = SCNBox(width: side/2, height: side/2, length: side/2, chamferRadius: radius/2)  // Cube Anim
         logoNode = SCNNode(geometry: logoGeometry)
         logoNode.name = "logo"
         logoNode.geometry?.materials = [logoMat]
-        logoNode.position = homeLogoIn
+        logoNode.position = homeLogoOut
         logoNode.pivot = SCNMatrix4MakeRotation(0.785398, 0, 1, 0);
         logoNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
         
@@ -213,19 +181,75 @@ class HomeScene: SKScene {
         fortyText.firstMaterial!.specular.contents = UIColor.white
         fortyTextNode.pivot = SCNMatrix4MakeRotation(-1.5708, 0, 1, 0);
         
+        scnScene.rootNode.addChildNode(logoNode)
+        logoNode.addChildNode(twentyTextNode)
+        logoNode.addChildNode(fortyTextNode)
+    }
+    
+    func animLogoIn(){
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        logoNode.position = homeLogoIn
+        SCNTransaction.commit()
+    }
+    
+    func animLogoOut(){
+        logoNode.position = homeLogoOut
+    }
+    
+    
+    func addCubeElement(){
+        let camera = SCNCamera()                        // Camera
+        cameraNode = SCNNode()
+        cameraNode.camera = camera
+        cameraNode.position = homeCameraIn
         
+        sceneFloor = SCNFloor()                         // Floor
+        floorNode = SCNNode(geometry: sceneFloor)
+        floorNode.position = homefloorIn
+        sceneFloor.reflectivity = 0.5
+        sceneFloor.reflectionResolutionScaleFactor = 0.7
+        sceneFloor.reflectionFalloffStart = 2.0
+        sceneFloor.reflectionFalloffEnd = 10.0
         
+        let light = SCNLight()                          // Light
+        light.type = SCNLight.LightType.spot
+        light.intensity = 1200
+        light.spotInnerAngle = 50.0
+        light.spotOuterAngle = 300.0
+        light.castsShadow = true
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(x: -1.0, y: 2.0, z: 3.5)
+        
+        let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)  // Cube Anim
+        cubeNode = SCNNode(geometry: cubeGeometry)
+        cubeNode.name = "cube"
+        cubeNode.physicsBody=SCNPhysicsBody(type: .dynamic, shape: nil)
+        cubeNode.physicsBody?.isAffectedByGravity = false
+        cubeNode.physicsBody?.mass = 80
+        cubeNode.geometry?.materials = [mat1024, mat512, mat8, mat64, mat2048, mat128]
+        
+        let constraint = SCNLookAtConstraint(target: cubeNode)                  // Constraints
+        constraint.isGimbalLockEnabled = true
+        cameraNode.constraints = [constraint]
+        lightNode.constraints = [constraint]                                                   // Adding Elements
         
         scnScene.rootNode.addChildNode(lightNode)
         scnScene.rootNode.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cubeNode)
         scnScene.rootNode.addChildNode(floorNode)
-        scnScene.rootNode.addChildNode(logoNode)
-        
-        logoNode.addChildNode(twentyTextNode)
-        logoNode.addChildNode(fortyTextNode)
         
     }
+    
+    func animCubeIn(){
+        
+    }
+    
+    func animCubeOut(){
+        
+    }
+    
     
     func touchDown(atPoint pos : CGPoint) {
         // detect object at point
@@ -245,7 +269,6 @@ class HomeScene: SKScene {
                 ]), withKey:"transitioning")
             
         }
-        
     }
     
     
