@@ -54,9 +54,9 @@ class GameViewController: UIViewController {
             nextScene = HomeScene(size: CGSize(width: screenW, height: screenH))
         }
         
-//        viewRef.presentScene(nextScene)
+        // viewRef.presentScene(nextScene)
         
-//        viewRef?.presentScene(nextScene, transition: sceneTransitionFade)
+        viewRef?.presentScene(nextScene, transition: sceneTransitionFade)
     }
     
 

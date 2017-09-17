@@ -23,6 +23,7 @@ class HomeScene: SKScene {
     var cameraNode:SCNNode! = nil
     var floorNode:SCNNode! = nil
     var sceneFloor:SCNFloor! = nil
+    var light:SCNLight! = nil
     
     struct TouchInfo {
         var location:CGPoint
@@ -88,12 +89,30 @@ class HomeScene: SKScene {
         sceneView.overlaySKScene = overlayScene
         
         sceneView.overlaySKScene!.isUserInteractionEnabled = false;
+
         addCubeElement()
         addLogo()
     }
     
     func animateSceneIn() {
         
+        run(SKAction.sequence([
+            SKAction.wait(forDuration: 1),
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 3.0
+
+                self.light.intensity = 1200
+                SCNTransaction.commit()
+            },
+            SKAction.wait(forDuration: 0.5),
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 1.0
+                self.logoNode.position = homeLogoIn
+                SCNTransaction.commit()
+            }
+            ]), withKey:"transitioning")
     }
     
     
@@ -102,6 +121,8 @@ class HomeScene: SKScene {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1.0
         cameraNode.position = homeCameraOut
+        logoNode.position = homeLogoOut
+        light.intensity = 0
         SCNTransaction.commit()
         // animate logo out
     }
@@ -184,18 +205,10 @@ class HomeScene: SKScene {
         scnScene.rootNode.addChildNode(logoNode)
         logoNode.addChildNode(twentyTextNode)
         logoNode.addChildNode(fortyTextNode)
+        
+        animateSceneIn() // transition in
     }
     
-    func animLogoIn(){
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        logoNode.position = homeLogoIn
-        SCNTransaction.commit()
-    }
-    
-    func animLogoOut(){
-        logoNode.position = homeLogoOut
-    }
     
     
     func addCubeElement(){
@@ -212,9 +225,9 @@ class HomeScene: SKScene {
         sceneFloor.reflectionFalloffStart = 2.0
         sceneFloor.reflectionFalloffEnd = 10.0
         
-        let light = SCNLight()                          // Light
+        light = SCNLight()                          // Light
         light.type = SCNLight.LightType.spot
-        light.intensity = 1200
+        light.intensity = 0
         light.spotInnerAngle = 50.0
         light.spotOuterAngle = 300.0
         light.castsShadow = true
@@ -240,6 +253,7 @@ class HomeScene: SKScene {
         scnScene.rootNode.addChildNode(cubeNode)
         scnScene.rootNode.addChildNode(floorNode)
         
+        
     }
     
     func animCubeIn(){
@@ -254,24 +268,29 @@ class HomeScene: SKScene {
     func touchDown(atPoint pos : CGPoint) {
         // detect object at point
         print("touchDown")
-        
+        var exit:CGFloat? = nil
         if playBtn.contains(pos) {
             print("playBtn Touched")
-            run(SKAction.sequence([
-                SKAction.run() {
-                    self.cameraNode.constraints = nil
-                    self.removeSceneAnim()
-                },
-                SKAction.wait(forDuration: 1.0),
-                SKAction.run() {
-                    self.gameViewController.moveToScene(to: scenes.game)
-                }
-                ]), withKey:"transitioning")
-            
+            exit = scenes.game
         }
+        if exit != nil {
+            exitToScene(scene: exit!)
+        }
+        
     }
     
-    
+    func exitToScene(scene:CGFloat){
+        run(SKAction.sequence([
+            SKAction.run() {
+                self.cameraNode.constraints = nil
+                self.removeSceneAnim()
+            },
+            SKAction.wait(forDuration: 1.0),
+            SKAction.run() {
+                self.gameViewController.moveToScene(to: scene)
+            }
+            ]), withKey:"transitioning")
+    }
     
     
     
