@@ -30,6 +30,12 @@ class HomeScene: SKScene {
         var time:TimeInterval
     }
     
+    // navigation items
+    var playButton:SCNNode! = nil
+    var settingsButton:SCNNode! = nil
+    var infoButton:SCNNode! = nil
+    var highscoreButton:SCNNode! = nil
+    
     var cubeNode:SCNNode! = nil
     var logoNode:SCNNode! = nil
     var history:[TouchInfo]?
@@ -41,11 +47,16 @@ class HomeScene: SKScene {
         homeScene = self;
         self.view?.backgroundColor = UIColor.clear
         print("HomeScene - didMove")
-        addStructure()
         setupBg()  //  background addition
-        addNav() //  2D spritekit elements
         assignTextures() // prepare textures
-        animateSceneIn()
+        addStructure()
+        
+        
+        addNavigation()
+        
+//        addNav() //  2D spritekit elements
+        
+        
         //printFonts()
         
     }
@@ -60,15 +71,45 @@ class HomeScene: SKScene {
         }
     }
     
+    func addNavigation(){
+        navFaceMat.diffuse.contents = logoBlue
+        navExtrutionMat.diffuse.contents = UIColor.white
+        
+        let playTxt = SCNText(string: "Play", extrusionDepth: 8)
+        playTxt.font = UIFont(name: "Hangar-Flat", size: 30)
+        playButton = SCNNode(geometry: playTxt)
+        playButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        playButton.position = playBtnIn
+        playTxt.flatness = 0.01
+        playTxt.chamferRadius = 0.1
+        var twminVec = SCNVector3Zero
+        var twmaxVec = SCNVector3Zero
+        if playButton.__getBoundingBoxMin(&twminVec, max: &twmaxVec) {
+            let distance = SCNVector3(
+                x: twmaxVec.x - twminVec.x,
+                y: twmaxVec.y - twminVec.y,
+                z: twmaxVec.z - twminVec.z)
+            playButton.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        playButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
+        
+        
+//        playTxt.firstMaterial!.diffuse.contents = logoBlue
+//        playTxt.firstMaterial!.specular.contents = UIColor.white
+        
+        scnScene.rootNode.addChildNode(playButton)
+    }
+    
+    
     func addNav() {
-        playBtn = SKSpriteNode(texture: homePlayBtn)
-        let playBtnRatio = (screenSize.width*0.65) / playBtn.size.width
-        playBtn.size.width = (screenSize.width*0.65)
-        playBtn.size.height = playBtn.size.height * playBtnRatio
-        playBtn.name = "playBtn"
-        playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.maxY*0.15);
-        playBtn.zPosition = 99;
-        overlayScene.addChild(playBtn);
+//        playBtn = SKSpriteNode(texture: homePlayBtn)
+//        let playBtnRatio = (screenSize.width*0.65) / playBtn.size.width
+//        playBtn.size.width = (screenSize.width*0.65)
+//        playBtn.size.height = playBtn.size.height * playBtnRatio
+//        playBtn.name = "playBtn"
+//        playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.maxY*0.15);
+//        playBtn.zPosition = 99;
+//        overlayScene.addChild(playBtn);
     }
     
     func setupBg() {
@@ -153,14 +194,14 @@ class HomeScene: SKScene {
     }
     
     func addLogo() {
-        logoMat.diffuse.contents = UIColor(red:0.40, green:0.74, blue:0.88, alpha:1.0)
-        let logoGeometry = SCNBox(width: side/2, height: side/2, length: side/2, chamferRadius: radius/2)  // Cube Anim
+        logoMat.diffuse.contents = logoBlue
+        let logoGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/4)  // Cube Anim
         logoNode = SCNNode(geometry: logoGeometry)
         logoNode.name = "logo"
         logoNode.geometry?.materials = [logoMat]
         logoNode.position = homeLogoOut
         logoNode.pivot = SCNMatrix4MakeRotation(0.785398, 0, 1, 0);
-        logoNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
+        logoNode.scale = SCNVector3Make(2.5, 2.5, 2.5)
         
         
         let twentyText = SCNText(string: "20", extrusionDepth: 5)
@@ -220,7 +261,7 @@ class HomeScene: SKScene {
         sceneFloor = SCNFloor()                         // Floor
         floorNode = SCNNode(geometry: sceneFloor)
         floorNode.position = homefloorIn
-        sceneFloor.reflectivity = 0.5
+        sceneFloor.reflectivity = 0.1
         sceneFloor.reflectionResolutionScaleFactor = 0.7
         sceneFloor.reflectionFalloffStart = 2.0
         sceneFloor.reflectionFalloffEnd = 10.0
@@ -233,7 +274,7 @@ class HomeScene: SKScene {
         light.castsShadow = true
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: -1.0, y: 2.0, z: 3.5)
+        lightNode.position = spotlightPosition
         
         let cubeGeometry = SCNBox(width: side, height: side, length: side, chamferRadius: radius)  // Cube Anim
         cubeNode = SCNNode(geometry: cubeGeometry)
@@ -269,10 +310,10 @@ class HomeScene: SKScene {
         // detect object at point
         print("touchDown")
         var exit:CGFloat? = nil
-        if playBtn.contains(pos) {
-            print("playBtn Touched")
-            exit = scenes.game
-        }
+//        if playBtn.contains(pos) {
+//            print("playBtn Touched")
+//            exit = scenes.game
+//        }
         if exit != nil {
             exitToScene(scene: exit!)
         }

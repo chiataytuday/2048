@@ -44,6 +44,8 @@ let col512 = UIColor(red:0.73, green:0.29, blue:0.29, alpha:1.0)
 let col1024 = UIColor(red:0.73, green:0.29, blue:0.29, alpha:1.0)
 let col2048 = UIColor(red:0.73, green:0.29, blue:0.29, alpha:1.0)
 
+let logoBlue = UIColor(red:0.40, green:0.74, blue:0.88, alpha:1.0)
+
 // Size params
 //------------------------------
 
@@ -98,22 +100,45 @@ let mat512 = SCNMaterial()
 let mat1024 = SCNMaterial()
 let mat2048 = SCNMaterial()
 
+// Nav Materials
+let navFaceMat = SCNMaterial()
+let navExtrutionMat = SCNMaterial()
+
 // Logo Materials
 let logoMat = SCNMaterial()
 let logoTextMat = SCNMaterial()
 
 // Cube Properties
-let side: CGFloat = 1 // one side of the cube
+let side: CGFloat = 2 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
+
+// light Properties
+let spotlightPosition = SCNVector3(x: -1.0, y: 2.0, z: 5.5)
+
+
 // Camera Properties
-let homeCameraIn = SCNVector3(x: 0.0, y: 0.7, z: 3.5)
+let homeCameraIn = SCNVector3(x: 0.0, y: 0.7, z: 6.1)
 let homeCameraOut = SCNVector3(x: 0.0, y: 60, z: -5.0)
 let gameCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 
-let homefloorIn = SCNVector3(x: 0, y: -0.5, z: 0)
+let homefloorIn = SCNVector3(x: 0, y: -1.0, z: 0)
 let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 
-let homeLogoIn = SCNVector3(x: 0, y: 1.1, z: 0.6)
+let homeLogoIn = SCNVector3(x: 0, y: 1.9, z: 0.6)
 let homeLogoOut = SCNVector3(x: 0, y: 4, z: 0.6)
+
+
+
+let playBtnIn = SCNVector3(x: 0, y: -0.97, z: 2.6)
+let playBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+
+let scoreBtnIn = SCNVector3(x: 0, y: 0, z: 0)
+let scoreBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+
+let infoBtnIn = SCNVector3(x: 0, y: 0, z: 0)
+let infoBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+
+let settingsBtnIn = SCNVector3(x: 0, y: 0, z: 0)
+let settingsBtnOut = SCNVector3(x: 0, y: 0, z: 0)
 
