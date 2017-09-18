@@ -16,8 +16,6 @@ let GameLogo = SKTexture(imageNamed: "GameLogo.png")
 let homePlayBtn = SKTexture(imageNamed: "NewGame.png")
 let metalMapTexture = SKTexture(imageNamed: "kMetalMap.png")
 
-
-
 // Material textures
 let text2 = UIImage(named: "tex2")
 let text4 = UIImage(named: "tex4")
@@ -122,14 +120,16 @@ let homeCameraOut = SCNVector3(x: 0.0, y: 60, z: -5.0)
 let gameCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 
+// Scene floor Properties
 let homefloorIn = SCNVector3(x: 0, y: -1.0, z: 0)
 let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 
+// Home logo Properties
 let homeLogoIn = SCNVector3(x: 0, y: 1.9, z: 0.6)
 let homeLogoOut = SCNVector3(x: 0, y: 4, z: 0.6)
 
 
-
+// Navigation items Properties
 let playBtnIn = SCNVector3(x: 0, y: -0.97, z: 2.6)
 let playBtnOut = SCNVector3(x: 0, y: 0, z: 0)
 

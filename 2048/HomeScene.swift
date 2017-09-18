@@ -12,23 +12,15 @@ import SceneKit
 
 class HomeScene: SKScene {
     
-    var playBtn: SKSpriteNode! = nil
-    var logo: SKSpriteNode! = nil
+    // Environment Objects
     var overlayView:SKView! = nil
     var overlayScene:SKScene! = nil
     
     var sceneView:SCNView! = nil
     var scnScene:SCNScene! = nil
-    
+    // Light and Camera
     var cameraNode:SCNNode! = nil
-    var floorNode:SCNNode! = nil
-    var sceneFloor:SCNFloor! = nil
     var light:SCNLight! = nil
-    
-    struct TouchInfo {
-        var location:CGPoint
-        var time:TimeInterval
-    }
     
     // navigation items
     var playButton:SCNNode! = nil
@@ -36,10 +28,23 @@ class HomeScene: SKScene {
     var infoButton:SCNNode! = nil
     var highscoreButton:SCNNode! = nil
     
-    var cubeNode:SCNNode! = nil
+    // Floor - HomeScene
+    var floorNode:SCNNode! = nil
+    var sceneFloor:SCNFloor! = nil
+    
+    // Logo
     var logoNode:SCNNode! = nil
+    // Cube reference
+    var cubeNode:SCNNode! = nil
+    
+    // Touch Lookup
+    struct TouchInfo {
+        var location:CGPoint
+        var time:TimeInterval
+    }
     var history:[TouchInfo]?
     
+    // ViewController reference
     var gameViewController : GameViewController!
     
     override func didMove(to view: SKView) {
@@ -47,17 +52,12 @@ class HomeScene: SKScene {
         homeScene = self;
         self.view?.backgroundColor = UIColor.clear
         print("HomeScene - didMove")
-        setupBg()  //  background addition
-        assignTextures() // prepare textures
-        addStructure()
-        
-        
+        setupBg()                           //  background addition
+        assignTextures()                    // prepare textures
+        addStructure()                      // Add prerequisites
+
         addNavigation()
-        
-//        addNav() //  2D spritekit elements
-        
-        
-        //printFonts()
+        printFonts()
         
     }
     
@@ -72,9 +72,10 @@ class HomeScene: SKScene {
     }
     
     func addNavigation(){
+        // color materials
         navFaceMat.diffuse.contents = logoBlue
         navExtrutionMat.diffuse.contents = UIColor.white
-        
+        // Play Text
         let playTxt = SCNText(string: "Play", extrusionDepth: 8)
         playTxt.font = UIFont(name: "Hangar-Flat", size: 30)
         playButton = SCNNode(geometry: playTxt)
@@ -94,23 +95,69 @@ class HomeScene: SKScene {
         playButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         
-//        playTxt.firstMaterial!.diffuse.contents = logoBlue
-//        playTxt.firstMaterial!.specular.contents = UIColor.white
+        let settingsTxt = SCNText(string: "Play", extrusionDepth: 8)
+        settingsTxt.font = UIFont(name: "Ionicons", size: 30)
+        settingsButton = SCNNode(geometry: settingsTxt)
+        settingsButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        settingsButton.position = settingsBtnIn
+        settingsTxt.flatness = 0.01
+        settingsTxt.chamferRadius = 0.1
+        var stminVec = SCNVector3Zero
+        var stmaxVec = SCNVector3Zero
+        if settingsButton.__getBoundingBoxMin(&stminVec, max: &stmaxVec) {
+            let distance = SCNVector3(
+                x: stmaxVec.x - stminVec.x,
+                y: stmaxVec.y - stminVec.y,
+                z: stmaxVec.z - stminVec.z)
+            settingsButton.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        settingsButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
+        
+        
+        
+        let scoreTxt = SCNText(string: "Play", extrusionDepth: 8)
+        scoreTxt.font = UIFont(name: "Ionicons", size: 30)
+        highscoreButton = SCNNode(geometry: scoreTxt)
+        highscoreButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        highscoreButton.position = scoreBtnIn
+        scoreTxt.flatness = 0.01
+        scoreTxt.chamferRadius = 0.1
+        var scminVec = SCNVector3Zero
+        var scmaxVec = SCNVector3Zero
+        if highscoreButton.__getBoundingBoxMin(&scminVec, max: &scmaxVec) {
+            let distance = SCNVector3(
+                x: scmaxVec.x - scminVec.x,
+                y: scmaxVec.y - scminVec.y,
+                z: scmaxVec.z - scminVec.z)
+            highscoreButton.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        highscoreButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
+        
+        
+        let infoTxt = SCNText(string: "Play", extrusionDepth: 8)
+        infoTxt.font = UIFont(name: "Ionicons", size: 30)
+        infoButton = SCNNode(geometry: infoTxt)
+        infoButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        infoButton.position = infoBtnIn
+        infoTxt.flatness = 0.01
+        infoTxt.chamferRadius = 0.1
+        var infominVec = SCNVector3Zero
+        var infomaxVec = SCNVector3Zero
+        if infoButton.__getBoundingBoxMin(&infominVec, max: &infomaxVec) {
+            let distance = SCNVector3(
+                x: infomaxVec.x - infominVec.x,
+                y: infomaxVec.y - infominVec.y,
+                z: infomaxVec.z - infominVec.z)
+            infoButton.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        infoButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         scnScene.rootNode.addChildNode(playButton)
+        scnScene.rootNode.addChildNode(settingsButton)
+        scnScene.rootNode.addChildNode(highscoreButton)
+        scnScene.rootNode.addChildNode(infoButton)
     }
     
-    
-    func addNav() {
-//        playBtn = SKSpriteNode(texture: homePlayBtn)
-//        let playBtnRatio = (screenSize.width*0.65) / playBtn.size.width
-//        playBtn.size.width = (screenSize.width*0.65)
-//        playBtn.size.height = playBtn.size.height * playBtnRatio
-//        playBtn.name = "playBtn"
-//        playBtn.position = CGPoint(x:self.frame.midX, y:self.frame.maxY*0.15);
-//        playBtn.zPosition = 99;
-//        overlayScene.addChild(playBtn);
-    }
     
     func setupBg() {
         let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
@@ -126,10 +173,9 @@ class HomeScene: SKScene {
         scnScene = SCNScene()
         sceneView.scene = scnScene
         
-        overlayScene = SKScene(size: (self.view?.bounds.size)!)     // create overlay and add to sceneView
-        sceneView.overlaySKScene = overlayScene
-        
-        sceneView.overlaySKScene!.isUserInteractionEnabled = false;
+//        overlayScene = SKScene(size: (self.view?.bounds.size)!)     // create overlay and add to sceneView
+//        sceneView.overlaySKScene = overlayScene
+//        sceneView.overlaySKScene!.isUserInteractionEnabled = false;
 
         addCubeElement()
         addLogo()
@@ -297,14 +343,6 @@ class HomeScene: SKScene {
         
     }
     
-    func animCubeIn(){
-        
-    }
-    
-    func animCubeOut(){
-        
-    }
-    
     
     func touchDown(atPoint pos : CGPoint) {
         // detect object at point
@@ -332,6 +370,12 @@ class HomeScene: SKScene {
             }
             ]), withKey:"transitioning")
     }
+    
+    
+    
+    
+    
+    
     
     
     
