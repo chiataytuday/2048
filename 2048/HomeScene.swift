@@ -79,7 +79,7 @@ class HomeScene: SKScene {
         let playTxt = SCNText(string: "Play", extrusionDepth: 8)
         playTxt.font = UIFont(name: "Hangar-Flat", size: 30)
         playButton = SCNNode(geometry: playTxt)
-        playButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        playButton.scale = SCNVector3Make(0.024, 0.024, 0.024)
         playButton.position = playBtnIn
         playTxt.flatness = 0.01
         playTxt.chamferRadius = 0.1
@@ -95,10 +95,10 @@ class HomeScene: SKScene {
         playButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         
-        let settingsTxt = SCNText(string: "Play", extrusionDepth: 8)
+        let settingsTxt = SCNText(string: "\u{f43d}", extrusionDepth: 8)
         settingsTxt.font = UIFont(name: "Ionicons", size: 30)
         settingsButton = SCNNode(geometry: settingsTxt)
-        settingsButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        settingsButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
         settingsButton.position = settingsBtnIn
         settingsTxt.flatness = 0.01
         settingsTxt.chamferRadius = 0.1
@@ -114,11 +114,10 @@ class HomeScene: SKScene {
         settingsButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         
-        
-        let scoreTxt = SCNText(string: "Play", extrusionDepth: 8)
+        let scoreTxt = SCNText(string: "\u{f348}", extrusionDepth: 8)
         scoreTxt.font = UIFont(name: "Ionicons", size: 30)
         highscoreButton = SCNNode(geometry: scoreTxt)
-        highscoreButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        highscoreButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
         highscoreButton.position = scoreBtnIn
         scoreTxt.flatness = 0.01
         scoreTxt.chamferRadius = 0.1
@@ -134,10 +133,10 @@ class HomeScene: SKScene {
         highscoreButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         
-        let infoTxt = SCNText(string: "Play", extrusionDepth: 8)
+        let infoTxt = SCNText(string: "\u{f149}", extrusionDepth: 8)
         infoTxt.font = UIFont(name: "Ionicons", size: 30)
         infoButton = SCNNode(geometry: infoTxt)
-        infoButton.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        infoButton.scale = SCNVector3Make(0.012, 0.012, 0.012)
         infoButton.position = infoBtnIn
         infoTxt.flatness = 0.01
         infoTxt.chamferRadius = 0.1
@@ -348,6 +347,12 @@ class HomeScene: SKScene {
         // detect object at point
         print("touchDown")
         var exit:CGFloat? = nil
+//        if playButton.cont(pos){
+//            exit = scenes.game
+//        }
+//        
+        
+        
 //        if playBtn.contains(pos) {
 //            print("playBtn Touched")
 //            exit = scenes.game
