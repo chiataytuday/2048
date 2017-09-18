@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A46BC3761F6FDD2A0031013B /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A46BC3751F6FDD2A0031013B /* ionicons.ttf */; };
 		A4864DB21F58A75B00645483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB11F58A75B00645483 /* AppDelegate.swift */; };
 		A4864DB81F58A75B00645483 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB71F58A75B00645483 /* GameScene.swift */; };
 		A4864DBA1F58A75B00645483 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB91F58A75B00645483 /* GameViewController.swift */; };
@@ -19,6 +18,7 @@
 		A4864DEE1F59437100645483 /* SplashLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DEB1F59437100645483 /* SplashLogo.png */; };
 		A4864DEF1F59437100645483 /* SplashLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DEC1F59437100645483 /* SplashLogo@2x.png */; };
 		A4864DF01F59437100645483 /* SplashLogo@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4864DED1F59437100645483 /* SplashLogo@4x.png */; };
+		A4883F531F703BA700B7D807 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4883F521F703BA700B7D807 /* ionicons.ttf */; };
 		A4D18BF91F594E5D00D93B03 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BF81F594E5D00D93B03 /* HomeScene.swift */; };
 		A4D18BFB1F5954C600D93B03 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFA1F5954C600D93B03 /* Globals.swift */; };
 		A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */; };
@@ -67,7 +67,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A46BC3751F6FDD2A0031013B /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../2048-Assets/ionicons.ttf"; sourceTree = "<group>"; };
 		A4864DAE1F58A75B00645483 /* 2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4864DB11F58A75B00645483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4864DB71F58A75B00645483 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		A4864DEB1F59437100645483 /* SplashLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashLogo.png; sourceTree = "<group>"; };
 		A4864DEC1F59437100645483 /* SplashLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashLogo@2x.png"; sourceTree = "<group>"; };
 		A4864DED1F59437100645483 /* SplashLogo@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashLogo@4x.png"; sourceTree = "<group>"; };
+		A4883F521F703BA700B7D807 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		A4D18BF81F594E5D00D93B03 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 		A4D18BFA1F5954C600D93B03 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleDefinitions.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		A4864DA51F58A75B00645483 = {
 			isa = PBXGroup;
 			children = (
-				A46BC3751F6FDD2A0031013B /* ionicons.ttf */,
+				A4883F521F703BA700B7D807 /* ionicons.ttf */,
 				A4D18C3A1F69A2A800D93B03 /* HANGAR_flat.ttf */,
 				A4864DB01F58A75B00645483 /* 2048 */,
 				A4864DCB1F58A75B00645483 /* 2048Tests */,
@@ -388,10 +388,10 @@
 				A4D18C351F60A46800D93B03 /* NewGame.png in Resources */,
 				A4D18C271F606B2200D93B03 /* tex16.png in Resources */,
 				A4D18C261F606B2200D93B03 /* tex8.png in Resources */,
-				A46BC3761F6FDD2A0031013B /* ionicons.ttf in Resources */,
 				A4D18C2E1F606B2200D93B03 /* tex2048.png in Resources */,
 				A4D18C2A1F606B2200D93B03 /* tex128.png in Resources */,
 				A4864DC21F58A75B00645483 /* LaunchScreen.storyboard in Resources */,
+				A4883F531F703BA700B7D807 /* ionicons.ttf in Resources */,
 				A4D18C241F606B2200D93B03 /* tex2.png in Resources */,
 				A4D18C371F60AAE900D93B03 /* MetalMap.png in Resources */,
 				A4864DEE1F59437100645483 /* SplashLogo.png in Resources */,
