@@ -79,6 +79,7 @@ class HomeScene: SKScene {
         let playTxt = SCNText(string: "Play", extrusionDepth: 8)
         playTxt.font = UIFont(name: "Hangar-Flat", size: 30)
         playButton = SCNNode(geometry: playTxt)
+        playButton.name = "play"
         playButton.scale = SCNVector3Make(0.024, 0.024, 0.024)
         playButton.position = playBtnIn
         playTxt.flatness = 0.01
@@ -98,6 +99,7 @@ class HomeScene: SKScene {
         let settingsTxt = SCNText(string: "\u{f43d}", extrusionDepth: 8)
         settingsTxt.font = UIFont(name: "Ionicons", size: 30)
         settingsButton = SCNNode(geometry: settingsTxt)
+        settingsButton.name = "settings"
         settingsButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
         settingsButton.position = settingsBtnIn
         settingsTxt.flatness = 0.01
@@ -117,6 +119,7 @@ class HomeScene: SKScene {
         let scoreTxt = SCNText(string: "\u{f348}", extrusionDepth: 8)
         scoreTxt.font = UIFont(name: "Ionicons", size: 30)
         highscoreButton = SCNNode(geometry: scoreTxt)
+        highscoreButton.name = "score"
         highscoreButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
         highscoreButton.position = scoreBtnIn
         scoreTxt.flatness = 0.01
@@ -136,6 +139,7 @@ class HomeScene: SKScene {
         let infoTxt = SCNText(string: "\u{f149}", extrusionDepth: 8)
         infoTxt.font = UIFont(name: "Ionicons", size: 30)
         infoButton = SCNNode(geometry: infoTxt)
+        infoButton.name = "info"
         infoButton.scale = SCNVector3Make(0.012, 0.012, 0.012)
         infoButton.position = infoBtnIn
         infoTxt.flatness = 0.01
@@ -346,21 +350,6 @@ class HomeScene: SKScene {
     func touchDown(atPoint pos : CGPoint) {
         // detect object at point
         print("touchDown")
-        var exit:CGFloat? = nil
-//        if playButton.cont(pos){
-//            exit = scenes.game
-//        }
-//        
-        
-        
-//        if playBtn.contains(pos) {
-//            print("playBtn Touched")
-//            exit = scenes.game
-//        }
-        if exit != nil {
-            exitToScene(scene: exit!)
-        }
-        
     }
     
     func exitToScene(scene:CGFloat){
@@ -379,8 +368,13 @@ class HomeScene: SKScene {
     
     
     
-    
-    
+//    let touch = touches.first
+//    if let touchPoint = touch?.locationInView(self.sceneView),
+//    hitTestResult = self.sceneView.hitTest(touchPoint, options: nil).first {
+//        let hitNode = hitTestResult.node
+//        hitNode.paused = !hitNode.paused
+//    }
+//    
     
     
     
@@ -393,8 +387,22 @@ class HomeScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-            self.touchDown(atPoint: t.location(in: self))
+//            self.touchDown(atPoint: t.location(in: self))
             history = [TouchInfo(location:t.location(in: self), time:t.timestamp)]
+        }
+        let touch = touches.first
+        if let touchPoint = touch?.location(in: self.sceneView),
+            let hitTestResult = self.sceneView.hitTest(touchPoint, options: nil).first {
+            let hitNode = hitTestResult.node
+            print("Name : ",hitNode.name)
+            var exit:CGFloat? = nil
+            if hitNode.name == "play" { exit = scenes.game }
+            if hitNode.name == "info" { exit = scenes.info }
+            if hitNode.name == "score" { exit = scenes.score }
+            if hitNode.name == "settings" { exit = scenes.settings }
+            if exit != nil {
+                exitToScene(scene: exit!)
+            }
         }
     }
     
