@@ -120,6 +120,7 @@ let radius: CGFloat = side / 12 // the corner radius
 
 // light Properties
 let spotlightPosition = SCNVector3(x: -1.0, y: 2.2, z: 7.8)
+let gamelightPosition = SCNVector3(x: -1.0, y: 2.2, z: 7.8)
 
 
 // Camera Properties

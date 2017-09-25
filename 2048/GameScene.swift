@@ -11,7 +11,15 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let sceneView:SCNView! = nil
+    var gameView:SCNView! = nil
+    var gameSCNScene:SCNScene! = nil
+    // Camera and Light
+    var cameraNode:SCNNode! = nil
+    var light:SCNLight! = nil
+    
+    // Config params
+    let gridSize = 4
+    let tileSize = 20
     
     
     let gameBoard:Array = [
@@ -27,9 +35,24 @@ class GameScene: SKScene {
         gameScene = self;
         self.view?.backgroundColor = UIColor.red
         print("didMove - GameScene")
-        setupBg()
+        
+        runSetup()
         
     }
+    
+    func runSetup(){
+        run(SKAction.sequence([
+            SKAction.run() {
+                self.setupBg()
+                self.addStructure()
+            },
+            SKAction.wait(forDuration: 0.2),
+            SKAction.run() {
+                self.buildGrid()
+            }
+            ]), withKey:"transitioning")
+    }
+    
     
     func setupBg() {
         let bg = SKSpriteNode(color: UIColor.white, size: CGSize(width: screenW, height: screenH))
@@ -37,24 +60,55 @@ class GameScene: SKScene {
         self.addChild(bg)
     }
     
+    func buildGrid(){
+        for x in 0..<gridSize {
+            for y in 0..<gridSize {
+                
+            }
+        }
+        
+        
+        
+//        for y in 0..gridSize
+//        {
+//            for x in 0..gridSize
+//            {
+//                print(board[x % numRows + y * numCols])
+//            }
+//        }
+    }
+    
     func newGame(){
         // spawn two random tiles between 2 or 4
     }
     
     func addStructure() {
-        sceneView = SCNView(frame: (self.view?.frame)!)
-        sceneView.backgroundColor = UIColor.clear
-        self.view?.insertSubview(sceneView, at: 0)                  // add sceneView as SubView
+        gameView = SCNView(frame: (self.view?.frame)!)
+        gameView.backgroundColor = UIColor.clear
+        self.view?.insertSubview(gameView, at: 0)                  // add sceneView as SubView
         
-        scnScene = SCNScene()
-        sceneView.scene = scnScene
+        gameSCNScene = SCNScene()
+        gameView.scene = gameSCNScene
         
-        //        overlayScene = SKScene(size: (self.view?.bounds.size)!)     // create overlay and add to sceneView
-        //        sceneView.overlaySKScene = overlayScene
-        //        sceneView.overlaySKScene!.isUserInteractionEnabled = false;
+        // add camera
+        let camera = SCNCamera()                        // Camera
+        cameraNode = SCNNode()
+        cameraNode.camera = camera
+        cameraNode.position = gameCameraIn
         
-        addCubeElement()
-        addLogo()
+        // add Light
+        light = SCNLight()                          // Light
+        light.type = SCNLight.LightType.spot
+        light.intensity = 0
+        light.spotInnerAngle = 50.0
+        light.spotOuterAngle = 300.0
+        light.castsShadow = true
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = gamelightPosition
+        
+        gameSCNScene.rootNode.addChildNode(lightNode)
+        gameSCNScene.rootNode.addChildNode(cameraNode)
     }
     
     func createTextures(){

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A451568A1F79931300467A06 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45156891F79931300467A06 /* Tile.swift */; };
 		A4864DB21F58A75B00645483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB11F58A75B00645483 /* AppDelegate.swift */; };
 		A4864DB81F58A75B00645483 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB71F58A75B00645483 /* GameScene.swift */; };
 		A4864DBA1F58A75B00645483 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB91F58A75B00645483 /* GameViewController.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A45156891F79931300467A06 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		A4864DAE1F58A75B00645483 /* 2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4864DB11F58A75B00645483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4864DB71F58A75B00645483 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -140,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A45156881F7992BC00467A06 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A45156891F79931300467A06 /* Tile.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		A4864DA51F58A75B00645483 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +175,7 @@
 		A4864DB01F58A75B00645483 /* 2048 */ = {
 			isa = PBXGroup;
 			children = (
+				A45156881F7992BC00467A06 /* Components */,
 				A4D18C0B1F5C9DC200D93B03 /* Scenes */,
 				A4D18BFE1F5957F100D93B03 /* Models */,
 				A4D18BFD1F5957E900D93B03 /* Views */,
@@ -424,6 +435,7 @@
 				A4D18C0D1F5C9E1600D93B03 /* InfoScene.swift in Sources */,
 				A4D18C081F5B466E00D93B03 /* ComponentsView.swift in Sources */,
 				A4D18C041F5B42D800D93B03 /* AuxModel.swift in Sources */,
+				A451568A1F79931300467A06 /* Tile.swift in Sources */,
 				A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */,
 				A4D18C0A1F5B46BC00D93B03 /* GameBoardView.swift in Sources */,
 				A4D18C061F5B43A000D93B03 /* GameModel.swift in Sources */,
