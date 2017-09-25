@@ -19,14 +19,9 @@ class GameScene: SKScene {
     
     // Config params
     let gridSize = 4
-    let tileSize = 20
+    let tileSize:CGFloat = 20
     
-    
-    let gameBoard:Array = [
-        [],
-        [],
-        [],
-        []]
+    var tiles:Array = [Tile]()
     
     let logo:SKSpriteNode! = nil
     
@@ -55,27 +50,29 @@ class GameScene: SKScene {
     
     
     func setupBg() {
+        print("setupBg")
         let bg = SKSpriteNode(color: UIColor.white, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
     }
     
     func buildGrid(){
-        for x in 0..<gridSize {
-            for y in 0..<gridSize {
-                
+        print("buildGrid")
+        let startY = (screenH/2) - CGFloat(tileSize * 2)
+        let startX = (screenW/2) - CGFloat(tileSize * 2)
+        for y in 0..<gridSize {
+            for x in 0..<gridSize {
+                let yPos = Float(startY * CGFloat(y+1))
+                let xPos = Float(startX * CGFloat(x+1))
+                let geo = SCNBox(width: tileSize, height: tileSize, length: tileSize, chamferRadius: radius)
+                let tilePos = SCNVector3(x: xPos, y: yPos, z: 8)
+                let tileName:String = String("t"+String(y)+String(x))
+                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 1, 0), scale: SCNVector3Make(2.5, 2.5, 2.5))
+                tiles.append(tile)
+                gameSCNScene.rootNode.addChildNode(tile)
             }
         }
-        
-        
-        
-//        for y in 0..gridSize
-//        {
-//            for x in 0..gridSize
-//            {
-//                print(board[x % numRows + y * numCols])
-//            }
-//        }
+    
     }
     
     func newGame(){
@@ -83,6 +80,7 @@ class GameScene: SKScene {
     }
     
     func addStructure() {
+        print("addStructure")
         gameView = SCNView(frame: (self.view?.frame)!)
         gameView.backgroundColor = UIColor.clear
         self.view?.insertSubview(gameView, at: 0)                  // add sceneView as SubView
