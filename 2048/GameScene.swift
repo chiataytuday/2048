@@ -21,6 +21,7 @@ class GameScene: SKScene {
     // Config params
     let gridSize = 4
     let tileSize:CGFloat = 20
+    let tilePosSize:CGFloat = 0.02
     
     var tiles:Array = [Tile]()
     
@@ -59,14 +60,16 @@ class GameScene: SKScene {
     
     func buildGrid(){
         print("buildGrid")
-        let startY = (screenH/2) - CGFloat(tileSize * 2)
-        let startX = (screenW/2) - CGFloat(tileSize * 2)
+        let startY =  CGFloat(tilePosSize * 2)
+        let startX =  CGFloat(tilePosSize * 2)
         for y in 0..<gridSize {
             for x in 0..<gridSize {
                 let yPos = Float(startY * CGFloat(y+1))
                 let xPos = Float(startX * CGFloat(x+1))
-                let geo = SCNBox(width: tileSize, height: tileSize, length: tileSize, chamferRadius: radius)
-                let tilePos = SCNVector3(x: xPos, y: yPos, z: 8)
+                print("x : ",xPos," - y : ",yPos)
+                
+                let geo = SCNBox(width: side, height: side, length: side, chamferRadius: radius/8)
+                let tilePos = SCNVector3(x: xPos, y: yPos, z: 3)
                 let tileName:String = String("t"+String(y)+String(x))
                 let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 1, 0), scale: SCNVector3Make(2.5, 2.5, 2.5))
                 tiles.append(tile)
