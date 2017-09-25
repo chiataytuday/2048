@@ -11,6 +11,15 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    let sceneView:SCNView! = nil
+    
+    
+    let gameBoard:Array = [
+        [],
+        [],
+        [],
+        []]
+    
     let logo:SKSpriteNode! = nil
     
     override func didMove(to view: SKView) {
@@ -19,13 +28,33 @@ class GameScene: SKScene {
         self.view?.backgroundColor = UIColor.red
         print("didMove - GameScene")
         setupBg()
-
+        
     }
     
     func setupBg() {
         let bg = SKSpriteNode(color: UIColor.white, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
+    }
+    
+    func newGame(){
+        // spawn two random tiles between 2 or 4
+    }
+    
+    func addStructure() {
+        sceneView = SCNView(frame: (self.view?.frame)!)
+        sceneView.backgroundColor = UIColor.clear
+        self.view?.insertSubview(sceneView, at: 0)                  // add sceneView as SubView
+        
+        scnScene = SCNScene()
+        sceneView.scene = scnScene
+        
+        //        overlayScene = SKScene(size: (self.view?.bounds.size)!)     // create overlay and add to sceneView
+        //        sceneView.overlaySKScene = overlayScene
+        //        sceneView.overlaySKScene!.isUserInteractionEnabled = false;
+        
+        addCubeElement()
+        addLogo()
     }
     
     func createTextures(){
