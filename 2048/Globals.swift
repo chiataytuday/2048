@@ -85,6 +85,14 @@ struct layers {
     static let navigation: CGFloat = 4
 }
 
+// Swipe Direction definitions
+struct swipe {
+    static let up: CGFloat = 0
+    static let down: CGFloat = 1
+    static let left: CGFloat = 2
+    static let right: CGFloat = 3
+}
+
 // Cube Materials
 let mat2 = SCNMaterial()
 let mat4 = SCNMaterial()
@@ -126,19 +134,19 @@ let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 
 // Home logo Properties
 let homeLogoIn = SCNVector3(x: 0, y: 2.0, z: 1.4)
-let homeLogoOut = SCNVector3(x: 0, y: 4, z: 0.6)
+let homeLogoOut = SCNVector3(x: 0, y: 5, z: 0.6)
 
 
 // Navigation items Properties
 let playBtnIn = SCNVector3(x: 0, y: -0.97, z: 3.3)
-let playBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+let playBtnOut = SCNVector3(x: 0, y: -0.97, z: 8)
 
 let scoreBtnIn = SCNVector3(x: 0, y: -0.91, z: 4.3)
-let scoreBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+let scoreBtnOut = SCNVector3(x: 0, y: -0.91, z: 8)
 
 let infoBtnIn = SCNVector3(x: 0.5, y: -0.92, z: 4.2)
-let infoBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+let infoBtnOut = SCNVector3(x: 0.5, y: -0.92, z: 8)
 
 let settingsBtnIn = SCNVector3(x: -0.5, y: -0.95, z: 4.2)
-let settingsBtnOut = SCNVector3(x: 0, y: 0, z: 0)
+let settingsBtnOut = SCNVector3(x: -0.5, y: -0.95, z: 8)
 

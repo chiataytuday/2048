@@ -57,7 +57,7 @@ class HomeScene: SKScene {
         addStructure()                      // Add prerequisites
 
         addNavigation()
-        printFonts()
+//        printFonts()
         
     }
     
@@ -81,7 +81,7 @@ class HomeScene: SKScene {
         playButton = SCNNode(geometry: playTxt)
         playButton.name = "play"
         playButton.scale = SCNVector3Make(0.024, 0.024, 0.024)
-        playButton.position = playBtnIn
+        playButton.position = playBtnOut
         playTxt.flatness = 0.01
         playTxt.chamferRadius = 0.1
         var twminVec = SCNVector3Zero
@@ -101,7 +101,7 @@ class HomeScene: SKScene {
         settingsButton = SCNNode(geometry: settingsTxt)
         settingsButton.name = "settings"
         settingsButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
-        settingsButton.position = settingsBtnIn
+        settingsButton.position = settingsBtnOut
         settingsTxt.flatness = 0.01
         settingsTxt.chamferRadius = 0.1
         var stminVec = SCNVector3Zero
@@ -121,7 +121,7 @@ class HomeScene: SKScene {
         highscoreButton = SCNNode(geometry: scoreTxt)
         highscoreButton.name = "score"
         highscoreButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
-        highscoreButton.position = scoreBtnIn
+        highscoreButton.position = scoreBtnOut
         scoreTxt.flatness = 0.01
         scoreTxt.chamferRadius = 0.1
         var scminVec = SCNVector3Zero
@@ -141,7 +141,7 @@ class HomeScene: SKScene {
         infoButton = SCNNode(geometry: infoTxt)
         infoButton.name = "info"
         infoButton.scale = SCNVector3Make(0.012, 0.012, 0.012)
-        infoButton.position = infoBtnIn
+        infoButton.position = infoBtnOut
         infoTxt.flatness = 0.01
         infoTxt.chamferRadius = 0.1
         var infominVec = SCNVector3Zero
@@ -195,11 +195,27 @@ class HomeScene: SKScene {
                 self.light.intensity = 1200
                 SCNTransaction.commit()
             },
-            SKAction.wait(forDuration: 0.5),
+            SKAction.wait(forDuration: 0.2),
             SKAction.run() {
                 SCNTransaction.begin()
                 SCNTransaction.animationDuration = 1.0
                 self.logoNode.position = homeLogoIn
+                SCNTransaction.commit()
+            },
+            SKAction.wait(forDuration: 0.2),
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.5
+                self.playButton.position = playBtnIn
+                SCNTransaction.commit()
+            },
+            SKAction.wait(forDuration: 0.1),
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.5
+                self.highscoreButton.position = scoreBtnIn
+                self.infoButton.position = infoBtnIn
+                self.settingsButton.position = settingsBtnIn
                 SCNTransaction.commit()
             }
             ]), withKey:"transitioning")
@@ -394,7 +410,7 @@ class HomeScene: SKScene {
         if let touchPoint = touch?.location(in: self.sceneView),
             let hitTestResult = self.sceneView.hitTest(touchPoint, options: nil).first {
             let hitNode = hitTestResult.node
-            print("Name : ",hitNode.name)
+            print("Name : ",hitNode.name as Any)
             var exit:CGFloat? = nil
             if hitNode.name == "play" { exit = scenes.game }
             if hitNode.name == "info" { exit = scenes.info }
@@ -437,6 +453,7 @@ class HomeScene: SKScene {
                 }
                 let velocity = CGVector(dx: vx/count, dy: vy/count)
                 let impulseFactor = velocity.dx / 10.0
+                print("Applying physics")
                 cubeNode?.physicsBody?.applyTorque(SCNVector4Make(0, 1, 0, Float(impulseFactor)), asImpulse: true)
                 history = nil
             }

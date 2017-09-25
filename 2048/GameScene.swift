@@ -17,15 +17,27 @@ class GameScene: SKScene {
         
         gameScene = self;
         self.view?.backgroundColor = UIColor.red
-        print("GameScene")
+        print("didMove - GameScene")
         setupBg()
 
     }
     
     func setupBg() {
-        let bg = SKSpriteNode(color: UIColor.blue, size: CGSize(width: screenW, height: screenH))
+        let bg = SKSpriteNode(color: UIColor.white, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
+    }
+    
+    func createTextures(){
+        // assign texture materials
+    }
+    
+    func setTextureForId(item:CGFloat){
+        
+    }
+    
+    func evaluateGrid(direction:CGFloat){
+
     }
     
     
