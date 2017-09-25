@@ -16,6 +16,7 @@ class GameScene: SKScene {
     // Camera and Light
     var cameraNode:SCNNode! = nil
     var light:SCNLight! = nil
+    var lockNode:SCNNode! = nil
     
     // Config params
     let gridSize = 4
@@ -105,6 +106,21 @@ class GameScene: SKScene {
         lightNode.light = light
         lightNode.position = gamelightPosition
         
+        // create lock object
+        logoMat.diffuse.contents = logoBlue
+        let logoGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/4)  // Cube Anim
+        lockNode = SCNNode(geometry: logoGeometry)
+        lockNode.name = "logo"
+        lockNode.geometry?.materials = [logoMat]
+        lockNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
+        lockNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        
+        let constraint = SCNLookAtConstraint(target: lockNode)                  // Constraints
+        constraint.isGimbalLockEnabled = true
+        cameraNode.constraints = [constraint]
+        lightNode.constraints = [constraint]
+        
+        gameSCNScene.rootNode.addChildNode(lockNode)
         gameSCNScene.rootNode.addChildNode(lightNode)
         gameSCNScene.rootNode.addChildNode(cameraNode)
     }
