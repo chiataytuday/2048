@@ -21,7 +21,7 @@ class GameScene: SKScene {
     // Config params
     let gridSize = 4
     let tileSize:CGFloat = 20
-    let tilePosSize:CGFloat = 0.02
+    let tilePosSize:CGFloat = 0.2
     
     var tiles:Array = [Tile]()
     
@@ -60,18 +60,21 @@ class GameScene: SKScene {
     
     func buildGrid(){
         print("buildGrid")
-        let startY =  CGFloat(tilePosSize * 2)
-        let startX =  CGFloat(tilePosSize * 2)
+        let startY =  -CGFloat((tilePosSize * 2)-tilePosSize/2)
+        let startX =  -CGFloat((tilePosSize * 2)-tilePosSize/2)
+        logoMat.diffuse.contents = logoBlue
         for y in 0..<gridSize {
             for x in 0..<gridSize {
-                let yPos = Float(startY * CGFloat(y+1))
-                let xPos = Float(startX * CGFloat(x+1))
-                print("x : ",xPos," - y : ",yPos)
+                let yPos = Float(startY + (tilePosSize * CGFloat(y)) )
+                let xPos = Float(startX + (tilePosSize * CGFloat(x)) )
+                print("x : ",x," - ",xPos," - y : ",yPos)
                 
-                let geo = SCNBox(width: side, height: side, length: side, chamferRadius: radius/8)
-                let tilePos = SCNVector3(x: xPos, y: yPos, z: 3)
+                let geo = SCNBox(width: side/1.2, height: side/1.2, length: side/1.2, chamferRadius: radius/2)
+                let tilePos = SCNVector3(x: xPos, y: yPos, z: 1.5 )
                 let tileName:String = String("t"+String(y)+String(x))
-                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 1, 0), scale: SCNVector3Make(2.5, 2.5, 2.5))
+                
+
+                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(0.1, 0.1, 0.1))
                 tiles.append(tile)
                 gameSCNScene.rootNode.addChildNode(tile)
             }
@@ -100,8 +103,8 @@ class GameScene: SKScene {
         
         // add Light
         light = SCNLight()                          // Light
-        light.type = SCNLight.LightType.spot
-        light.intensity = 0
+        light.type = SCNLight.LightType.omni
+        light.intensity = 1000
         light.spotInnerAngle = 50.0
         light.spotOuterAngle = 300.0
         light.castsShadow = true
@@ -116,7 +119,7 @@ class GameScene: SKScene {
         lockNode.name = "logo"
         lockNode.geometry?.materials = [logoMat]
         lockNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
-        lockNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        lockNode.scale = SCNVector3Make(0.01, 0.01, 0.01)
         
         let constraint = SCNLookAtConstraint(target: lockNode)                  // Constraints
         constraint.isGimbalLockEnabled = true
