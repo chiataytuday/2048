@@ -46,8 +46,27 @@ class GameScene: SKScene {
             SKAction.wait(forDuration: 0.2),
             SKAction.run() {
                 self.buildGrid()
+                self.addGestureListeners()
             }
             ]), withKey:"transitioning")
+    }
+    
+    func addGestureListeners(){
+        let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeUP.direction = UISwipeGestureRecognizerDirection.up
+        self.view?.addGestureRecognizer(swipeUP)
+        
+        let swipeDOWN = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDOWN.direction = UISwipeGestureRecognizerDirection.down
+        self.view?.addGestureRecognizer(swipeDOWN)
+        
+        let swipeLEFT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLEFT.direction = UISwipeGestureRecognizerDirection.left
+        self.view?.addGestureRecognizer(swipeLEFT)
+        
+        let swipeRIGHT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRIGHT.direction = UISwipeGestureRecognizerDirection.right
+        self.view?.addGestureRecognizer(swipeRIGHT)
     }
     
     
@@ -143,7 +162,39 @@ class GameScene: SKScene {
 
     }
     
+    func testTileMaterials(){
+        for itm in tiles {
+            print("item :: ",itm)
+            itm.setMaterialForValue(value: material.m1024)
+        }
+    }
     
+    
+    // Gesture handler
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                print("Swiped right")
+                self.testTileMaterials()
+                self.bounce(item:tiles[0])
+            case UISwipeGestureRecognizerDirection.down:
+                print("Swiped down")
+            case UISwipeGestureRecognizerDirection.left:
+                print("Swiped left")
+                self.testTileMaterials()
+            case UISwipeGestureRecognizerDirection.up:
+                print("Swiped up")
+            default:
+                break
+            }
+        }
+    }
+    
+    
+    
+    
+    // Touch handlers
     func touchDown(atPoint pos : CGPoint) {
 
     }
@@ -178,4 +229,24 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+    
+    // Actions
+    // ----------------------------------------------------------------------------------
+    func bounce(item:Tile){
+        run(SKAction.sequence([
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.2
+                item.scale = SCNVector3Make(0.12, 0.12, 0.12)
+                SCNTransaction.commit()
+            },
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.2
+                item.scale = SCNVector3Make(0.1, 0.1, 0.1)
+                SCNTransaction.commit()
+            }
+            ]), withKey:"bouncing")
+    }
+    
 }
