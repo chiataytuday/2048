@@ -12,12 +12,19 @@ import GameplayKit
 
 class Tile : SCNNode {
     
-//    var tileID:Int = nil
+    var id : Int = 0 {
+        didSet {
+            //do something reactive
+//            backgroundColor = delegate.tileColor(value)
+//            numberLabel.textColor = delegate.tileNumberColor(value)
+//            numberLabel.text = "\(value)"
+        }
+    }
     
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-    init(geometry: SCNBox, name:String, materials:Array<SCNMaterial>, position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3){
+    init(geometry: SCNBox, name:String, materials:Array<SCNMaterial>, position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, id:Int){
             super.init()
             self.geometry = geometry
             self.name = name
@@ -25,6 +32,7 @@ class Tile : SCNNode {
             self.position = position
             self.pivot = pivot
             self.scale = scale
+            self.id = id
     }
     
     func setMaterial(materials:Array<SCNMaterial>){

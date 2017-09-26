@@ -82,8 +82,10 @@ class GameScene: SKScene {
         let startY =  -CGFloat((tilePosSize * 2)-tilePosSize/2)
         let startX =  -CGFloat((tilePosSize * 2)-tilePosSize/2)
         logoMat.diffuse.contents = logoBlue
+        var lc = 0;
         for y in 0..<gridSize {
             for x in 0..<gridSize {
+                lc = lc+1
                 let yPos = Float(startY + (tilePosSize * CGFloat(y)) )
                 let xPos = Float(startX + (tilePosSize * CGFloat(x)) )
                 print("x : ",x," - ",xPos," - y : ",yPos)
@@ -93,7 +95,7 @@ class GameScene: SKScene {
                 let tileName:String = String("t"+String(y)+String(x))
                 
 
-                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(0.1, 0.1, 0.1))
+                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(0.1, 0.1, 0.1), id:lc)
                 tiles.append(tile)
                 gameSCNScene.rootNode.addChildNode(tile)
             }
