@@ -50,6 +50,7 @@ class Tile : SCNNode {
             self.scale = scale
             self.id = id
             self.active = false
+            self.hide()
     }
     
     func setMaterial(materials:Array<SCNMaterial>){

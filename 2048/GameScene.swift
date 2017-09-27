@@ -48,6 +48,10 @@ class GameScene: SKScene {
             SKAction.run() {
                 self.buildGrid()
                 self.addGestureListeners()
+            },
+            SKAction.wait(forDuration: 0.2),
+            SKAction.run(){
+                self.newGame()
             }
             ]), withKey:"transitioning")
     }
@@ -106,6 +110,16 @@ class GameScene: SKScene {
     
     func newGame(){
         // spawn two random tiles between 2 or 4
+        var empty = self.getAvailableSlot()
+        for i in 0...1 {
+            print("i : ",i," --> ",CGFloat( arc4random_uniform(2) ))
+            let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
+            let t = empty[randomIndex]
+            empty.remove(at: randomIndex)
+            t.setMaterialForValue(value : CGFloat( Int(arc4random_uniform(2)) ))
+            t.show()
+        }
+        
     }
     
     
@@ -175,13 +189,14 @@ class GameScene: SKScene {
     }
     
     // Logic helpers
-    func getAvailableSlot(){
+    func getAvailableSlot() -> [Tile] {
         var available : Array = [Tile]()
         for t in tiles {
             if !t.active {
                 available.append(t)
             }
         }
+        return available
     }
     
     
@@ -192,13 +207,11 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 print("Swiped right")
-                self.testTileMaterials()
                 self.bounce(item:tiles[0])
             case UISwipeGestureRecognizerDirection.down:
                 print("Swiped down")
             case UISwipeGestureRecognizerDirection.left:
                 print("Swiped left")
-                self.testTileMaterials()
             case UISwipeGestureRecognizerDirection.up:
                 print("Swiped up")
             default:
@@ -252,13 +265,13 @@ class GameScene: SKScene {
         run(SKAction.sequence([
             SKAction.run() {
                 SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.2
+                SCNTransaction.animationDuration = 0.1
                 item.scale = SCNVector3Make(0.12, 0.12, 0.12)
                 SCNTransaction.commit()
             },
             SKAction.run() {
                 SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.2
+                SCNTransaction.animationDuration = 0.1
                 item.scale = SCNVector3Make(0.1, 0.1, 0.1)
                 SCNTransaction.commit()
             }
