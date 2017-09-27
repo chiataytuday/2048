@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import SceneKit
 
 class GameScene: SKScene {
     
@@ -72,7 +73,7 @@ class GameScene: SKScene {
     
     func setupBg() {
         print("setupBg")
-        let bg = SKSpriteNode(color: UIColor.white, size: CGSize(width: screenW, height: screenH))
+        let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
     }
@@ -106,6 +107,8 @@ class GameScene: SKScene {
     func newGame(){
         // spawn two random tiles between 2 or 4
     }
+    
+    
     
     func addStructure() {
         print("addStructure")
@@ -170,6 +173,17 @@ class GameScene: SKScene {
             itm.setMaterialForValue(value: material.m1024)
         }
     }
+    
+    // Logic helpers
+    func getAvailableSlot(){
+        var available : Array = [Tile]()
+        for t in tiles {
+            if !t.active {
+                available.append(t)
+            }
+        }
+    }
+    
     
     
     // Gesture handler
