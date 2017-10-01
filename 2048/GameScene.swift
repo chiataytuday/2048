@@ -111,8 +111,7 @@ class GameScene: SKScene {
     func newGame(){
         // spawn two random tiles between 2 or 4
         var empty = self.getAvailableSlot()
-        for i in 0...1 {
-            print("i : ",i," --> ",CGFloat( arc4random_uniform(2) ))
+        for _ in 0...1 {
             let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
             let t = empty[randomIndex]
             empty.remove(at: randomIndex)
@@ -120,6 +119,9 @@ class GameScene: SKScene {
             t.show()
         }
         
+        let test = tiles[12]
+        test.setMaterialForValue(value :  material.m128)
+        test.show()
     }
     
     
@@ -199,6 +201,34 @@ class GameScene: SKScene {
         return available
     }
     
+    func calculateRow(direction:CGFloat){
+        switch direction {
+        case swipe.right:
+            print("calculate row from right")
+        case swipe.down:
+            print("calculate row from bottom")
+        case swipe.left:
+            print("calculate row from left")
+            var n = 0
+            var count = 0
+            for i in tiles {
+                print("name : ",i.id)
+                count = count + 1
+                i.setMaterialForValue(value: CGFloat(n) )
+                if count == 4 {
+                    count = 0
+                    n = n + 1
+                }
+            }
+            
+        case swipe.up:
+            print("calculate row from top")
+        default:
+            break
+        }
+    }
+    
+    
     
     
     // Gesture handler
@@ -206,14 +236,13 @@ class GameScene: SKScene {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
-                print("Swiped right")
-                self.bounce(item:tiles[0])
+                calculateRow(direction:swipe.right)
             case UISwipeGestureRecognizerDirection.down:
-                print("Swiped down")
+                calculateRow(direction:swipe.down)
             case UISwipeGestureRecognizerDirection.left:
-                print("Swiped left")
+                calculateRow(direction:swipe.left)
             case UISwipeGestureRecognizerDirection.up:
-                print("Swiped up")
+                calculateRow(direction:swipe.up)
             default:
                 break
             }

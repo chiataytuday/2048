@@ -94,17 +94,17 @@ struct swipe {
 }
 
 struct material {
-    static let m2: CGFloat = 1
-    static let m4: CGFloat = 2
-    static let m8: CGFloat = 3
-    static let m16: CGFloat = 4
-    static let m32: CGFloat = 5
-    static let m64: CGFloat = 6
-    static let m128: CGFloat = 7
-    static let m256: CGFloat = 8
-    static let m512: CGFloat = 9
-    static let m1024: CGFloat = 10
-    static let m2048: CGFloat = 11
+    static let m2: CGFloat = 0
+    static let m4: CGFloat = 1
+    static let m8: CGFloat = 2
+    static let m16: CGFloat = 3
+    static let m32: CGFloat = 4
+    static let m64: CGFloat = 5
+    static let m128: CGFloat = 6
+    static let m256: CGFloat = 7
+    static let m512: CGFloat = 8
+    static let m1024: CGFloat = 9
+    static let m2048: CGFloat = 10
 }
 
 // Cube Materials
