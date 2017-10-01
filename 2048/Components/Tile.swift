@@ -21,6 +21,18 @@ class Tile : SCNNode {
         }
     }
     
+    var row : Int = 0 {
+        didSet {
+
+        }
+    }
+    
+    var col : Int = 0 {
+        didSet {
+            
+        }
+    }
+    
     var value : Int = 0{
         didSet {
             
@@ -40,7 +52,7 @@ class Tile : SCNNode {
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-    init(geometry: SCNBox, name:String, materials:Array<SCNMaterial>, position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, id:Int){
+    init(geometry: SCNBox, name:String, materials:Array<SCNMaterial>, position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, id:Int, row:Int, col:Int){
             super.init()
             self.geometry = geometry
             self.name = name
@@ -50,6 +62,8 @@ class Tile : SCNNode {
             self.scale = scale
             self.id = id
             self.active = false
+            self.row = row
+            self.col = col
             self.hide()
     }
     

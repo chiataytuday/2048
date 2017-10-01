@@ -93,6 +93,20 @@ struct swipe {
     static let right: CGFloat = 3
 }
 
+struct column {
+    static let zero: Int = 0
+    static let one: Int = 1
+    static let two: Int = 2
+    static let three: Int = 3
+}
+
+struct row {
+    static let zero: Int = 0
+    static let one: Int = 1
+    static let two: Int = 2
+    static let three: Int = 3
+}
+
 struct material {
     static let m2: CGFloat = 0
     static let m4: CGFloat = 1

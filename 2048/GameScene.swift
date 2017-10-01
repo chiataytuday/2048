@@ -100,7 +100,7 @@ class GameScene: SKScene {
                 let tileName:String = String("t"+String(y)+String(x))
                 
 
-                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(0.1, 0.1, 0.1), id:lc)
+                let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(0.1, 0.1, 0.1), id:lc, row: y, col:x)
                 tiles.append(tile)
                 gameSCNScene.rootNode.addChildNode(tile)
             }
@@ -209,16 +209,27 @@ class GameScene: SKScene {
             print("calculate row from bottom")
         case swipe.left:
             print("calculate row from left")
-            var n = 0
-            var count = 0
+//            var n = 0
+//            var count = 0
             for i in tiles {
-                print("name : ",i.id)
-                count = count + 1
-                i.setMaterialForValue(value: CGFloat(n) )
-                if count == 4 {
-                    count = 0
-                    n = n + 1
+                print("name : ",i.id,"  Row: ",i.row,"  Col: ",i.col)
+                
+                if i.active {
+                    var neighbour = self.getTileFor(row:i.row, col:i.col+1)
+                    if neighbour.active && neighbour.value == i.value {
+                        // match
+                    }
+                }else{
+                    
                 }
+                
+                
+//                count = count + 1
+//                i.setMaterialForValue(value: CGFloat(n) )
+//                if count == 4 {
+//                    count = 0
+//                    n = n + 1
+//                }
             }
             
         case swipe.up:
@@ -228,7 +239,21 @@ class GameScene: SKScene {
         }
     }
     
+    func joinTiles(target:Tile, neighbour:Tile){
+        target.value = target.value*2
+        neighbour.active = false
+    }
     
+    
+    func getTileFor(row:Int, col:Int)->Tile{
+        var ret:Tile! = nil
+        for t in tiles{
+            if t.row == row && t.col == col {
+                ret = t
+            }
+        }
+        return ret
+    }
     
     
     // Gesture handler
