@@ -35,7 +35,35 @@ class Tile : SCNNode {
     
     var value : Int = 0{
         didSet {
-            
+            print(" value ",value)
+            self.active = true
+            switch value {
+            case tilevalue.v2:
+                self.setMaterialForValue(value: material.m2)
+            case tilevalue.v4:
+                self.setMaterialForValue(value: material.m4)
+            case tilevalue.v8:
+                self.setMaterialForValue(value: material.m8)
+            case tilevalue.v16:
+                self.setMaterialForValue(value: material.m16)
+            case tilevalue.v32:
+                self.setMaterialForValue(value: material.m32)
+            case tilevalue.v64:
+                self.setMaterialForValue(value: material.m64)
+            case tilevalue.v128:
+                self.setMaterialForValue(value: material.m128)
+            case tilevalue.v256:
+                self.setMaterialForValue(value: material.m256)
+            case tilevalue.v512:
+                self.setMaterialForValue(value: material.m512)
+            case tilevalue.v1024:
+                self.setMaterialForValue(value: material.m1024)
+            case tilevalue.v2048:
+                self.setMaterialForValue(value: material.m2048)
+            default:
+                self.setMaterialForValue(value: 1000)
+                self.active = false
+            }
         }
     }
     
@@ -86,37 +114,26 @@ class Tile : SCNNode {
         switch value {
         case material.m2:
             self.geometry?.materials = [mat2]
-            self.value = 2
         case material.m4:
             self.geometry?.materials = [mat4]
-            self.value = 4
         case material.m8:
             self.geometry?.materials = [mat8]
-            self.value = 8
         case material.m16:
             self.geometry?.materials = [mat16]
-            self.value = 16
         case material.m32:
             self.geometry?.materials = [mat32]
-            self.value = 32
         case material.m64:
             self.geometry?.materials = [mat64]
-            self.value = 64
         case material.m128:
             self.geometry?.materials = [mat128]
-            self.value = 128
         case material.m256:
             self.geometry?.materials = [mat256]
-            self.value = 256
         case material.m512:
             self.geometry?.materials = [mat512]
-            self.value = 512
         case material.m1024:
             self.geometry?.materials = [mat1024]
-            self.value = 1024
         case material.m2048:
             self.geometry?.materials = [mat2048]
-            self.value = 2048
         default:
             self.geometry?.materials = [logoMat]
             self.value = 0

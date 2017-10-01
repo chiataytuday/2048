@@ -121,6 +121,20 @@ struct material {
     static let m2048: CGFloat = 10
 }
 
+struct tilevalue {
+    static let v2: Int = 2
+    static let v4: Int = 4
+    static let v8: Int = 8
+    static let v16: Int = 16
+    static let v32: Int = 32
+    static let v64: Int = 64
+    static let v128: Int = 128
+    static let v256: Int = 256
+    static let v512: Int = 512
+    static let v1024: Int = 1024
+    static let v2048: Int = 2048
+}
+
 // Cube Materials
 let mat2 = SCNMaterial()
 let mat4 = SCNMaterial()

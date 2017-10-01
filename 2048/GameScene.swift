@@ -111,17 +111,17 @@ class GameScene: SKScene {
     func newGame(){
         // spawn two random tiles between 2 or 4
         var empty = self.getAvailableSlot()
-        for _ in 0...1 {
+        for _ in 0...8 {
             let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
             let t = empty[randomIndex]
             empty.remove(at: randomIndex)
-            t.setMaterialForValue(value : CGFloat( Int(arc4random_uniform(2)) ))
-            t.show()
+//            t.setMaterialForValue(value : CGFloat( Int(arc4random_uniform(2)) ))
+            t.value = Int( (arc4random_uniform(2)+1)*2 )
         }
         
-        let test = tiles[12]
-        test.setMaterialForValue(value :  material.m128)
-        test.show()
+//        let test = tiles[12]
+//        test.setMaterialForValue(value :  material.m128)
+//        test.show()
     }
     
     
@@ -212,12 +212,15 @@ class GameScene: SKScene {
 //            var n = 0
 //            var count = 0
             for i in tiles {
-                print("name : ",i.id,"  Row: ",i.row,"  Col: ",i.col)
+                print("name : ",i.id,"  Row: ",i.row,"  Col: ",i.col, " Active: ",i.active)
                 
                 if i.active {
-                    var neighbour = self.getTileFor(row:i.row, col:i.col+1)
-                    if neighbour.active && neighbour.value == i.value {
-                        // match
+                    if i.col < 3 {
+                        let neighbour = self.getTileFor(row:i.row, col:i.col+1)
+                        if neighbour.active && neighbour.value == i.value {
+                            // match
+                            joinTiles(target: i, neighbour: neighbour)
+                        }
                     }
                 }else{
                     
