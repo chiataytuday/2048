@@ -217,7 +217,11 @@ class GameScene: SKScene {
                         }
                     }
                 }
-                compact(stack: row)
+                
+                print("")
+                print("ROW : ",x)
+                print("----------------")
+                compact(stack: row, rev:true)
             }
             
         case swipe.left:
@@ -236,7 +240,7 @@ class GameScene: SKScene {
                         }
                     }
                 }
-                compact(stack: row)
+                compact(stack: row, rev:false)
             }
             
         case swipe.down:
@@ -255,10 +259,7 @@ class GameScene: SKScene {
                         }
                     }
                 }
-                print("")
-                print("COLUMN : ",y)
-                print("----------------")
-                compact(stack: col)
+                compact(stack: col, rev:false)
             }
             
         case swipe.up:
@@ -277,7 +278,7 @@ class GameScene: SKScene {
                         }
                     }
                 }
-                compact(stack: col)
+                compact(stack: col, rev:true)
             }
             
         default:
@@ -289,32 +290,57 @@ class GameScene: SKScene {
     
     
     
-    func compact(stack:Array<Tile>){
+    func compact(stack:Array<Tile>, rev:Bool){
         
-        for (index, item) in stack.enumerated() {
-            var inactive:Array = [Tile]()
-            if index>0{
-                if item.active{
-                    print("ACTIVE ITEM : ",item.id," pos: ",index)
-                    //compact item
-                    for n in 0...index{
-                        let nx = stack[n]
-                        if !nx.active {
-                            print("fount empty item")
-                            inactive.append(nx)
+        if rev {
+            
+            for (index, item) in stack.reversed().enumerated() {
+                print("ITEM ",item.id," index: ",index)
+                var inactive:Array = [Tile]()
+                if index>0{
+                    if item.active{
+                        print("ACTIVE ITEM : ",item.id," pos: ",index)
+                        //compact item
+                        for n in 0...index{
+                            let nx = stack[n]
+                            if !nx.active {
+//                                print("fount empty item")
+                                inactive.append(nx)
+                            }
+                        }
+                        let last = inactive.last
+                        if (last != nil) {
+                            print("last id: ",last?.id as Any)
+                            last?.value = item.value
+                            item.value = defaultGridValue
                         }
                     }
-                    let last = inactive.first
-                    if (last != nil) {
-                        print("last id: ",last?.id as Any)
-                        last?.value = item.value
-                        item.value = defaultGridValue
-                    }
-                    
                 }
             }
             
+        }else{
+            for (index, item) in stack.enumerated() {
+                var inactive:Array = [Tile]()
+                if index>0{
+                    if item.active{
+                        for n in 0...index{
+                            let nx = stack[n]
+                            if !nx.active {
+                                inactive.append(nx)
+                            }
+                        }
+                        let first = inactive.first
+                        if (first != nil) {
+                            first?.value = item.value
+                            item.value = defaultGridValue
+                        }
+                    }
+                }
+            }
         }
+        
+        
+
 
     }
     
