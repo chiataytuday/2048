@@ -115,13 +115,8 @@ class GameScene: SKScene {
             let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
             let t = empty[randomIndex]
             empty.remove(at: randomIndex)
-//            t.setMaterialForValue(value : CGFloat( Int(arc4random_uniform(2)) ))
             t.value = Int( (arc4random_uniform(2)+1)*2 )
         }
-        
-//        let test = tiles[12]
-//        test.setMaterialForValue(value :  material.m128)
-//        test.show()
     }
     
     
@@ -205,12 +200,8 @@ class GameScene: SKScene {
         switch direction {
         case swipe.right:
             print("calculate row from right")
-        case swipe.down:
-            print("calculate row from bottom")
         case swipe.left:
             print("calculate row from left")
-//            var n = 0
-//            var count = 0
             for i in tiles {
                 print("name : ",i.id,"  Row: ",i.row,"  Col: ",i.col, " Active: ",i.active)
                 
@@ -218,28 +209,64 @@ class GameScene: SKScene {
                     if i.col < 3 {
                         let neighbour = self.getTileFor(row:i.row, col:i.col+1)
                         if neighbour.active && neighbour.value == i.value {
-                            // match
+
                             joinTiles(target: i, neighbour: neighbour)
                         }
                     }
-                }else{
-                    
                 }
-                
-                
-//                count = count + 1
-//                i.setMaterialForValue(value: CGFloat(n) )
-//                if count == 4 {
-//                    count = 0
-//                    n = n + 1
-//                }
+            }
+            
+        case swipe.down:
+            print("calculate row from top")
+            for y in 0..<gridSize {
+                let col = getColRow(type: "col",id:y )
+                for (index, it) in col.enumerated() {
+                    for (ix, next) in col.enumerated() {
+                        if ix > index {
+                            if next.active && next.value == it.value && it.active{
+                                joinTiles(target: it, neighbour: next) // found  item --> BREAK
+                                break;
+                            }else if next.active && next.value != it.value && it.active {
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             
         case swipe.up:
-            print("calculate row from top")
+            print("calculate row from bottom")
+            for y in 0..<gridSize {
+                let col = getColRow(type: "col",id:y )
+                for (index, it) in col.reversed().enumerated() {                    // calculate a column
+                    for (ix, next) in col.reversed().enumerated() {
+                        if ix > index {
+                            if next.active && next.value == it.value && it.active{
+                                joinTiles(target: it, neighbour: next) // found  item --> BREAK
+                                break;
+                            }else if next.active && next.value != it.value && it.active {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            
         default:
             break
         }
+    }
+    
+    func getColRow(type:String,id:Int) -> Array<Tile> {
+        var ret:Array = [Tile]()
+        for i in tiles{
+            if type == "row" && i.row == id {
+                ret.append(i)
+            }else if type == "col" && i.col == id {
+                ret.append(i)
+            }
+        }
+        return ret
     }
     
     func joinTiles(target:Tile, neighbour:Tile){
