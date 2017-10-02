@@ -136,7 +136,6 @@ class Tile : SCNNode {
             self.geometry?.materials = [mat2048]
         default:
             self.geometry?.materials = [logoMat]
-            self.value = 0
             self.hide()
         }
     }

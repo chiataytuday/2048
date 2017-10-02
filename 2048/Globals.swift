@@ -16,6 +16,8 @@ let GameLogo = SKTexture(imageNamed: "GameLogo.png")
 let homePlayBtn = SKTexture(imageNamed: "NewGame.png")
 let metalMapTexture = SKTexture(imageNamed: "kMetalMap.png")
 
+let defaultGridValue:Int = 1000
+
 // Material textures
 let text2 = UIImage(named: "tex2")
 let text4 = UIImage(named: "tex4")

@@ -196,12 +196,15 @@ class GameScene: SKScene {
         return available
     }
     
+    
+    
+    
     func calculateRowCol(direction:CGFloat){
         switch direction {
-        case swipe.right:
-            print("calculate row from right") // reversed
+        case swipe.right: // reversed
+            var row:Array = [Tile]()
             for x in 0..<gridSize {
-                let row = getColRow(type: "row",id:x )
+                row = getColRow(type: "row",id:x )
                 for (index, it) in row.reversed().enumerated() {
                     for (ix, next) in row.reversed().enumerated() {
                         if ix > index {
@@ -214,11 +217,13 @@ class GameScene: SKScene {
                         }
                     }
                 }
+                compact(stack: row)
             }
+            
         case swipe.left:
-            print("calculate row from left")
+            var row:Array = [Tile]()
             for x in 0..<gridSize {
-                let row = getColRow(type: "row",id:x )
+                row = getColRow(type: "row",id:x )
                 for (index, it) in row.enumerated() {
                     for (ix, next) in row.enumerated() {
                         if ix > index {
@@ -231,12 +236,13 @@ class GameScene: SKScene {
                         }
                     }
                 }
+                compact(stack: row)
             }
             
         case swipe.down:
-            print("calculate row from top")
+            var col:Array = [Tile]()
             for y in 0..<gridSize {
-                let col = getColRow(type: "col",id:y )
+                col = getColRow(type: "col",id:y )
                 for (index, it) in col.enumerated() {
                     for (ix, next) in col.enumerated() {
                         if ix > index {
@@ -249,12 +255,16 @@ class GameScene: SKScene {
                         }
                     }
                 }
+                print("")
+                print("COLUMN : ",y)
+                print("----------------")
+                compact(stack: col)
             }
             
         case swipe.up:
-            print("calculate row from bottom")
+            var col:Array = [Tile]()
             for y in 0..<gridSize {
-                let col = getColRow(type: "col",id:y )
+                col = getColRow(type: "col",id:y )
                 for (index, it) in col.reversed().enumerated() {                    // calculate a column
                     for (ix, next) in col.reversed().enumerated() {
                         if ix > index {
@@ -267,11 +277,45 @@ class GameScene: SKScene {
                         }
                     }
                 }
+                compact(stack: col)
             }
             
         default:
             break
         }
+    }
+    
+    
+    
+    
+    
+    func compact(stack:Array<Tile>){
+        
+        for (index, item) in stack.enumerated() {
+            var inactive:Array = [Tile]()
+            if index>0{
+                if item.active{
+                    print("ACTIVE ITEM : ",item.id," pos: ",index)
+                    //compact item
+                    for n in 0...index{
+                        let nx = stack[n]
+                        if !nx.active {
+                            print("fount empty item")
+                            inactive.append(nx)
+                        }
+                    }
+                    let last = inactive.first
+                    if (last != nil) {
+                        print("last id: ",last?.id as Any)
+                        last?.value = item.value
+                        item.value = defaultGridValue
+                    }
+                    
+                }
+            }
+            
+        }
+
     }
     
     func getColRow(type:String,id:Int) -> Array<Tile> {
