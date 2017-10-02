@@ -196,21 +196,38 @@ class GameScene: SKScene {
         return available
     }
     
-    func calculateRow(direction:CGFloat){
+    func calculateRowCol(direction:CGFloat){
         switch direction {
         case swipe.right:
-            print("calculate row from right")
+            print("calculate row from right") // reversed
+            for x in 0..<gridSize {
+                let row = getColRow(type: "row",id:x )
+                for (index, it) in row.reversed().enumerated() {
+                    for (ix, next) in row.reversed().enumerated() {
+                        if ix > index {
+                            if next.active && next.value == it.value && it.active{
+                                joinTiles(target: it, neighbour: next) // found  item --> BREAK
+                                break;
+                            }else if next.active && next.value != it.value && it.active {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         case swipe.left:
             print("calculate row from left")
-            for i in tiles {
-                print("name : ",i.id,"  Row: ",i.row,"  Col: ",i.col, " Active: ",i.active)
-                
-                if i.active {
-                    if i.col < 3 {
-                        let neighbour = self.getTileFor(row:i.row, col:i.col+1)
-                        if neighbour.active && neighbour.value == i.value {
-
-                            joinTiles(target: i, neighbour: neighbour)
+            for x in 0..<gridSize {
+                let row = getColRow(type: "row",id:x )
+                for (index, it) in row.enumerated() {
+                    for (ix, next) in row.enumerated() {
+                        if ix > index {
+                            if next.active && next.value == it.value && it.active{
+                                joinTiles(target: it, neighbour: next) // found  item --> BREAK
+                                break;
+                            }else if next.active && next.value != it.value && it.active {
+                                break;
+                            }
                         }
                     }
                 }
@@ -291,13 +308,13 @@ class GameScene: SKScene {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
-                calculateRow(direction:swipe.right)
+                calculateRowCol(direction:swipe.right)
             case UISwipeGestureRecognizerDirection.down:
-                calculateRow(direction:swipe.down)
+                calculateRowCol(direction:swipe.down)
             case UISwipeGestureRecognizerDirection.left:
-                calculateRow(direction:swipe.left)
+                calculateRowCol(direction:swipe.left)
             case UISwipeGestureRecognizerDirection.up:
-                calculateRow(direction:swipe.up)
+                calculateRowCol(direction:swipe.up)
             default:
                 break
             }
