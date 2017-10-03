@@ -189,9 +189,7 @@ class GameScene: SKScene {
     func getAvailableSlot() -> [Tile] {
         var available : Array = [Tile]()
         for t in tiles {
-            if !t.active {
-                available.append(t)
-            }
+            if !t.active { available.append(t) }
         }
         return available
     }
@@ -217,10 +215,6 @@ class GameScene: SKScene {
                         }
                     }
                 }
-                
-                print("")
-                print("ROW : ",x)
-                print("----------------")
                 compact(stack: row, rev:true)
             }
             
@@ -288,36 +282,19 @@ class GameScene: SKScene {
     
     
     
-    
-    
     func compact(stack:Array<Tile>, rev:Bool){
-        
         if rev {
-            
-            for (index, item) in stack.reversed().enumerated() {
-                print("ITEM ",item.id," index: ",index)
+            for (_, item) in stack.reversed().enumerated() {
                 var inactive:Array = [Tile]()
-                if index>0{
-                    if item.active{
-                        print("ACTIVE ITEM : ",item.id," pos: ",index)
-                        //compact item
-                        for n in 0...index{
-                            let nx = stack[n]
-                            if !nx.active {
-//                                print("fount empty item")
-                                inactive.append(nx)
-                            }
-                        }
-                        let last = inactive.last
-                        if (last != nil) {
-                            print("last id: ",last?.id as Any)
-                            last?.value = item.value
-                            item.value = defaultGridValue
-                        }
-                    }
+                for (_, next) in stack.reversed().enumerated() {
+                    if !next.active { inactive.append(next) }
+                }
+                if item.active {
+                    let first = inactive.first
+                    first?.value = item.value
+                    item.value = defaultGridValue
                 }
             }
-            
         }else{
             for (index, item) in stack.enumerated() {
                 var inactive:Array = [Tile]()
@@ -338,21 +315,11 @@ class GameScene: SKScene {
                 }
             }
         }
-        
-        
-
-
     }
     
     func getColRow(type:String,id:Int) -> Array<Tile> {
         var ret:Array = [Tile]()
-        for i in tiles{
-            if type == "row" && i.row == id {
-                ret.append(i)
-            }else if type == "col" && i.col == id {
-                ret.append(i)
-            }
-        }
+        for i in tiles{ if type == "row" && i.row == id { ret.append(i) }else if type == "col" && i.col == id { ret.append(i) } }
         return ret
     }
     
@@ -364,11 +331,7 @@ class GameScene: SKScene {
     
     func getTileFor(row:Int, col:Int)->Tile{
         var ret:Tile! = nil
-        for t in tiles{
-            if t.row == row && t.col == col {
-                ret = t
-            }
-        }
+        for t in tiles{ if t.row == row && t.col == col { ret = t } }
         return ret
     }
     
