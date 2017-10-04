@@ -119,7 +119,13 @@ class GameScene: SKScene {
         }
     }
     
-    
+    func addRandomTile(){
+        var empty = self.getAvailableSlot()
+        let index = Int(arc4random_uniform(UInt32(empty.count)))
+        let t = empty[index]
+        empty.remove(at: index)
+        t.value = Int( (arc4random_uniform(2)+1)*2 )
+    }
     
     func addStructure() {
         print("addStructure")
@@ -217,7 +223,7 @@ class GameScene: SKScene {
                 }
                 compact(stack: row, rev:true)
             }
-            
+            self.addRandomTile()
         case swipe.left:
             var row:Array = [Tile]()
             for x in 0..<gridSize {
@@ -236,7 +242,7 @@ class GameScene: SKScene {
                 }
                 compact(stack: row, rev:false)
             }
-            
+            self.addRandomTile()
         case swipe.down:
             var col:Array = [Tile]()
             for y in 0..<gridSize {
@@ -255,7 +261,7 @@ class GameScene: SKScene {
                 }
                 compact(stack: col, rev:false)
             }
-            
+            self.addRandomTile()
         case swipe.up:
             var col:Array = [Tile]()
             for y in 0..<gridSize {
@@ -274,7 +280,7 @@ class GameScene: SKScene {
                 }
                 compact(stack: col, rev:true)
             }
-            
+            self.addRandomTile()
         default:
             break
         }
