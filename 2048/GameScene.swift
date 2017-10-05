@@ -332,9 +332,7 @@ class GameScene: SKScene {
                 }
             }
         }
-        for tl in inactive {
-            if tl.active 
-        }
+        for tl in stack { if !tl.active { tl.value = defaultGridValue } }
     }
     
     func getColRow(type:String,id:Int) -> Array<Tile> {
@@ -438,20 +436,22 @@ class GameScene: SKScene {
     }
     
     func animateTileIn(tile:Tile){
-        run(SKAction.sequence([
-            SKAction.run() {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.07
-                tile.position.z = 1.7
-                SCNTransaction.commit()
-            },
-            SKAction.run() {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.15
-                tile.position.z = 1.5
-                SCNTransaction.commit()
-            }
-            ]), withKey:"transitionIn")
+        let tileInAction = SKAction.run() {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.2
+            tile.position.z = 1.7
+            SCNTransaction.commit()
+        }
+        let tileOutAction = SKAction.run() {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.3
+            tile.position.z = 1.5
+            SCNTransaction.commit()
+        }
+        tileInAction.timingMode = SKActionTimingMode.easeOut;
+        tileOutAction.timingMode = SKActionTimingMode.easeIn;
+
+        run(SKAction.sequence([ tileInAction, tileOutAction ]), withKey:"transitionIn")
     }
     
     
