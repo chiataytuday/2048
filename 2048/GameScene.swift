@@ -12,6 +12,8 @@ import SceneKit
 
 class GameScene: SKScene {
     
+    var scoreboard:Scoreboard! = nil
+    
     var gameView:SCNView! = nil
     var gameSCNScene:SCNScene! = nil
     // Camera and Light
@@ -47,6 +49,7 @@ class GameScene: SKScene {
             SKAction.wait(forDuration: 0.2),
             SKAction.run() {
                 self.buildGrid()
+                self.addScoreboard()
                 self.addGestureListeners()
             },
             SKAction.wait(forDuration: 0.2),
@@ -54,6 +57,11 @@ class GameScene: SKScene {
                 self.newGame()
             }
             ]), withKey:"transitioning")
+    }
+    
+    func addScoreboard(){
+        scoreboard = Scoreboard(name: "scoreboard", position: gameScoreIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.5, 1.5, 1.5), score: 0)
+        gameSCNScene.rootNode.addChildNode(scoreboard)
     }
     
     func addGestureListeners(){
@@ -173,25 +181,6 @@ class GameScene: SKScene {
         gameSCNScene.rootNode.addChildNode(cameraNode)
     }
     
-    func createTextures(){
-        // assign texture materials
-    }
-    
-    func setTextureForId(item:CGFloat){
-        
-    }
-    
-    func evaluateGrid(direction:CGFloat){
-
-    }
-    
-    func testTileMaterials(){
-        for itm in tiles {
-            print("item :: ",itm)
-            itm.setMaterialForValue(value: material.m1024)
-        }
-    }
-    
     // Logic helpers
     func getAvailableSlot() -> [Tile] {
         var available : Array = [Tile]()
@@ -200,8 +189,6 @@ class GameScene: SKScene {
         }
         return available
     }
-    
-    
     
     
     func calculateRowCol(direction:CGFloat){
@@ -343,9 +330,7 @@ class GameScene: SKScene {
     
     func joinTiles(target:Tile, neighbour:Tile){
         target.value = target.value*2
-        print("Score ton add: ",target.value)
-        // send value of join to scoreboard
-        
+        scoreboard.score = target.value     // send value of join to scoreboard
         neighbour.active = false
         
         
@@ -448,9 +433,8 @@ class GameScene: SKScene {
             tile.position.z = 1.5
             SCNTransaction.commit()
         }
-        tileInAction.timingMode = SKActionTimingMode.easeOut;
-        tileOutAction.timingMode = SKActionTimingMode.easeIn;
-
+        tileInAction.timingMode = SKActionTimingMode.easeIn;
+        tileOutAction.timingMode = SKActionTimingMode.easeOut;
         run(SKAction.sequence([ tileInAction, tileOutAction ]), withKey:"transitionIn")
     }
     

@@ -15,11 +15,16 @@ class Scoreboard : SCNNode {
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-    init(geometry: SCNBox, name:String, materials:Array<SCNMaterial>, position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, score:Int){
+    init(name:String,position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, score:Int){
+        print("Scoreboard Init")
+        scoreBgMat.diffuse.contents = UIColor.white
+        
+        logoMat.diffuse.contents = logoBlue
+        
         super.init()
-        self.geometry = geometry
+        self.geometry = SCNBox(width: side/1.2, height: side/1.2, length: side/1.2, chamferRadius: radius/2)
         self.name = name
-        self.geometry?.materials = materials
+        self.geometry?.materials = [logoMat]
         self.position = position
         self.pivot = pivot
         self.scale = scale
@@ -30,6 +35,15 @@ class Scoreboard : SCNNode {
     var score : Int = 0 {
         didSet {
             // update score text
+            print("Score added ",score)
+            highscore = highscore + score
+        }
+    }
+    
+    var highscore : Int = 0 {
+        didSet {
+            // update score text
+            print("highscore = ",highscore)
         }
     }
     

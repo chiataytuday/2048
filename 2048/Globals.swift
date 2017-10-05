@@ -61,14 +61,6 @@ var settingsScene: SKScene!
 var infoScene: SKScene!
 var highscoreScene: SKScene!
 
-struct scenes {
-    static let game: CGFloat = 0
-    static let home: CGFloat = 1
-    static let settings: CGFloat = 2
-    static let info: CGFloat = 3
-    static let score: CGFloat = 4
-}
-
 // Animation and transition timings
 let scaleUpAction = SKAction.scale(to: 1.5, duration: 0.3)
 let scaleDownAction = SKAction.scale(to: 1, duration: 0.3)
@@ -78,9 +70,17 @@ let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction, wai
 let sceneTransitionFade = SKTransition.fade(with: UIColor.black, duration: 1.0)
 let sceneTransitionCrossFade = SKTransition.crossFade(withDuration: 1.0)
 
+// Scenes
+struct scenes {
+    static let game: CGFloat = 0
+    static let home: CGFloat = 1
+    static let settings: CGFloat = 2
+    static let info: CGFloat = 3
+    static let score: CGFloat = 4
+}
+
 // Layers
 struct layers {
-    
     static let background: CGFloat = 0
     static let characters: CGFloat = 2
     static let projectiles: CGFloat = 3
@@ -158,6 +158,9 @@ let navExtrutionMat = SCNMaterial()
 let logoMat = SCNMaterial()
 let logoTextMat = SCNMaterial()
 
+// Scoreboard Materials
+let scoreBgMat = SCNMaterial()
+
 // Cube Properties
 let side: CGFloat = 2 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
@@ -181,6 +184,9 @@ let homefloorOut = SCNVector3(x: 0, y: 0.0, z: 30.0)
 let homeLogoIn = SCNVector3(x: 0, y: 2.0, z: 1.4)
 let homeLogoOut = SCNVector3(x: 0, y: 5, z: 0.6)
 
+// scoreboard Position - Gamescene
+let gameScoreIn = SCNVector3(x: 0, y: 1.0, z: 1.5 )
+let gameScoreOut = SCNVector3(x: 0, y: 1.0, z: 1.5 )
 
 // Navigation items Properties
 let playBtnIn = SCNVector3(x: 0, y: -0.97, z: 3.3)
