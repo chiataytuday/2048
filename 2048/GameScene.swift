@@ -62,6 +62,7 @@ class GameScene: SKScene {
     func addScoreboard(){
         scoreboard = Scoreboard(name: "scoreboard", position: gameScoreIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.0, 1.0, 1.0), score: 0)
         gameSCNScene.rootNode.addChildNode(scoreboard)
+        scoreboard.setup()
     }
     
     func addGestureListeners(){
@@ -153,7 +154,7 @@ class GameScene: SKScene {
         
         // add Light
         light = SCNLight()                          // Light
-        light.type = SCNLight.LightType.omni
+        light.type = SCNLight.LightType.spot
         light.intensity = 1000
         light.spotInnerAngle = 50.0
         light.spotOuterAngle = 300.0
