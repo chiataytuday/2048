@@ -18,7 +18,6 @@ class GameScene: SKScene {
     var cameraNode:SCNNode! = nil
     var light:SCNLight! = nil
     var lockNode:SCNNode! = nil
-    
     // Config params
     let gridSize = 4
     let tileSize:CGFloat = 20
@@ -57,19 +56,16 @@ class GameScene: SKScene {
     }
     
     func addGestureListeners(){
-        let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe UP
         swipeUP.direction = UISwipeGestureRecognizerDirection.up
         self.view?.addGestureRecognizer(swipeUP)
-        
-        let swipeDOWN = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        let swipeDOWN = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe DOWN
         swipeDOWN.direction = UISwipeGestureRecognizerDirection.down
         self.view?.addGestureRecognizer(swipeDOWN)
-        
-        let swipeLEFT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        let swipeLEFT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe LEFT
         swipeLEFT.direction = UISwipeGestureRecognizerDirection.left
         self.view?.addGestureRecognizer(swipeLEFT)
-        
-        let swipeRIGHT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        let swipeRIGHT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe RIGHT
         swipeRIGHT.direction = UISwipeGestureRecognizerDirection.right
         self.view?.addGestureRecognizer(swipeRIGHT)
     }
@@ -113,8 +109,7 @@ class GameScene: SKScene {
     
     func addRandomTile(){
         var empty = self.getAvailableSlot()
-        if empty.count == 0 {
-            // something went wrong
+        if empty.count == 0 { // something went wrong
         }else{
             if empty.count == 1 {
                 if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
@@ -133,19 +128,14 @@ class GameScene: SKScene {
         print("addStructure")
         gameView = SCNView(frame: (self.view?.frame)!)
         gameView.backgroundColor = UIColor.clear
-        self.view?.insertSubview(gameView, at: 0)                  // add sceneView as SubView
-        
+        self.view?.insertSubview(gameView, at: 0)       // add sceneView as SubView
         gameSCNScene = SCNScene()
         gameView.scene = gameSCNScene
-        
-        // add camera
         let camera = SCNCamera()                        // Camera
         cameraNode = SCNNode()
         cameraNode.camera = camera
         cameraNode.position = gameCameraIn
-        
-        // add Light
-        light = SCNLight()                          // Light
+        light = SCNLight()                              // Light
         light.type = SCNLight.LightType.spot
         light.intensity = 1000
         light.spotInnerAngle = 50.0
@@ -154,22 +144,19 @@ class GameScene: SKScene {
         let lightNode = SCNNode()
         lightNode.light = light
         lightNode.position = gamelightPosition
-        
         // create lock object
         logoMat.diffuse.contents = logoBlue
-        let logoGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/4)  // Cube Anim
-        lockNode = SCNNode(geometry: logoGeometry)
+        let lockGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/4)  // Cube Anim
+        lockNode = SCNNode(geometry: lockGeometry)
         lockNode.name = "logo"
         lockNode.geometry?.materials = [logoMat]
         lockNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
         lockNode.scale = SCNVector3Make(0.01, 0.01, 0.01)
-        
         let constraint = SCNLookAtConstraint(target: lockNode)                  // Constraints
         constraint.isGimbalLockEnabled = true
         cameraNode.constraints = [constraint]
         lightNode.constraints = [constraint]
-        
-        gameSCNScene.rootNode.addChildNode(lockNode)
+        gameSCNScene.rootNode.addChildNode(lockNode)        // Add to scene
         gameSCNScene.rootNode.addChildNode(lightNode)
         gameSCNScene.rootNode.addChildNode(cameraNode)
     }
