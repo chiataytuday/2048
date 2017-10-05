@@ -166,8 +166,8 @@ let side: CGFloat = 2 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
 
 // scoreboard size properties
-let scoreBoardWidth: CGFloat = 1.6
-let scoreBoardHeight: CGFloat = 0.7
+let scoreBoardWidth: CGFloat = 2.5
+let scoreBoardHeight: CGFloat = 1.0
 let scoreBoardDepth: CGFloat = 0.5
 let scoreBoardRadius: CGFloat = 0.05
 

@@ -11,9 +11,7 @@ import GameplayKit
 import SceneKit
 
 class GameScene: SKScene {
-    
     var scoreboard:Scoreboard! = nil
-    
     var gameView:SCNView! = nil
     var gameSCNScene:SCNScene! = nil
     // Camera and Light
@@ -25,19 +23,12 @@ class GameScene: SKScene {
     let gridSize = 4
     let tileSize:CGFloat = 20
     let tilePosSize:CGFloat = 0.2
-    
     var tiles:Array = [Tile]()
     
-    let logo:SKSpriteNode! = nil
-    
     override func didMove(to view: SKView) {
-        
         gameScene = self;
         self.view?.backgroundColor = UIColor.red
-        print("didMove - GameScene")
-        
         runSetup()
-        
     }
     
     func runSetup(){
@@ -85,14 +76,12 @@ class GameScene: SKScene {
     
     
     func setupBg() {
-        print("setupBg")
         let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
     }
     
     func buildGrid(){
-        print("buildGrid")
         let startY =  -CGFloat((tilePosSize * 2)-tilePosSize/2)
         let startX =  -CGFloat((tilePosSize * 2)-tilePosSize/2)
         logoMat.diffuse.contents = logoBlue
@@ -102,25 +91,19 @@ class GameScene: SKScene {
                 lc = lc+1
                 let yPos = Float(startY + (tilePosSize * CGFloat(y)) )
                 let xPos = Float(startX + (tilePosSize * CGFloat(x)) )
-                print("x : ",x," - ",xPos," - y : ",yPos)
-                
                 let geo = SCNBox(width: side/1.2, height: side/1.2, length: side/1.2, chamferRadius: radius/2)
                 let tilePos = SCNVector3(x: xPos, y: yPos, z: 1.5 )
                 let tileName:String = String("t"+String(y)+String(x))
-                
-
                 let tile = Tile(geometry: geo, name: tileName, materials: [logoMat], position: tilePos, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(0.1, 0.1, 0.1), id:lc, row: y, col:x)
                 tiles.append(tile)
                 gameSCNScene.rootNode.addChildNode(tile)
             }
         }
-    
     }
     
     func newGame(){
-        // spawn two random tiles between 2 or 4
-        var empty = self.getAvailableSlot()
-        for _ in 0...8 {
+        var empty = self.getAvailableSlot() // spawn two random tiles between 2 or 4
+        for _ in 0...2 {
             let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
             let t = empty[randomIndex]
             empty.remove(at: randomIndex)
@@ -130,11 +113,20 @@ class GameScene: SKScene {
     
     func addRandomTile(){
         var empty = self.getAvailableSlot()
-        let index = Int(arc4random_uniform(UInt32(empty.count)))
-        let t = empty[index]
-        empty.remove(at: index)
-        t.value = Int( (arc4random_uniform(2)+1)*2 )
-        animateTileIn(tile: t)
+        if empty.count == 0 {
+            // something went wrong
+        }else{
+            if empty.count == 1 {
+                if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
+            }else{
+                let index = Int(arc4random_uniform(UInt32(empty.count)))
+                let t = empty[index]
+                empty.remove(at: index)
+                t.value = Int( (arc4random_uniform(2)+1)*2 )
+                animateTileIn(tile: t)
+            }
+        }
+        
     }
     
     func addStructure() {
@@ -185,9 +177,7 @@ class GameScene: SKScene {
     // Logic helpers
     func getAvailableSlot() -> [Tile] {
         var available : Array = [Tile]()
-        for t in tiles {
-            if !t.active { available.append(t) }
-        }
+        for t in tiles { if !t.active { available.append(t) } }
         return available
     }
     
@@ -275,21 +265,38 @@ class GameScene: SKScene {
         }
     }
     
-    
+    func evaluateGrid() -> Bool{
+        var ret:Bool = true
+        var col:Array = [Tile]()
+        for y in 0..<gridSize {
+            col = getColRow(type: "col",id:y )
+            for (index, it) in col.enumerated() {
+                for (ix, next) in col.enumerated() {
+                    if ix > index { if next.active && next.value == it.value && it.active{ ret = false } }
+                }
+            }
+        }
+        var row:Array = [Tile]()
+        for x in 0..<gridSize {
+            row = getColRow(type: "row",id:x )
+            for (index, it) in row.enumerated() {
+                for (ix, next) in row.enumerated() {
+                    if ix > index { if next.active && next.value == it.value && it.active{ ret = false } }
+                }
+            }
+        }
+        return ret
+    }
     
     func compact(stack:Array<Tile>, rev:Bool){
         if rev {
-            
             for (index, item) in stack.reversed().enumerated() {
                 var inactive:Array = [Tile]()
                 if index>0{
                     if item.active{
                         for n in 0...index{
                             let nx = stack.reversed()[n]
-                            if !nx.active {
-                                inactive.append(nx)
-                                
-                            }
+                            if !nx.active { inactive.append(nx) }
                         }
                         let first = inactive.first
                         if (first != nil) {
@@ -299,7 +306,6 @@ class GameScene: SKScene {
                     }
                 }
             }
-
         }else{
             for (index, item) in stack.enumerated() {
                 var inactive:Array = [Tile]()
@@ -307,9 +313,7 @@ class GameScene: SKScene {
                     if item.active{
                         for n in 0...index{
                             let nx = stack[n]
-                            if !nx.active {
-                                inactive.append(nx)
-                            }
+                            if !nx.active { inactive.append(nx) }
                         }
                         let first = inactive.first
                         if (first != nil) {
@@ -337,6 +341,13 @@ class GameScene: SKScene {
         
     }
     
+    func gameOver(){
+        // finalize game
+        print("GAME OVER !")
+        // store score
+        
+        // transition to end screen
+    }
     
     func getTileFor(row:Int, col:Int)->Tile{
         var ret:Tile! = nil
@@ -363,39 +374,15 @@ class GameScene: SKScene {
         }
     }
     
-    
-    
-    
     // Touch handlers
-    func touchDown(atPoint pos : CGPoint) {
-
-    }
+    func touchDown(atPoint pos : CGPoint) {}
+    func touchMoved(toPoint pos : CGPoint) {}
+    func touchUp(atPoint pos : CGPoint) {}
     
-    func touchMoved(toPoint pos : CGPoint) {
-
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchDown(atPoint: t.location(in: self)) } }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchMoved(toPoint: t.location(in: self)) } }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
     
     
     override func update(_ currentTime: TimeInterval) {

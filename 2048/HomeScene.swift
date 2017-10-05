@@ -260,7 +260,7 @@ class HomeScene: SKScene {
     
     func addLogo() {
         logoMat.diffuse.contents = logoBlue
-        let logoGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/4)  // Cube Anim
+        let logoGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/8)  // Cube Anim
         logoNode = SCNNode(geometry: logoGeometry)
         logoNode.name = "logo"
         logoNode.geometry?.materials = [logoMat]

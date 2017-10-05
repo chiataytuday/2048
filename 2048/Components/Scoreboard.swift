@@ -15,6 +15,9 @@ class Scoreboard : SCNNode {
     var bestNode:SCNNode! = nil
     var currentNode:SCNNode! = nil
     
+    var bestTxt:SCNText! = nil
+    var curTxt:SCNText! = nil
+    
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -33,13 +36,13 @@ class Scoreboard : SCNNode {
 
     func setup(){
         
-        let bestTxt = SCNText(string: "b : 0", extrusionDepth: 8)
+        bestTxt = SCNText(string: "best: 0", extrusionDepth: 8)
         bestTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         bestNode = SCNNode(geometry: bestTxt)
         bestNode.name = "bestscore"
-        bestNode.scale = SCNVector3Make(0.01, 0.01, 0.01)
+        bestNode.scale = SCNVector3Make(0.008, 0.008, 0.008)
         bestNode.position = SCNVector3Make(0.0, 0.2, 0.0)
-        bestTxt.flatness = 0.01
+        bestTxt.flatness = 0.1
         bestTxt.chamferRadius = 0.1
         var bestMinVec = SCNVector3Zero
         var bestMaxVec = SCNVector3Zero
@@ -55,13 +58,13 @@ class Scoreboard : SCNNode {
         self.addChildNode(bestNode)
 
         
-        let curTxt = SCNText(string: "s : 0", extrusionDepth: 8)
+        curTxt = SCNText(string: "score: 0", extrusionDepth: 8)
         curTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         currentNode = SCNNode(geometry: curTxt)
         currentNode.name = "currentscore"
-        currentNode.scale = SCNVector3Make(0.015, 0.015, 0.015)
-        currentNode.position = SCNVector3Make(0.0, -0.2, 0.5)
-        curTxt.flatness = 0.01
+        currentNode.scale = SCNVector3Make(0.01, 0.01, 0.01)
+        currentNode.position = SCNVector3Make(-0.02, -0.22, 0.5)
+        curTxt.flatness = 0.1
         curTxt.chamferRadius = 0.1
         var curMinVec = SCNVector3Zero
         var curMaxVec = SCNVector3Zero
@@ -94,6 +97,9 @@ class Scoreboard : SCNNode {
         didSet {
             // update score text
             print("highscore = ",highscore)
+            print("Text node ",curTxt)
+            curTxt.string = "SCORE: "+String(highscore)
+//            currentNode.geometry.string = "SCORE"
         }
     }
     
