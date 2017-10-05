@@ -60,7 +60,7 @@ class GameScene: SKScene {
     }
     
     func addScoreboard(){
-        scoreboard = Scoreboard(name: "scoreboard", position: gameScoreIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.5, 1.5, 1.5), score: 0)
+        scoreboard = Scoreboard(name: "scoreboard", position: gameScoreIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.0, 1.0, 1.0), score: 0)
         gameSCNScene.rootNode.addChildNode(scoreboard)
     }
     

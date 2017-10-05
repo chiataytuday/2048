@@ -12,25 +12,33 @@ import GameplayKit
 
 class Scoreboard : SCNNode {
     
+    var bestTitle:SCNText! = nil
+    var bestScore:SCNText! = nil
+    
+    var currentTitle:SCNText! = nil
+    var currentScore:SCNText! = nil
+    
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
     init(name:String,position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, score:Int){
         print("Scoreboard Init")
         scoreBgMat.diffuse.contents = UIColor.white
-        
-        logoMat.diffuse.contents = logoBlue
-        
         super.init()
-        self.geometry = SCNBox(width: side/1.2, height: side/1.2, length: side/1.2, chamferRadius: radius/2)
+        self.geometry = SCNBox(width: scoreBoardWidth, height: scoreBoardHeight, length: scoreBoardDepth, chamferRadius: scoreBoardRadius)
         self.name = name
-        self.geometry?.materials = [logoMat]
+        self.geometry?.materials = [scoreBgMat]
         self.position = position
         self.pivot = pivot
         self.scale = scale
         self.score = score
+        self.setup()
     }
 
+    func setup(){
+        
+    }
+    
     
     var score : Int = 0 {
         didSet {

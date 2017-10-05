@@ -165,6 +165,12 @@ let scoreBgMat = SCNMaterial()
 let side: CGFloat = 2 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
 
+// scoreboard size properties
+let scoreBoardWidth: CGFloat = 1.6
+let scoreBoardHeight: CGFloat = 0.7
+let scoreBoardDepth: CGFloat = 0.5
+let scoreBoardRadius: CGFloat = 0.05
+
 // light Properties
 let spotlightPosition = SCNVector3(x: -1.0, y: 2.2, z: 7.8)
 let gamelightPosition = SCNVector3(x: -1.0, y: 2.2, z: 7.8)
@@ -185,7 +191,7 @@ let homeLogoIn = SCNVector3(x: 0, y: 2.0, z: 1.4)
 let homeLogoOut = SCNVector3(x: 0, y: 5, z: 0.6)
 
 // scoreboard Position - Gamescene
-let gameScoreIn = SCNVector3(x: 0, y: 1.0, z: 1.5 )
+let gameScoreIn = SCNVector3(x: 0, y: 1.1, z: 0.2 )
 let gameScoreOut = SCNVector3(x: 0, y: 1.0, z: 1.5 )
 
 // Navigation items Properties

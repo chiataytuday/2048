@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A41836E71F845B3A0021561E /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41836E61F845B3A0021561E /* Scoreboard.swift */; };
+		A41836E91F862AE90021561E /* GameScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41836E81F862AE90021561E /* GameScoreManager.swift */; };
 		A451568A1F79931300467A06 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45156891F79931300467A06 /* Tile.swift */; };
 		A4864DB21F58A75B00645483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB11F58A75B00645483 /* AppDelegate.swift */; };
 		A4864DB81F58A75B00645483 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4864DB71F58A75B00645483 /* GameScene.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		A41836E61F845B3A0021561E /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
+		A41836E81F862AE90021561E /* GameScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreManager.swift; sourceTree = "<group>"; };
 		A45156891F79931300467A06 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		A4864DAE1F58A75B00645483 /* 2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4864DB11F58A75B00645483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				A45156891F79931300467A06 /* Tile.swift */,
 				A41836E61F845B3A0021561E /* Scoreboard.swift */,
+				A41836E81F862AE90021561E /* GameScoreManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 			files = (
 				A4D18C0D1F5C9E1600D93B03 /* InfoScene.swift in Sources */,
 				A4D18C081F5B466E00D93B03 /* ComponentsView.swift in Sources */,
+				A41836E91F862AE90021561E /* GameScoreManager.swift in Sources */,
 				A4D18C041F5B42D800D93B03 /* AuxModel.swift in Sources */,
 				A451568A1F79931300467A06 /* Tile.swift in Sources */,
 				A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */,
