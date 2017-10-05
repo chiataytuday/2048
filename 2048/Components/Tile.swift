@@ -35,7 +35,7 @@ class Tile : SCNNode {
     
     var value : Int = 0{
         didSet {
-            print(" value ",value)
+//            print(" value ",value)
             self.active = true
             switch value {
             case tilevalue.v2:

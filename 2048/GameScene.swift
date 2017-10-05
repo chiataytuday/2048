@@ -125,6 +125,7 @@ class GameScene: SKScene {
         let t = empty[index]
         empty.remove(at: index)
         t.value = Int( (arc4random_uniform(2)+1)*2 )
+        animateTileIn(tile: t)
     }
     
     func addStructure() {
@@ -290,17 +291,27 @@ class GameScene: SKScene {
     
     func compact(stack:Array<Tile>, rev:Bool){
         if rev {
-            for (_, item) in stack.reversed().enumerated() {
+            
+            for (index, item) in stack.reversed().enumerated() {
                 var inactive:Array = [Tile]()
-                for (_, next) in stack.reversed().enumerated() {
-                    if !next.active { inactive.append(next) }
-                }
-                if item.active {
-                    let first = inactive.first
-                    first?.value = item.value
-                    item.value = defaultGridValue
+                if index>0{
+                    if item.active{
+                        for n in 0...index{
+                            let nx = stack.reversed()[n]
+                            if !nx.active {
+                                inactive.append(nx)
+                                
+                            }
+                        }
+                        let first = inactive.first
+                        if (first != nil) {
+                            first?.value = item.value
+                            item.value = defaultGridValue
+                        }
+                    }
                 }
             }
+
         }else{
             for (index, item) in stack.enumerated() {
                 var inactive:Array = [Tile]()
@@ -321,6 +332,9 @@ class GameScene: SKScene {
                 }
             }
         }
+        for tl in inactive {
+            if tl.active 
+        }
     }
     
     func getColRow(type:String,id:Int) -> Array<Tile> {
@@ -331,7 +345,12 @@ class GameScene: SKScene {
     
     func joinTiles(target:Tile, neighbour:Tile){
         target.value = target.value*2
+        print("Score ton add: ",target.value)
+        // send value of join to scoreboard
+        
         neighbour.active = false
+        
+        
     }
     
     
@@ -405,7 +424,7 @@ class GameScene: SKScene {
         run(SKAction.sequence([
             SKAction.run() {
                 SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.1
+                SCNTransaction.animationDuration = 0.05
                 item.scale = SCNVector3Make(0.12, 0.12, 0.12)
                 SCNTransaction.commit()
             },
@@ -417,5 +436,23 @@ class GameScene: SKScene {
             }
             ]), withKey:"bouncing")
     }
+    
+    func animateTileIn(tile:Tile){
+        run(SKAction.sequence([
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.07
+                tile.position.z = 1.7
+                SCNTransaction.commit()
+            },
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.15
+                tile.position.z = 1.5
+                SCNTransaction.commit()
+            }
+            ]), withKey:"transitionIn")
+    }
+    
     
 }
