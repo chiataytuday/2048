@@ -99,7 +99,7 @@ class GameScene: SKScene {
     
     func newGame(){
         var empty = self.getAvailableSlot() // spawn two random tiles between 2 or 4
-        for _ in 0...2 {
+        for _ in 0...1 {
             let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
             let t = empty[randomIndex]
             empty.remove(at: randomIndex)
@@ -110,15 +110,19 @@ class GameScene: SKScene {
     func addRandomTile(){
         var empty = self.getAvailableSlot()
         if empty.count == 0 { // something went wrong
+            
         }else{
-            if empty.count == 1 {
+            
+            let index = Int(arc4random_uniform(UInt32(empty.count)))
+            let t = empty[index]
+            empty.remove(at: index)
+            t.value = Int( (arc4random_uniform(2)+1)*2 )
+            animateTileIn(tile: t)
+            
+            if empty.count == 0 {
                 if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
             }else{
-                let index = Int(arc4random_uniform(UInt32(empty.count)))
-                let t = empty[index]
-                empty.remove(at: index)
-                t.value = Int( (arc4random_uniform(2)+1)*2 )
-                animateTileIn(tile: t)
+                // nothing - move on
             }
         }
         
@@ -148,7 +152,7 @@ class GameScene: SKScene {
         logoMat.diffuse.contents = logoBlue
         let lockGeometry = SCNBox(width: side/4, height: side/4, length: side/4, chamferRadius: radius/4)  // Cube Anim
         lockNode = SCNNode(geometry: lockGeometry)
-        lockNode.name = "logo"
+        lockNode.name = "lock"
         lockNode.geometry?.materials = [logoMat]
         lockNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
         lockNode.scale = SCNVector3Make(0.01, 0.01, 0.01)
