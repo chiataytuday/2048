@@ -120,6 +120,7 @@ class GameScene: SKScene {
             animateTileIn(tile: t)
             
             if empty.count == 0 {
+                print("no spots left ----->>>>>>> Any options? : ", self.evaluateGrid() )
                 if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
             }else{
                 // nothing - move on
