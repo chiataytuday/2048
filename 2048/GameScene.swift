@@ -263,17 +263,19 @@ class GameScene: SKScene {
         for y in 0..<gridSize {
             col = getColRow(type: "col",id:y )
             for (index, it) in col.enumerated() {
-                for (ix, next) in col.enumerated() {
-                    if ix > index { if next.active && next.value == it.value && it.active{ ret = false } }
+                if index < Int(col.count-1) {
+                    let next = col[Int(index+1)]
+                    if it.active && it.value == next.value && next.active{ ret = false }
                 }
             }
         }
         var row:Array = [Tile]()
         for x in 0..<gridSize {
             row = getColRow(type: "row",id:x )
-            for (index, it) in row.enumerated() {
-                for (ix, next) in row.enumerated() {
-                    if ix > index { if next.active && next.value == it.value && it.active{ ret = false } }
+            for (index, itx) in row.enumerated() {
+                if index < Int(row.count-1) {
+                    let nextx = row[Int(index+1)]
+                    if itx.active && itx.value == nextx.value && nextx.active{ ret = false }
                 }
             }
         }
