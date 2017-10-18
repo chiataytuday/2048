@@ -30,6 +30,8 @@ class GameScene: SKScene {
         runSetup()
     }
     
+    //  Start sequence
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     func runSetup(){
         run(SKAction.sequence([
             SKAction.run() {
@@ -48,33 +50,17 @@ class GameScene: SKScene {
             }
             ]), withKey:"transitioning")
     }
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     
+    
+    
+    
+    // Build the environment for the scene
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     func addScoreboard(){
         scoreboard = Scoreboard(name: "scoreboard", position: gameScoreIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.0, 1.0, 1.0), score: 0)
         gameSCNScene.rootNode.addChildNode(scoreboard)
         scoreboard.setup()
-    }
-    
-    func addGestureListeners(){
-        let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe UP
-        swipeUP.direction = UISwipeGestureRecognizerDirection.up
-        self.view?.addGestureRecognizer(swipeUP)
-        let swipeDOWN = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe DOWN
-        swipeDOWN.direction = UISwipeGestureRecognizerDirection.down
-        self.view?.addGestureRecognizer(swipeDOWN)
-        let swipeLEFT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe LEFT
-        swipeLEFT.direction = UISwipeGestureRecognizerDirection.left
-        self.view?.addGestureRecognizer(swipeLEFT)
-        let swipeRIGHT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe RIGHT
-        swipeRIGHT.direction = UISwipeGestureRecognizerDirection.right
-        self.view?.addGestureRecognizer(swipeRIGHT)
-    }
-    
-    
-    func setupBg() {
-        let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
-        bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
-        self.addChild(bg)
     }
     
     func buildGrid(){
@@ -97,36 +83,25 @@ class GameScene: SKScene {
         }
     }
     
-    func newGame(){
-        var empty = self.getAvailableSlot() // spawn two random tiles between 2 or 4
-        for _ in 0...1 {
-            let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
-            let t = empty[randomIndex]
-            empty.remove(at: randomIndex)
-            t.value = Int( (arc4random_uniform(2)+1)*2 )
-        }
+    func addGestureListeners(){
+        let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe UP
+        swipeUP.direction = UISwipeGestureRecognizerDirection.up
+        self.view?.addGestureRecognizer(swipeUP)
+        let swipeDOWN = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe DOWN
+        swipeDOWN.direction = UISwipeGestureRecognizerDirection.down
+        self.view?.addGestureRecognizer(swipeDOWN)
+        let swipeLEFT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe LEFT
+        swipeLEFT.direction = UISwipeGestureRecognizerDirection.left
+        self.view?.addGestureRecognizer(swipeLEFT)
+        let swipeRIGHT = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe RIGHT
+        swipeRIGHT.direction = UISwipeGestureRecognizerDirection.right
+        self.view?.addGestureRecognizer(swipeRIGHT)
     }
     
-    func addRandomTile(){
-        var empty = self.getAvailableSlot()
-        if empty.count == 0 { // something went wrong
-            
-        }else{
-            
-            let index = Int(arc4random_uniform(UInt32(empty.count)))
-            let t = empty[index]
-            empty.remove(at: index)
-            t.value = Int( (arc4random_uniform(2)+1)*2 )
-            animateTileIn(tile: t)
-            
-            if empty.count == 0 {
-                print("no spots left ----->>>>>>> Any options? : ", self.evaluateGrid() )
-                if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
-            }else{
-                // nothing - move on
-            }
-        }
-        
+    func setupBg() {
+        let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
+        bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
+        self.addChild(bg)
     }
     
     func addStructure() {
@@ -166,13 +141,44 @@ class GameScene: SKScene {
         gameSCNScene.rootNode.addChildNode(cameraNode)
     }
     
+    func addEndPanel(){
+        
+    }
+    
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    
+    
+    
+    // Game Actions
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    func newGame(){
+        var empty = self.getAvailableSlot() // spawn two random tiles between 2 or 4
+        for _ in 0...1 {
+            let randomIndex = Int(arc4random_uniform(UInt32(empty.count)))
+            let t = empty[randomIndex]
+            empty.remove(at: randomIndex)
+            t.value = Int( (arc4random_uniform(2)+1)*2 )
+        }
+    }
+    
+    func resetGame(){
+        
+    }
+    
+    func returnToHome(){
+        
+    }
+    
+    
     // Logic helpers
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     func getAvailableSlot() -> [Tile] {
         var available : Array = [Tile]()
         for t in tiles { if !t.active { available.append(t) } }
         return available
     }
-    
     
     func calculateRowCol(direction:CGFloat){
         switch direction {
@@ -321,6 +327,21 @@ class GameScene: SKScene {
         for tl in stack { if !tl.active { tl.value = defaultGridValue } }
     }
     
+    func addRandomTile(){
+        var empty = self.getAvailableSlot()
+        if empty.count == 0 { /* something went wrong */ }else{
+            let index = Int(arc4random_uniform(UInt32(empty.count)))
+            let t = empty[index]
+            empty.remove(at: index)
+            t.value = Int( (arc4random_uniform(2)+1)*2 )
+            animateTileIn(tile: t)
+            if empty.count == 0 {
+                print("no spots left ----->>>>>>> Any options? : ", self.evaluateGrid() )
+                if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
+            }else{ /* nothing - move on */ }
+        }
+    }
+    
     func getColRow(type:String,id:Int) -> Array<Tile> {
         var ret:Array = [Tile]()
         for i in tiles{ if type == "row" && i.row == id { ret.append(i) }else if type == "col" && i.col == id { ret.append(i) } }
@@ -331,16 +352,6 @@ class GameScene: SKScene {
         target.value = target.value*2
         scoreboard.score = target.value     // send value of join to scoreboard
         neighbour.active = false
-        
-        
-    }
-    
-    func gameOver(){
-        // finalize game
-        print("GAME OVER !")
-        // store score
-        
-        // transition to end screen
     }
     
     func getTileFor(row:Int, col:Int)->Tile{
@@ -348,9 +359,37 @@ class GameScene: SKScene {
         for t in tiles{ if t.row == row && t.col == col { ret = t } }
         return ret
     }
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    
+    
+    
+    
+    
+    // Highscore section
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    func gameOver(){
+        // finalize game
+        print("GAME OVER !")
+        // store score
+        
+        // transition to end screen
+        moveToScore()
+    }
+    
+    func moveToScore(){
+        
+    }
+    
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    
+    
     
     
     // Gesture handler
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
@@ -377,14 +416,15 @@ class GameScene: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchMoved(toPoint: t.location(in: self)) } }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
     
-    // Actions
-    // ----------------------------------------------------------------------------------
+    
+    // Animation Actions
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     func bounce(item:Tile){
         run(SKAction.sequence([
             SKAction.run() {
@@ -418,6 +458,12 @@ class GameScene: SKScene {
         tileInAction.timingMode = SKActionTimingMode.easeIn;
         tileOutAction.timingMode = SKActionTimingMode.easeOut;
         run(SKAction.sequence([ tileInAction, tileOutAction ]), withKey:"transitionIn")
+    }
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
     }
     
     
