@@ -13,22 +13,31 @@ import GameplayKit
 
 class GameoverPanel : SCNNode {
 
-    var backPanel:SCNNode! = nil            // Primitive panel
+    var backPanel:SCNNode! = nil                // Primitive panel
     
-    var gameoverHeaderNode:SCNNode! = nil   // Title text
+    var gameoverHeaderNode:SCNNode! = nil       // Title text
     var gameoverHeaderTxt:SCNText! = nil
     
-    var scoreNode:SCNNode! = nil            // Current gamescore text
+    var scoreTitleNode:SCNNode! = nil           // Current gamescore text
+    var scoreTitleTxt:SCNText! = nil
+    var scoreNode:SCNNode! = nil                // Current gamescore text
     var scoreTxt:SCNText! = nil
     
-    var replayNode:SCNNode! = nil           // Replay Button
-    var replayTxt:SCNText! = nil
+    var highScoreTitleNode:SCNNode! = nil       // Current gamescore text
+    var highScoreTitleTxt:SCNText! = nil
+    var highScoreNode:SCNNode! = nil            // Current gamescore text
+    var highScoreTxt:SCNText! = nil
     
-    var highscoreNode:SCNNode! = nil        // Highscore Button
-    var highscoreTxt:SCNText! = nil
     
-    var homeNode:SCNNode! = nil             // Home Button
-    var homeTxt:SCNText! = nil
+    // buttons
+    var replayBtnNode:SCNNode! = nil            // Replay Button
+    var replayBtnTxt:SCNText! = nil
+    
+    var highscoreBtnNode:SCNNode! = nil         // Highscore Button
+    var highscoreBtnTxt:SCNText! = nil
+    
+    var homeBtnNode:SCNNode! = nil              // Home Button
+    var homeBtnTxt:SCNText! = nil
     
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -65,31 +74,181 @@ class GameoverPanel : SCNNode {
         gameoverHeaderNode.position = SCNVector3Make(0.0, 1.45, 0.45)
         gameoverHeaderTxt.flatness = 0.1
         gameoverHeaderTxt.chamferRadius = 0.1
-        var bestMinVec = SCNVector3Zero
-        var bestMaxVec = SCNVector3Zero
-        if gameoverHeaderNode.__getBoundingBoxMin(&bestMinVec, max: &bestMaxVec) {
+        var goMinVec = SCNVector3Zero
+        var goMaxVec = SCNVector3Zero
+        if gameoverHeaderNode.__getBoundingBoxMin(&goMinVec, max: &goMaxVec) {
             let distance = SCNVector3(
-                x: bestMaxVec.x - bestMinVec.x,
-                y: bestMaxVec.y - bestMinVec.y,
-                z: bestMaxVec.z - bestMinVec.z)
+                x: goMaxVec.x - goMinVec.x,
+                y: goMaxVec.y - goMinVec.y,
+                z: goMaxVec.z - goMinVec.z)
             gameoverHeaderNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
         }
         gameoverHeaderTxt.firstMaterial!.diffuse.contents = UIColor.white
         gameoverHeaderTxt.firstMaterial!.specular.contents = UIColor.white
-        self.addChildNode(gameoverHeaderNode)
+        
         
         // Add current score
-        
+        scoreTitleTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        scoreTitleTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        scoreTitleNode = SCNNode(geometry: scoreTitleTxt)
+        scoreTitleNode.name = "bestscore"
+        scoreTitleNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        scoreTitleNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        scoreTitleTxt.flatness = 0.1
+        scoreTitleTxt.chamferRadius = 0.1
+        var stMinVec = SCNVector3Zero
+        var stMaxVec = SCNVector3Zero
+        if scoreTitleNode.__getBoundingBoxMin(&stMinVec, max: &stMaxVec) {
+            let distance = SCNVector3(
+                x: stMaxVec.x - stMinVec.x,
+                y: stMaxVec.y - stMinVec.y,
+                z: stMaxVec.z - stMinVec.z)
+            scoreTitleNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        scoreTitleTxt.firstMaterial!.diffuse.contents = UIColor.white
+        scoreTitleTxt.firstMaterial!.specular.contents = UIColor.white
+
+
+
+        scoreTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        scoreTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        scoreNode = SCNNode(geometry: scoreTxt)
+        scoreNode.name = "bestscore"
+        scoreNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        scoreNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        scoreTxt.flatness = 0.1
+        scoreTxt.chamferRadius = 0.1
+        var snMinVec = SCNVector3Zero
+        var snMaxVec = SCNVector3Zero
+        if scoreNode.__getBoundingBoxMin(&snMinVec, max: &snMaxVec) {
+            let distance = SCNVector3(
+                x: snMaxVec.x - snMinVec.x,
+                y: snMaxVec.y - snMinVec.y,
+                z: snMaxVec.z - snMinVec.z)
+            scoreNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        scoreTxt.firstMaterial!.diffuse.contents = UIColor.white
+        scoreTxt.firstMaterial!.specular.contents = UIColor.white
+
+
         // Add Highest score
+        highScoreTitleTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        highScoreTitleTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        highScoreTitleNode = SCNNode(geometry: highScoreTitleTxt)
+        highScoreTitleNode.name = "bestscore"
+        highScoreTitleNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        highScoreTitleNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        highScoreTitleTxt.flatness = 0.1
+        highScoreTitleTxt.chamferRadius = 0.1
+        var hstMinVec = SCNVector3Zero
+        var hstMaxVec = SCNVector3Zero
+        if highScoreTitleNode.__getBoundingBoxMin(&hstMinVec, max: &hstMaxVec) {
+            let distance = SCNVector3(
+                x: hstMaxVec.x - hstMinVec.x,
+                y: hstMaxVec.y - hstMinVec.y,
+                z: hstMaxVec.z - hstMinVec.z)
+            highScoreTitleNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        highScoreTitleTxt.firstMaterial!.diffuse.contents = UIColor.white
+        highScoreTitleTxt.firstMaterial!.specular.contents = UIColor.white
         
+
+        highScoreTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        highScoreTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        highScoreNode = SCNNode(geometry: highScoreTxt)
+        highScoreNode.name = "bestscore"
+        highScoreNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        highScoreNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        highScoreTxt.flatness = 0.1
+        highScoreTxt.chamferRadius = 0.1
+        var hsMinVec = SCNVector3Zero
+        var hsMaxVec = SCNVector3Zero
+        if highScoreNode.__getBoundingBoxMin(&hsMinVec, max: &hsMaxVec) {
+            let distance = SCNVector3(
+                x: hsMaxVec.x - hsMinVec.x,
+                y: hsMaxVec.y - hsMinVec.y,
+                z: hsMaxVec.z - hsMinVec.z)
+            highScoreNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        highScoreTxt.firstMaterial!.diffuse.contents = UIColor.white
+        highScoreTxt.firstMaterial!.specular.contents = UIColor.white
+
+
         // Add Replay button
-        
+        replayBtnTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        replayBtnTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        replayBtnNode = SCNNode(geometry: replayBtnTxt)
+        replayBtnNode.name = "bestscore"
+        replayBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        replayBtnNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        replayBtnTxt.flatness = 0.1
+        replayBtnTxt.chamferRadius = 0.1
+        var rpbMinVec = SCNVector3Zero
+        var rpbMaxVec = SCNVector3Zero
+        if replayBtnNode.__getBoundingBoxMin(&rpbMinVec, max: &rpbMaxVec) {
+            let distance = SCNVector3(
+                x: rpbMaxVec.x - rpbMinVec.x,
+                y: rpbMaxVec.y - rpbMinVec.y,
+                z: rpbMaxVec.z - rpbMinVec.z)
+            replayBtnNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        replayBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
+        replayBtnTxt.firstMaterial!.specular.contents = UIColor.white
+
+
         // Add highscore button
+        highscoreBtnTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        highscoreBtnTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        highscoreBtnNode = SCNNode(geometry: highscoreBtnTxt)
+        highscoreBtnNode.name = "bestscore"
+        highscoreBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        highscoreBtnNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        highscoreBtnTxt.flatness = 0.1
+        highscoreBtnTxt.chamferRadius = 0.1
+        var hsbMinVec = SCNVector3Zero
+        var hsbMaxVec = SCNVector3Zero
+        if highscoreBtnNode.__getBoundingBoxMin(&hsbMinVec, max: &hsbMaxVec) {
+            let distance = SCNVector3(
+                x: hsbMaxVec.x - hsbMinVec.x,
+                y: hsbMaxVec.y - hsbMinVec.y,
+                z: hsbMaxVec.z - hsbMinVec.z)
+            highscoreBtnNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        highscoreBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
+        highscoreBtnTxt.firstMaterial!.specular.contents = UIColor.white
+        
         
         // Add home button
-        
+        homeBtnTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        homeBtnTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        homeBtnNode = SCNNode(geometry: homeBtnTxt)
+        homeBtnNode.name = "bestscore"
+        homeBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        homeBtnNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        homeBtnTxt.flatness = 0.1
+        homeBtnTxt.chamferRadius = 0.1
+        var hbMinVec = SCNVector3Zero
+        var hbMaxVec = SCNVector3Zero
+        if homeBtnNode.__getBoundingBoxMin(&hbMinVec, max: &hbMaxVec) {
+            let distance = SCNVector3(
+                x: hbMaxVec.x - hbMinVec.x,
+                y: hbMaxVec.y - hbMinVec.y,
+                z: hbMaxVec.z - hbMinVec.z)
+            homeBtnNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        homeBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
+        homeBtnTxt.firstMaterial!.specular.contents = UIColor.white
         
         self.addChildNode(backPanel)
+        self.addChildNode(gameoverHeaderNode)
+        self.addChildNode(scoreTitleNode)
+        self.addChildNode(scoreNode)
+        self.addChildNode(highScoreTitleNode)
+        self.addChildNode(highScoreNode)
+        self.addChildNode(highscoreBtnNode)
+        self.addChildNode(replayBtnNode)
+        self.addChildNode(homeBtnNode)
+        
     }
     
     var score : Int = 0 {
