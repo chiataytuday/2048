@@ -47,7 +47,49 @@ class GameoverPanel : SCNNode {
     }
     
     func setup(){
+        endpanelBgMat.diffuse.contents = col2048
+        let panelGeometry = SCNBox(width: panelWidth, height: panelHeight, length: panelDepth, chamferRadius: panelRadius)  // Cube Anim
+        backPanel = SCNNode(geometry: panelGeometry)
+        backPanel.name = "endpanel"
+        backPanel.geometry?.materials = [endpanelBgMat]
+        backPanel.position = SCNVector3(x: 0, y: 0, z: 0)
+        backPanel.pivot = SCNMatrix4MakeRotation(0.785398, 0, 0, 0);
+        backPanel.scale = SCNVector3Make(2.5, 2.5, 2.5)
         
+        // Add gameover text
+        gameoverHeaderTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        gameoverHeaderTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        gameoverHeaderNode = SCNNode(geometry: gameoverHeaderTxt)
+        gameoverHeaderNode.name = "bestscore"
+        gameoverHeaderNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
+        gameoverHeaderNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        gameoverHeaderTxt.flatness = 0.1
+        gameoverHeaderTxt.chamferRadius = 0.1
+        var bestMinVec = SCNVector3Zero
+        var bestMaxVec = SCNVector3Zero
+        if gameoverHeaderNode.__getBoundingBoxMin(&bestMinVec, max: &bestMaxVec) {
+            let distance = SCNVector3(
+                x: bestMaxVec.x - bestMinVec.x,
+                y: bestMaxVec.y - bestMinVec.y,
+                z: bestMaxVec.z - bestMinVec.z)
+            gameoverHeaderNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        gameoverHeaderTxt.firstMaterial!.diffuse.contents = UIColor.white
+        gameoverHeaderTxt.firstMaterial!.specular.contents = UIColor.white
+        self.addChildNode(gameoverHeaderNode)
+        
+        // Add current score
+        
+        // Add Highest score
+        
+        // Add Replay button
+        
+        // Add highscore button
+        
+        // Add home button
+        
+        
+        self.addChildNode(backPanel)
     }
     
     var score : Int = 0 {

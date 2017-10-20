@@ -45,6 +45,8 @@ let col1024 = UIColor(red:0.73, green:0.29, blue:0.29, alpha:1.0)
 let col2048 = UIColor(red:0.73, green:0.29, blue:0.29, alpha:1.0)
 
 let logoBlue = UIColor(red:0.40, green:0.74, blue:0.88, alpha:1.0)
+let colorWhite = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
+let colorLightGrey = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
 
 // Size params
 //------------------------------
@@ -161,9 +163,18 @@ let logoTextMat = SCNMaterial()
 // Scoreboard Materials
 let scoreBgMat = SCNMaterial()
 
+// Endpanel Materials
+let endpanelBgMat = SCNMaterial()
+
 // Cube Properties
 let side: CGFloat = 2 // one side of the cube
 let radius: CGFloat = side / 12 // the corner radius
+
+// Gameover Panel
+let panelWidth : CGFloat = 1.2
+let panelHeight : CGFloat = 2
+let panelDepth : CGFloat = 0.3
+let panelRadius : CGFloat = 0.05
 
 // scoreboard size properties
 let scoreBoardWidth: CGFloat = 2.5
@@ -174,13 +185,15 @@ let scoreBoardRadius: CGFloat = 0.05
 // light Properties
 let spotlightPosition = SCNVector3(x: -1.0, y: 2.2, z: 7.8)
 let gamelightPosition = SCNVector3(x: -1.0, y: 2.2, z: 7.8)
+let gamelightScorePosition = SCNVector3(x: -1.0, y: 2.2, z: 11)
 
 
 // Camera Properties
 let homeCameraIn = SCNVector3(x: 0.0, y: 0.7, z: 6.8)
 let homeCameraOut = SCNVector3(x: 0.0, y: 60, z: -5.0)
 let gameCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
-let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
+let gameCameraScore = SCNVector3(x: 0.0, y: 0.0, z: 13.0)
+let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: -3.0)
 
 // Scene floor Properties
 let homefloorIn = SCNVector3(x: 0, y: -1.0, z: 0)
@@ -193,6 +206,9 @@ let homeLogoOut = SCNVector3(x: 0, y: 5, z: 0.6)
 // scoreboard Position - Gamescene
 let gameScoreIn = SCNVector3(x: 0, y: 1.1, z: 0.2 )
 let gameScoreOut = SCNVector3(x: 0, y: 1.0, z: 1.5 )
+
+// gameEnd Position - Gamescene
+let gameEndIn = SCNVector3(x: 0, y: 0.0, z: 7 )
 
 // Navigation items Properties
 let playBtnIn = SCNVector3(x: 0, y: -0.97, z: 3.3)

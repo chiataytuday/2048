@@ -12,11 +12,13 @@ import SceneKit
 
 class GameScene: SKScene {
     var scoreboard:Scoreboard! = nil
+    var gameoverPanel:GameoverPanel! = nil
     var gameView:SCNView! = nil
     var gameSCNScene:SCNScene! = nil
     // Camera and Light
     var cameraNode:SCNNode! = nil
     var light:SCNLight! = nil
+    var lightNode:SCNNode! = nil
     var lockNode:SCNNode! = nil
     // Config params
     let gridSize = 4
@@ -42,6 +44,7 @@ class GameScene: SKScene {
             SKAction.run() {
                 self.buildGrid()
                 self.addScoreboard()
+                self.addEndScore()
                 self.addGestureListeners()
             },
             SKAction.wait(forDuration: 0.2),
@@ -61,6 +64,12 @@ class GameScene: SKScene {
         scoreboard = Scoreboard(name: "scoreboard", position: gameScoreIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.0, 1.0, 1.0), score: 0)
         gameSCNScene.rootNode.addChildNode(scoreboard)
         scoreboard.setup()
+    }
+    
+    func addEndScore(){
+        gameoverPanel = GameoverPanel(name: "endPanel", position: gameEndIn, pivot: SCNMatrix4MakeRotation(0.785398, 0, 0, 0), scale: SCNVector3Make(1.0, 1.0, 1.0))
+        gameSCNScene.rootNode.addChildNode(gameoverPanel)
+        gameoverPanel.setup()
     }
     
     func buildGrid(){
@@ -121,7 +130,7 @@ class GameScene: SKScene {
         light.spotInnerAngle = 50.0
         light.spotOuterAngle = 300.0
         light.castsShadow = true
-        let lightNode = SCNNode()
+        lightNode = SCNNode()
         lightNode.light = light
         lightNode.position = gamelightPosition
         // create lock object
@@ -379,7 +388,35 @@ class GameScene: SKScene {
     }
     
     func moveToScore(){
+        // disable swip actions
         
+        // possibly reset game
+        
+        //
+    }
+    
+    func toScore(){
+        run(SKAction.sequence([
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 1.0
+                self.cameraNode.position = gameCameraScore
+                self.lightNode.position = gamelightScorePosition
+                SCNTransaction.commit()
+            }
+            ]), withKey:"transitioning")
+    }
+    
+    func toGame(){
+        run(SKAction.sequence([
+            SKAction.run() {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 1.0
+                self.cameraNode.position = gameCameraIn
+                self.lightNode.position = gamelightPosition
+                SCNTransaction.commit()
+            }
+            ]), withKey:"transitioning")
     }
     
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -395,10 +432,12 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 calculateRowCol(direction:swipe.right)
+                toGame()
             case UISwipeGestureRecognizerDirection.down:
                 calculateRowCol(direction:swipe.down)
             case UISwipeGestureRecognizerDirection.left:
                 calculateRowCol(direction:swipe.left)
+                toScore()
             case UISwipeGestureRecognizerDirection.up:
                 calculateRowCol(direction:swipe.up)
             default:
