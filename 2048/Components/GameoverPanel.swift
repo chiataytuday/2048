@@ -69,9 +69,9 @@ class GameoverPanel : SCNNode {
         gameoverHeaderTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
         gameoverHeaderTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         gameoverHeaderNode = SCNNode(geometry: gameoverHeaderTxt)
-        gameoverHeaderNode.name = "bestscore"
+        gameoverHeaderNode.name = "gameoverHeader"
         gameoverHeaderNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        gameoverHeaderNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        gameoverHeaderNode.position = SCNVector3Make(0.0, 1.7, 0.55)
         gameoverHeaderTxt.flatness = 0.1
         gameoverHeaderTxt.chamferRadius = 0.1
         var goMinVec = SCNVector3Zero
@@ -88,12 +88,12 @@ class GameoverPanel : SCNNode {
         
         
         // Add current score
-        scoreTitleTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        scoreTitleTxt = SCNText(string: "Current Score", extrusionDepth: 8)
         scoreTitleTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         scoreTitleNode = SCNNode(geometry: scoreTitleTxt)
-        scoreTitleNode.name = "bestscore"
-        scoreTitleNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        scoreTitleNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        scoreTitleNode.name = "scoreTitle"
+        scoreTitleNode.scale = SCNVector3Make(0.014, 0.014, 0.014)
+        scoreTitleNode.position = SCNVector3Make(0.0, 1.27, 0.45)
         scoreTitleTxt.flatness = 0.1
         scoreTitleTxt.chamferRadius = 0.1
         var stMinVec = SCNVector3Zero
@@ -110,12 +110,12 @@ class GameoverPanel : SCNNode {
 
 
 
-        scoreTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        scoreTxt = SCNText(string: "1240", extrusionDepth: 8)
         scoreTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         scoreNode = SCNNode(geometry: scoreTxt)
-        scoreNode.name = "bestscore"
-        scoreNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        scoreNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        scoreNode.name = "scoreTxt"
+        scoreNode.scale = SCNVector3Make(0.028, 0.028, 0.028)
+        scoreNode.position = SCNVector3Make(0.0, 0.76, 0.48)
         scoreTxt.flatness = 0.1
         scoreTxt.chamferRadius = 0.1
         var snMinVec = SCNVector3Zero
@@ -132,12 +132,12 @@ class GameoverPanel : SCNNode {
 
 
         // Add Highest score
-        highScoreTitleTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        highScoreTitleTxt = SCNText(string: "Best Score", extrusionDepth: 8)
         highScoreTitleTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         highScoreTitleNode = SCNNode(geometry: highScoreTitleTxt)
-        highScoreTitleNode.name = "bestscore"
-        highScoreTitleNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        highScoreTitleNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        highScoreTitleNode.name = "highScoreTitle"
+        highScoreTitleNode.scale = SCNVector3Make(0.009, 0.009, 0.009)
+        highScoreTitleNode.position = SCNVector3Make(0.0, 0.4, 0.45)
         highScoreTitleTxt.flatness = 0.1
         highScoreTitleTxt.chamferRadius = 0.1
         var hstMinVec = SCNVector3Zero
@@ -153,12 +153,12 @@ class GameoverPanel : SCNNode {
         highScoreTitleTxt.firstMaterial!.specular.contents = UIColor.white
         
 
-        highScoreTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
+        highScoreTxt = SCNText(string: "2048", extrusionDepth: 8)
         highScoreTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         highScoreNode = SCNNode(geometry: highScoreTxt)
-        highScoreNode.name = "bestscore"
-        highScoreNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        highScoreNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        highScoreNode.name = "highScoreTxt"
+        highScoreNode.scale = SCNVector3Make(0.018, 0.018, 0.018)
+        highScoreNode.position = SCNVector3Make(0.0, 0.05, 0.45)
         highScoreTxt.flatness = 0.1
         highScoreTxt.chamferRadius = 0.1
         var hsMinVec = SCNVector3Zero
@@ -175,12 +175,12 @@ class GameoverPanel : SCNNode {
 
 
         // Add Replay button
-        replayBtnTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
-        replayBtnTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        replayBtnTxt = SCNText(string: "\u{f21c}", extrusionDepth: 8)
+        replayBtnTxt.font = UIFont(name: "Ionicons", size: 20)
         replayBtnNode = SCNNode(geometry: replayBtnTxt)
-        replayBtnNode.name = "bestscore"
-        replayBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        replayBtnNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        replayBtnNode.name = "replayBtn"
+        replayBtnNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
+        replayBtnNode.position = SCNVector3Make(0.0, -0.9, 0.5)
         replayBtnTxt.flatness = 0.1
         replayBtnTxt.chamferRadius = 0.1
         var rpbMinVec = SCNVector3Zero
@@ -197,12 +197,12 @@ class GameoverPanel : SCNNode {
 
 
         // Add highscore button
-        highscoreBtnTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
-        highscoreBtnTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        highscoreBtnTxt = SCNText(string: "\u{f348}", extrusionDepth: 8)
+        highscoreBtnTxt.font = UIFont(name: "Ionicons", size: 20)
         highscoreBtnNode = SCNNode(geometry: highscoreBtnTxt)
-        highscoreBtnNode.name = "bestscore"
+        highscoreBtnNode.name = "scoreBtn"
         highscoreBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        highscoreBtnNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        highscoreBtnNode.position = SCNVector3Make(-0.9, -0.9, 0.45)
         highscoreBtnTxt.flatness = 0.1
         highscoreBtnTxt.chamferRadius = 0.1
         var hsbMinVec = SCNVector3Zero
@@ -219,12 +219,12 @@ class GameoverPanel : SCNNode {
         
         
         // Add home button
-        homeBtnTxt = SCNText(string: "GAME OVER", extrusionDepth: 8)
-        homeBtnTxt.font = UIFont(name: "Hangar-Flat", size: 20)
+        homeBtnTxt = SCNText(string: "\u{f38f}", extrusionDepth: 8)
+        homeBtnTxt.font = UIFont(name: "Ionicons", size: 20)
         homeBtnNode = SCNNode(geometry: homeBtnTxt)
-        homeBtnNode.name = "bestscore"
+        homeBtnNode.name = "homeBtn"
         homeBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        homeBtnNode.position = SCNVector3Make(0.0, 1.45, 0.45)
+        homeBtnNode.position = SCNVector3Make(0.9, -0.9, 0.45)
         homeBtnTxt.flatness = 0.1
         homeBtnTxt.chamferRadius = 0.1
         var hbMinVec = SCNVector3Zero
@@ -251,10 +251,15 @@ class GameoverPanel : SCNNode {
         
     }
     
+    func setScore(val:Int){
+        self.score = val
+    }
+    
     var score : Int = 0 {
         didSet {
             // update score text
             print("Score added ",score)
+            scoreTxt.string = String(score)
             
         }
     }
