@@ -382,7 +382,7 @@ class GameScene: SKScene {
         // finalize game
         print("GAME OVER !")
         // store score
-        
+        gameoverPanel.setScore(val:self.scoreboard.score)
         // transition to end screen
         moveToScore()
     }
@@ -432,12 +432,12 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 calculateRowCol(direction:swipe.right)
-                toGame()
+//                toGame()
             case UISwipeGestureRecognizerDirection.down:
                 calculateRowCol(direction:swipe.down)
             case UISwipeGestureRecognizerDirection.left:
                 calculateRowCol(direction:swipe.left)
-                toScore()
+//                toScore()
             case UISwipeGestureRecognizerDirection.up:
                 calculateRowCol(direction:swipe.up)
             default:
