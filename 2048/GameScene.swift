@@ -12,6 +12,7 @@ import SceneKit
 
 class GameScene: SKScene {
     var scoreboard:Scoreboard! = nil
+    var scoreManager:GameScoreManager! = nil
     var gameoverPanel:GameoverPanel! = nil
     var gameView:SCNView! = nil
     var gameSCNScene:SCNScene! = nil
@@ -28,8 +29,11 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         gameScene = self;
-        self.view?.backgroundColor = UIColor.red
+//        self.view?.backgroundColor = UIColor.red
+        scoreManager = GameScoreManager.sharedInstance
         runSetup()
+        scoreManager.saveScore(score: 234)
+        scoreManager.saveScore(score: 456)
     }
     
     //  Start sequence
