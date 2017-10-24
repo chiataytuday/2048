@@ -29,6 +29,11 @@ class GameScoreManager {
         return userDefaults.object(forKey: highscore) as? [Int] ?? [Int]()
     }
     
+    func getHighScore() -> Int {
+        var list = userDefaults.object(forKey: highscore) as? [Int] ?? [Int]()
+        return list[0]
+    }
+    
     // Bool helpers
     func getFlagForKey(key:String) -> Bool { return userDefaults.bool(forKey:key) }
     func setFlagForKey(key:String, val:Bool){ userDefaults.set(val, forKey: key) }
