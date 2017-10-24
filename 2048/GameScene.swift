@@ -16,6 +16,7 @@ class GameScene: SKScene {
     var gameoverPanel:GameoverPanel! = nil
     var gameView:SCNView! = nil
     var gameSCNScene:SCNScene! = nil
+    var swipeActive:Bool = true
     // Camera and Light
     var cameraNode:SCNNode! = nil
     var light:SCNLight! = nil
@@ -32,8 +33,6 @@ class GameScene: SKScene {
 //        self.view?.backgroundColor = UIColor.red
         scoreManager = GameScoreManager.sharedInstance
         runSetup()
-        scoreManager.saveScore(score: 234)
-        scoreManager.saveScore(score: 456)
     }
     
     //  Start sequence
@@ -176,7 +175,7 @@ class GameScene: SKScene {
     }
     
     func resetGame(){
-        
+        // clear the decks
     }
     
     func returnToHome(){
@@ -386,6 +385,7 @@ class GameScene: SKScene {
         // finalize game
         print("GAME OVER !")
         // store score
+        scoreManager.saveScore(score: self.scoreboard.score)
         gameoverPanel.setScore(val:self.scoreboard.score)
         // transition to end screen
         moveToScore()
@@ -393,10 +393,11 @@ class GameScene: SKScene {
     
     func moveToScore(){
         // disable swip actions
-        
+        self.swipeActive = false
         // possibly reset game
-        
-        //
+        resetGame()
+        // move to score panel
+        toScore()
     }
     
     func toScore(){
@@ -419,6 +420,7 @@ class GameScene: SKScene {
                 self.cameraNode.position = gameCameraIn
                 self.lightNode.position = gamelightPosition
                 SCNTransaction.commit()
+                self.swipeActive = true
             }
             ]), withKey:"transitioning")
     }
@@ -435,15 +437,13 @@ class GameScene: SKScene {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
-                calculateRowCol(direction:swipe.right)
-//                toGame()
+                if swipeActive { calculateRowCol(direction:swipe.right) }
             case UISwipeGestureRecognizerDirection.down:
-                calculateRowCol(direction:swipe.down)
+                if swipeActive { calculateRowCol(direction:swipe.down) }
             case UISwipeGestureRecognizerDirection.left:
-                calculateRowCol(direction:swipe.left)
-//                toScore()
+                if swipeActive { calculateRowCol(direction:swipe.left) }
             case UISwipeGestureRecognizerDirection.up:
-                calculateRowCol(direction:swipe.up)
+                if swipeActive { calculateRowCol(direction:swipe.up) }
             default:
                 break
             }

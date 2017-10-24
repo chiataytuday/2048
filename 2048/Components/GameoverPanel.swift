@@ -260,7 +260,8 @@ class GameoverPanel : SCNNode {
             // update score text
             print("Score added ",score)
             scoreTxt.string = String(score)
-            
+            // get best score from memory
+            highScoreTxt.string = String( GameScoreManager.sharedInstance.getHighScore() )
         }
     }
     
