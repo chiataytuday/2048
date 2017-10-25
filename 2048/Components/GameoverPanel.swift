@@ -239,6 +239,7 @@ class GameoverPanel : SCNNode {
         homeBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
         homeBtnTxt.firstMaterial!.specular.contents = UIColor.white
         
+        
         self.addChildNode(backPanel)
         self.addChildNode(gameoverHeaderNode)
         self.addChildNode(scoreTitleNode)
