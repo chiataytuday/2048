@@ -441,23 +441,25 @@ class GameScene: SKScene {
         
         // bannerView.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        self.addBannerViewToView(bannerView)
+        self.addBannerViewToView()
     }
     
-    func addBannerViewToView(_ bannerView: GADBannerView) {
+    func addBannerViewToView() {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         self.view?.addSubview(bannerView)
 //        self.view?.insertSubview(sceneView, at: 0)
-        var bottomConstraint:NSLayoutConstraint! = nil
-        if #available(iOS 11, *) {
-            bottomConstraint = NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view?.safeAreaLayoutGuide.bottomAnchor, attribute: .bottom, multiplier: 0.0, constant: 0.0)
-        }else{
-            bottomConstraint = NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.0, constant: 0.0)
-        }
-        self.view?.addConstraints( [bottomConstraint] )
+        
+//        var bottomConstraint:NSLayoutConstraint! = nil
+//        if #available(iOS 11, *) {
+//            bottomConstraint = NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view?.safeAreaLayoutGuide.bottomAnchor, attribute: .bottom, multiplier: 0.0, constant: 0.0)
+//        }else{
+//            bottomConstraint = NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.0, constant: 0.0)
+//        }
+//        self.view?.addConstraints( [bottomConstraint] )
+        
         // load banner
-        bannerView.adUnitID = "ca-app-pub-1672643432387969/6981900150"
         bannerView.rootViewController = self.gameViewController
+        bannerView.adUnitID = "ca-app-pub-1672643432387969/6981900150"
         bannerView.load(GADRequest())
     }
     
@@ -482,6 +484,7 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if swipeActive { calculateRowCol(direction:swipe.right) }
+                moveToScore()
             case UISwipeGestureRecognizerDirection.down:
                 if swipeActive { calculateRowCol(direction:swipe.down) }
             case UISwipeGestureRecognizerDirection.left:

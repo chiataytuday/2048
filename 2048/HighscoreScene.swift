@@ -12,6 +12,8 @@ import GameplayKit
 
 class HighscoreScene: SKScene {
     
+    var gameViewController : GameViewController!
+    
     override func didMove(to view: SKView) {
         
         highscoreScene = self;

@@ -12,6 +12,8 @@ import GameplayKit
 
 class InfoScene: SKScene {
     
+    var gameViewController : GameViewController!
+    
     override func didMove(to view: SKView) {
         
         infoScene = self;

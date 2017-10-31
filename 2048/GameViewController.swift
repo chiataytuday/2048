@@ -33,30 +33,36 @@ class GameViewController: UIViewController {
     }
     
     func moveToScene(to:CGFloat){
-        var nextScene:SKScene! = nil
         
         print("moveToScene")
         
         switch to {
         case scenes.game:
-            nextScene = GameScene(size: viewRef.bounds.size)
+            let gameScene = GameScene(size: viewRef.bounds.size)
+            gameScene.gameViewController = self
+            viewRef?.presentScene(gameScene, transition: sceneTransitionFade)
             break
         case scenes.info:
-            nextScene = InfoScene(size: CGSize(width: screenW, height: screenH))
+            let infoScene = InfoScene(size: CGSize(width: screenW, height: screenH))
+            infoScene.gameViewController = self
+            viewRef?.presentScene(infoScene, transition: sceneTransitionFade)
             break
         case scenes.score:
-            nextScene = HighscoreScene(size: CGSize(width: screenW, height: screenH))
+            let highscoreScene = HighscoreScene(size: CGSize(width: screenW, height: screenH))
+            highscoreScene.gameViewController = self
+            viewRef?.presentScene(highscoreScene, transition: sceneTransitionFade)
             break
         case scenes.settings:
-            nextScene = SettingsScene(size: CGSize(width: screenW, height: screenH))
+            let settingScene = SettingsScene(size: CGSize(width: screenW, height: screenH))
+            settingScene.gameViewController = self
+            viewRef?.presentScene(settingScene, transition: sceneTransitionFade)
             break
         default:
-            nextScene = HomeScene(size: CGSize(width: screenW, height: screenH))
+            let homeScene = HomeScene(size: CGSize(width: screenW, height: screenH))
+            homeScene.gameViewController = self
+            viewRef?.presentScene(homeScene, transition: sceneTransitionFade)
         }
-        
-        // viewRef.presentScene(nextScene)
-        
-        viewRef?.presentScene(nextScene, transition: sceneTransitionFade)
+
     }
     
 

@@ -12,6 +12,8 @@ import GameplayKit
 
 class SettingsScene: SKScene {
     
+    var gameViewController : GameViewController!
+    
     override func didMove(to view: SKView) {
         
         settingsScene = self;
