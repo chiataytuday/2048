@@ -14,6 +14,7 @@ import GoogleMobileAds
 class GameScene: SKScene {
     
     var bannerView: GADBannerView!
+    var bannerDisplayed:Bool = false
     
     var scoreboard:Scoreboard! = nil
     var scoreManager:GameScoreManager! = nil
@@ -439,7 +440,7 @@ class GameScene: SKScene {
         // Ad ID - ca-app-pub-1672643432387969/6981900150
         // Ad Name - Scoreboard AD
         
-        // bannerView.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
+//         bannerView.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         self.addBannerViewToView()
     }
@@ -460,9 +461,27 @@ class GameScene: SKScene {
         // load banner
         bannerView.rootViewController = self.gameViewController
         bannerView.adUnitID = "ca-app-pub-1672643432387969/6981900150"
-        bannerView.load(GADRequest())
+        
+        let request = GADRequest()
+        request.testDevices = [ kGADSimulatorID, "4BC139DD-B4B1-41C0-A7F5-49C4A8531181" ] // iPhone 7 Plus (10.3.1)
+        bannerView.load(request)
     }
     
+//    func adViewDidReceiveAd(view: GADBannerView!) {
+//        print("adViewDidReceiveAd:\(view)");
+//        bannerDisplayed = true
+//        relayoutViews()
+//    }
+//
+//    func relayoutViews(){
+//        if (bannerDisplayed) {
+//            var bannerFrame = bannerView!.frame
+//            bannerFrame.origin.x = 0
+//            let screenSize: CGRect = UIScreen.main.bounds
+//            bannerFrame.origin.y = screenSize.height - bannerFrame.size.height
+//            bannerView!.frame = bannerFrame
+//        }
+//    }
     
     func removeBanner(){
         // get subview of banner and remove
