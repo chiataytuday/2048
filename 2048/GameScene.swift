@@ -439,49 +439,25 @@ class GameScene: SKScene {
         // create Ad Panel - Admob
         // Ad ID - ca-app-pub-1672643432387969/6981900150
         // Ad Name - Scoreboard AD
-        
-//         bannerView.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait) // kGADAdSizeBanner
         self.addBannerViewToView()
     }
     
     func addBannerViewToView() {
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
         self.view?.addSubview(bannerView)
-//        self.view?.insertSubview(sceneView, at: 0)
-        
-//        var bottomConstraint:NSLayoutConstraint! = nil
-//        if #available(iOS 11, *) {
-//            bottomConstraint = NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view?.safeAreaLayoutGuide.bottomAnchor, attribute: .bottom, multiplier: 0.0, constant: 0.0)
-//        }else{
-//            bottomConstraint = NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.0, constant: 0.0)
-//        }
-//        self.view?.addConstraints( [bottomConstraint] )
-        
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
         // load banner
         bannerView.rootViewController = self.gameViewController
         bannerView.adUnitID = "ca-app-pub-1672643432387969/6981900150"
-        
+        // add constraints
+        self.view?.addConstraint(NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0))
+        self.view?.addConstraint(NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        // Request banner
         let request = GADRequest()
         request.testDevices = [ kGADSimulatorID, "4BC139DD-B4B1-41C0-A7F5-49C4A8531181" ] // iPhone 7 Plus (10.3.1)
         bannerView.load(request)
     }
     
-//    func adViewDidReceiveAd(view: GADBannerView!) {
-//        print("adViewDidReceiveAd:\(view)");
-//        bannerDisplayed = true
-//        relayoutViews()
-//    }
-//
-//    func relayoutViews(){
-//        if (bannerDisplayed) {
-//            var bannerFrame = bannerView!.frame
-//            bannerFrame.origin.x = 0
-//            let screenSize: CGRect = UIScreen.main.bounds
-//            bannerFrame.origin.y = screenSize.height - bannerFrame.size.height
-//            bannerView!.frame = bannerFrame
-//        }
-//    }
     
     func removeBanner(){
         // get subview of banner and remove
