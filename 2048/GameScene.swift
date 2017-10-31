@@ -479,7 +479,7 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if swipeActive { calculateRowCol(direction:swipe.right) }
-                moveToScore()
+//                moveToScore()
             case UISwipeGestureRecognizerDirection.down:
                 if swipeActive { calculateRowCol(direction:swipe.down) }
             case UISwipeGestureRecognizerDirection.left:

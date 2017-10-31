@@ -172,7 +172,7 @@ let radius: CGFloat = side / 12 // the corner radius
 
 // Gameover Panel
 let panelWidth : CGFloat = 1.2
-let panelHeight : CGFloat = 2
+let panelHeight : CGFloat = 1.7
 let panelDepth : CGFloat = 0.3
 let panelRadius : CGFloat = 0.05
 

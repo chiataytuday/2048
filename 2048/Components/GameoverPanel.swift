@@ -71,7 +71,7 @@ class GameoverPanel : SCNNode {
         gameoverHeaderNode = SCNNode(geometry: gameoverHeaderTxt)
         gameoverHeaderNode.name = "gameoverHeader"
         gameoverHeaderNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        gameoverHeaderNode.position = SCNVector3Make(0.0, 1.7, 0.55)
+        gameoverHeaderNode.position = SCNVector3Make(0.0, 1.3, 0.55)
         gameoverHeaderTxt.flatness = 0.1
         gameoverHeaderTxt.chamferRadius = 0.1
         var goMinVec = SCNVector3Zero
@@ -93,7 +93,7 @@ class GameoverPanel : SCNNode {
         scoreTitleNode = SCNNode(geometry: scoreTitleTxt)
         scoreTitleNode.name = "scoreTitle"
         scoreTitleNode.scale = SCNVector3Make(0.014, 0.014, 0.014)
-        scoreTitleNode.position = SCNVector3Make(0.0, 1.27, 0.45)
+        scoreTitleNode.position = SCNVector3Make(0.0, 0.87, 0.45)
         scoreTitleTxt.flatness = 0.1
         scoreTitleTxt.chamferRadius = 0.1
         var stMinVec = SCNVector3Zero
@@ -115,7 +115,7 @@ class GameoverPanel : SCNNode {
         scoreNode = SCNNode(geometry: scoreTxt)
         scoreNode.name = "scoreTxt"
         scoreNode.scale = SCNVector3Make(0.028, 0.028, 0.028)
-        scoreNode.position = SCNVector3Make(0.0, 0.76, 0.48)
+        scoreNode.position = SCNVector3Make(0.0, 0.36, 0.48)
         scoreTxt.flatness = 0.1
         scoreTxt.chamferRadius = 0.1
         var snMinVec = SCNVector3Zero
@@ -137,7 +137,7 @@ class GameoverPanel : SCNNode {
         highScoreTitleNode = SCNNode(geometry: highScoreTitleTxt)
         highScoreTitleNode.name = "highScoreTitle"
         highScoreTitleNode.scale = SCNVector3Make(0.009, 0.009, 0.009)
-        highScoreTitleNode.position = SCNVector3Make(0.0, 0.4, 0.45)
+        highScoreTitleNode.position = SCNVector3Make(0.0, 0.0, 0.45)
         highScoreTitleTxt.flatness = 0.1
         highScoreTitleTxt.chamferRadius = 0.1
         var hstMinVec = SCNVector3Zero
@@ -158,7 +158,7 @@ class GameoverPanel : SCNNode {
         highScoreNode = SCNNode(geometry: highScoreTxt)
         highScoreNode.name = "highScoreTxt"
         highScoreNode.scale = SCNVector3Make(0.018, 0.018, 0.018)
-        highScoreNode.position = SCNVector3Make(0.0, 0.05, 0.45)
+        highScoreNode.position = SCNVector3Make(0.0, -0.4, 0.45)
         highScoreTxt.flatness = 0.1
         highScoreTxt.chamferRadius = 0.1
         var hsMinVec = SCNVector3Zero
@@ -180,7 +180,7 @@ class GameoverPanel : SCNNode {
         replayBtnNode = SCNNode(geometry: replayBtnTxt)
         replayBtnNode.name = "replayBtn"
         replayBtnNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
-        replayBtnNode.position = SCNVector3Make(0.0, -0.9, 0.5)
+        replayBtnNode.position = SCNVector3Make(0.0, -1.45, 0.6)
         replayBtnTxt.flatness = 0.1
         replayBtnTxt.chamferRadius = 0.1
         var rpbMinVec = SCNVector3Zero
@@ -202,7 +202,7 @@ class GameoverPanel : SCNNode {
         highscoreBtnNode = SCNNode(geometry: highscoreBtnTxt)
         highscoreBtnNode.name = "scoreBtn"
         highscoreBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        highscoreBtnNode.position = SCNVector3Make(-0.9, -0.9, 0.45)
+        highscoreBtnNode.position = SCNVector3Make(-0.9, -1.45, 0.55)
         highscoreBtnTxt.flatness = 0.1
         highscoreBtnTxt.chamferRadius = 0.1
         var hsbMinVec = SCNVector3Zero
@@ -224,7 +224,7 @@ class GameoverPanel : SCNNode {
         homeBtnNode = SCNNode(geometry: homeBtnTxt)
         homeBtnNode.name = "homeBtn"
         homeBtnNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        homeBtnNode.position = SCNVector3Make(0.9, -0.9, 0.45)
+        homeBtnNode.position = SCNVector3Make(0.9, -1.45, 0.55)
         homeBtnTxt.flatness = 0.1
         homeBtnTxt.chamferRadius = 0.1
         var hbMinVec = SCNVector3Zero
