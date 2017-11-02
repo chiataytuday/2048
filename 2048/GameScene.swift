@@ -497,7 +497,29 @@ class GameScene: SKScene {
     func touchMoved(toPoint pos : CGPoint) {}
     func touchUp(atPoint pos : CGPoint) {}
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchDown(atPoint: t.location(in: self)) } }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+
+        let touch = touches.first
+        if let touchPoint = touch?.location(in: self.gameView),
+            let hitTestResult = self.gameView.hitTest(touchPoint, options: nil).first {
+            let hitNode = hitTestResult.node
+            print("Name : ",hitNode.name as Any)
+            var exit:CGFloat? = nil
+            if hitNode.name == "play" { exit = scenes.game }
+            if hitNode.name == "info" { exit = scenes.info }
+            if hitNode.name == "score" { exit = scenes.score }
+            if hitNode.name == "settings" { exit = scenes.settings }
+            if exit != nil {
+                exitToScene(scene: exit!)
+            }
+        }
+    }
+    
+    
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchMoved(toPoint: t.location(in: self)) } }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
@@ -505,6 +527,31 @@ class GameScene: SKScene {
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     
     
+    
+    // Transition to scenes
+    // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    func exitToScene(scene:CGFloat){
+        run(SKAction.sequence([
+            SKAction.run() {
+                self.cameraNode.constraints = nil
+                self.removeSceneAnim()
+            },
+            SKAction.wait(forDuration: 1.0),
+            SKAction.run() {
+                self.gameViewController.moveToScene(to: scene)
+            }
+            ]), withKey:"transitioning")
+    }
+    
+    func removeSceneAnim(){
+        // animate cube out
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1.0
+        cameraNode.position = homeCameraOut
+        light.intensity = 0
+        SCNTransaction.commit()
+        // animate logo out
+    }
     
     
     // Animation Actions
