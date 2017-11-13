@@ -512,6 +512,13 @@ class GameScene: SKScene {
             if hitNode.name == "info" { exit = scenes.info }
             if hitNode.name == "score" { exit = scenes.score }
             if hitNode.name == "settings" { exit = scenes.settings }
+            if hitNode.name == "replayBtn" {
+                exit = nil
+                // self.resetGame()
+                self.toGame()
+            }
+            if hitNode.name == "scoreBtn" { exit = scenes.score }
+            if hitNode.name == "homeBtn" { exit = scenes.home }
             if exit != nil {
                 exitToScene(scene: exit!)
             }

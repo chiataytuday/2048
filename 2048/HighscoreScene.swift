@@ -17,6 +17,32 @@ class HighscoreScene: SKScene {
     override func didMove(to view: SKView) {
         
         highscoreScene = self;
+        self.view?.backgroundColor = UIColor.clear
+        print("InfoScene - didMove")
+        setupBg()                           //  background addition
+        assignTextures()                    // prepare textures
+        addStructure()                      // Add prerequisites
+        addNavigation()
+        animateIn()
+    }
+    
+    func setupBg(){
+        
+    }
+    
+    func assignTextures(){
+        
+    }
+    
+    func addStructure(){
+        
+    }
+    
+    func addNavigation(){
+        
+    }
+    
+    func animateIn(){
         
     }
     
