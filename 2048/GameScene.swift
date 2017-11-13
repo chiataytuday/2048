@@ -463,6 +463,8 @@ class GameScene: SKScene {
         // get subview of banner and remove
         if bannerView != nil {
             bannerView.removeFromSuperview()
+            bannerView.rootViewController = nil
+            bannerView = nil
         }
     }
     
@@ -479,7 +481,7 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if swipeActive { calculateRowCol(direction:swipe.right) }
-//                moveToScore()
+                moveToScore()
             case UISwipeGestureRecognizerDirection.down:
                 if swipeActive { calculateRowCol(direction:swipe.down) }
             case UISwipeGestureRecognizerDirection.left:
@@ -520,6 +522,7 @@ class GameScene: SKScene {
             if hitNode.name == "scoreBtn" { exit = scenes.score }
             if hitNode.name == "homeBtn" { exit = scenes.home }
             if exit != nil {
+                self.removeBanner()
                 exitToScene(scene: exit!)
             }
         }
