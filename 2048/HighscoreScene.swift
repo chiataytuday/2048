@@ -33,10 +33,14 @@ class HighscoreScene: SKScene {
         highscoreScene = self;
         self.view?.backgroundColor = UIColor.clear
         print("HighscoreScene - didMove")
+        
+        scoreManager = GameScoreManager.sharedInstance
+        
         setupBg()                           //  background addition
         assignTextures()                    // prepare textures
         addStructure()                      // Add prerequisites
         addNavigation()
+        populateScore()
         animateIn()
     }
     
@@ -89,6 +93,15 @@ class HighscoreScene: SKScene {
     
     func addNavigation(){
         
+    }
+    
+    func populateScore(){
+        // get score from scoremanager
+        let scoreList = scoreManager.getScores()
+        // loop through the scores and create decending scoreboard
+        for score in scoreList {
+            // do something with score.
+        }
     }
     
     func animateIn(){
