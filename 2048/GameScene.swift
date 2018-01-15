@@ -185,6 +185,8 @@ class GameScene: SKScene {
     func resetGame(){
         for t in tiles { t.value = defaultGridValue } // grid already exists - just reset the tile values
         newGame() // leave 2 tiles as random 2-4
+        scoreboard.score = 0
+        scoreboard.highscore = 0
     }
     
     func returnToHome(){
