@@ -25,10 +25,14 @@ class GameScoreManager {
     func getScores() -> Array<Int> { return userDefaults.object(forKey: highscore) as? [Int] ?? [Int]() }   // Returns list of scores
     
     func getHighScore() -> Int {                                                                            // Return Highest Score
+        var ret = 0
         var list = getScores()
-        for itm in list { print("list: ",itm) }
-        list = list.sorted { $0 > $1 }
-        return list[0]
+        if list.count>0 {
+            for itm in list { print("list: ",itm) }
+            list = list.sorted { $0 > $1 }
+            ret = list[0]
+        }
+        return ret
     }
     
     // Bool helpers

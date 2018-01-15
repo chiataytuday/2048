@@ -194,6 +194,8 @@ let homeCameraOut = SCNVector3(x: 0.0, y: 60, z: -5.0)
 let gameCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 3.0)
 let gameCameraScore = SCNVector3(x: 0.0, y: 0.0, z: 13.0)
 let gameCameraOut = SCNVector3(x: 0.0, y: 0.0, z: -3.0)
+let highscoreCameraOut = SCNVector3(x: 0.0, y: 0.0, z: -5.0)
+let highscoreCameraIn = SCNVector3(x: 0.0, y: 0.0, z: 6.0)
 
 // Scene floor Properties
 let homefloorIn = SCNVector3(x: 0, y: -1.0, z: 0)
@@ -214,12 +216,9 @@ let gameEndIn = SCNVector3(x: 0, y: 0.0, z: 7 )
 let playBtnIn = SCNVector3(x: 0, y: -0.97, z: 3.3)
 let playBtnOut = SCNVector3(x: 0, y: -0.97, z: 8)
 
-let scoreBtnIn = SCNVector3(x: 0, y: -0.91, z: 4.3)
-let scoreBtnOut = SCNVector3(x: 0, y: -0.91, z: 8)
-
 let infoBtnIn = SCNVector3(x: 0.5, y: -0.92, z: 4.2)
 let infoBtnOut = SCNVector3(x: 0.5, y: -0.92, z: 8)
 
-let settingsBtnIn = SCNVector3(x: -0.5, y: -0.95, z: 4.2)
-let settingsBtnOut = SCNVector3(x: -0.5, y: -0.95, z: 8)
+let scoreBtnIn = SCNVector3(x: -0.5, y: -0.92, z: 4.2)
+let scoreBtnOut = SCNVector3(x: -0.5, y: -0.92, z: 8)
 

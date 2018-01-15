@@ -31,9 +31,7 @@ class InfoScene: SKScene {
         self.view?.backgroundColor = UIColor.clear
         print("InfoScene - didMove")
         setupBg()                           //  background addition
-        assignTextures()                    // prepare textures
         addStructure()                      // Add prerequisites
-        addNavigation()
         animateIn()
     }
     
@@ -41,10 +39,6 @@ class InfoScene: SKScene {
         let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
-    }
-    
-    func assignTextures(){
-        
     }
     
     func addStructure(){
@@ -83,10 +77,7 @@ class InfoScene: SKScene {
         infoSCNScene.rootNode.addChildNode(lightNode)
         infoSCNScene.rootNode.addChildNode(cameraNode)
     }
-    
-    func addNavigation(){
-        
-    }
+
     
     func animateIn(){
         

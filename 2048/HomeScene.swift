@@ -98,31 +98,11 @@ class HomeScene: SKScene {
         playButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         
-        let settingsTxt = SCNText(string: "\u{f43d}", extrusionDepth: 8)
-        settingsTxt.font = UIFont(name: "Ionicons", size: 30)
-        settingsButton = SCNNode(geometry: settingsTxt)
-        settingsButton.name = "settings"
-        settingsButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
-        settingsButton.position = settingsBtnOut
-        settingsTxt.flatness = 0.01
-        settingsTxt.chamferRadius = 0.1
-        var stminVec = SCNVector3Zero
-        var stmaxVec = SCNVector3Zero
-        if settingsButton.__getBoundingBoxMin(&stminVec, max: &stmaxVec) {
-            let distance = SCNVector3(
-                x: stmaxVec.x - stminVec.x,
-                y: stmaxVec.y - stminVec.y,
-                z: stmaxVec.z - stminVec.z)
-            settingsButton.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
-        }
-        settingsButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
-        
-        
         let scoreTxt = SCNText(string: "\u{f348}", extrusionDepth: 8)
         scoreTxt.font = UIFont(name: "Ionicons", size: 30)
         highscoreButton = SCNNode(geometry: scoreTxt)
         highscoreButton.name = "score"
-        highscoreButton.scale = SCNVector3Make(0.014, 0.014, 0.014)
+        highscoreButton.scale = SCNVector3Make(0.013, 0.013, 0.013)
         highscoreButton.position = scoreBtnOut
         scoreTxt.flatness = 0.01
         scoreTxt.chamferRadius = 0.1
@@ -158,7 +138,6 @@ class HomeScene: SKScene {
         infoButton.geometry?.materials = [navExtrutionMat, navExtrutionMat, navFaceMat, navFaceMat, navFaceMat]
         
         scnScene.rootNode.addChildNode(playButton)
-        scnScene.rootNode.addChildNode(settingsButton)
         scnScene.rootNode.addChildNode(highscoreButton)
         scnScene.rootNode.addChildNode(infoButton)
     }
@@ -218,7 +197,6 @@ class HomeScene: SKScene {
                 SCNTransaction.animationDuration = 0.5
                 self.highscoreButton.position = scoreBtnIn
                 self.infoButton.position = infoBtnIn
-                self.settingsButton.position = settingsBtnIn
                 SCNTransaction.commit()
             }
             ]), withKey:"transitioning")

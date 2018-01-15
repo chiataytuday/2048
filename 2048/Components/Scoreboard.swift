@@ -9,8 +9,12 @@
 import SceneKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class Scoreboard : SCNNode {
+    
+    var tone: Audio!
+    var engine: AVAudioEngine!
     
     var bestNode:SCNNode! = nil
     var currentNode:SCNNode! = nil
@@ -35,6 +39,19 @@ class Scoreboard : SCNNode {
     }
 
     func setup(){
+        tone = Audio.sharedInstance
+        
+        let format = AVAudioFormat(standardFormatWithSampleRate: tone.sampleRate, channels: 1)
+        
+        engine = AVAudioEngine()
+        engine.attach(tone)
+        let mixer = engine.mainMixerNode
+        engine.connect(tone, to: mixer, format: format)
+        do {
+            try engine.start()
+        } catch let error as NSError {
+            print(error)
+        }
         
         bestTxt = SCNText(string: "best: 0", extrusionDepth: 8)
         bestTxt.font = UIFont(name: "Hangar-Flat", size: 20)
@@ -78,30 +95,59 @@ class Scoreboard : SCNNode {
         curTxt.firstMaterial!.diffuse.contents = UIColor.white
         curTxt.firstMaterial!.specular.contents = UIColor.white
         self.addChildNode(currentNode)
-
         
         print("ScoreBoard setup!!")
-
     }
     
     
     var score : Int = 0 {
         didSet {
-            // update score text
             print("Score added ",score)
-            highscore = highscore + score
+            highscore = highscore + score // update score text
+//            setAudioFreq(freq:getFrequencyForScore(score: score))
+//            playAudio()
         }
     }
     
     var highscore : Int = 0 {
         didSet {
-            // update score text
-            print("highscore = ",highscore)
-            print("Text node ",curTxt)
+            print("highscore = ",highscore," -> Text node ",curTxt) // update score text
             curTxt.string = "SCORE: "+String(highscore)
-//            currentNode.geometry.string = "SCORE"
         }
     }
     
-
+    func getFrequencyForScore(score:Int) -> Double {
+        var freq:Double = 0.0
+        switch score {
+        case 2: freq = 2.0
+        case 4: freq = 4.0
+        case 8: freq = 8.0
+        case 16: freq = 16.0
+        case 32: freq = 32.0
+        case 64: freq = 64.0
+        case 128: freq = 128.0
+        case 256: freq = 256.0
+        case 512: freq = 512.0
+        case 1024: freq = 1024.0
+        case 2048: freq = 2048.0
+        default: break
+            // no sound
+        }
+        return freq
+    }
+    
+    func setAudioFreq(freq:Double){
+        tone.frequency = freq
+    }
+    
+    func playAudio(){
+        if tone.isPlaying {
+            engine.mainMixerNode.volume = 0.0
+            tone.stop()
+        }
+        tone.preparePlaying()
+        tone.play()
+        engine.mainMixerNode.volume = 1.0
+    }
+    
 }
