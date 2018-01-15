@@ -56,6 +56,8 @@ class HomeScene: SKScene {
         assignTextures()                    // prepare textures
         addStructure()                      // Add prerequisites
 
+        GameScoreManager.sharedInstance.getHighScore()
+        
         addNavigation()
 //        printFonts()
         

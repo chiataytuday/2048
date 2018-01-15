@@ -183,7 +183,8 @@ class GameScene: SKScene {
     }
     
     func resetGame(){
-        // clear the decks
+        for t in tiles { t.value = defaultGridValue } // grid already exists - just reset the tile values
+        newGame() // leave 2 tiles as random 2-4
     }
     
     func returnToHome(){
@@ -385,16 +386,15 @@ class GameScene: SKScene {
     
     
     
-    
     // Highscore section
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     func gameOver(){
         // finalize game
-        print("GAME OVER !")
+        print("GAME OVER ! : ",self.scoreboard.highscore)
         // store score
-        scoreManager.saveScore(score: self.scoreboard.score)
-        gameoverPanel.setScore(val:self.scoreboard.score)
+        scoreManager.saveScore(score: self.scoreboard.highscore)
+        gameoverPanel.setScore(val:self.scoreboard.highscore)
         // transition to end screen
         moveToScore()
     }
@@ -481,7 +481,7 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if swipeActive { calculateRowCol(direction:swipe.right) }
-                moveToScore()
+//                moveToScore()
             case UISwipeGestureRecognizerDirection.down:
                 if swipeActive { calculateRowCol(direction:swipe.down) }
             case UISwipeGestureRecognizerDirection.left:

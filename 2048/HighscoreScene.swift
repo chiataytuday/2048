@@ -98,10 +98,17 @@ class HighscoreScene: SKScene {
     func populateScore(){
         // get score from scoremanager
         let scoreList = scoreManager.getScores()
+        print("scoreList is : ", type(of: scoreList))
         // loop through the scores and create decending scoreboard
         for score in scoreList {
             // do something with score.
+            print("SCORE IS : ", score)
+            createScoreItem(score:score)
         }
+    }
+    
+    func createScoreItem(score:Int){
+        
     }
     
     func animateIn(){

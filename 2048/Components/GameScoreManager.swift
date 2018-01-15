@@ -25,7 +25,9 @@ class GameScoreManager {
     func getScores() -> Array<Int> { return userDefaults.object(forKey: highscore) as? [Int] ?? [Int]() }   // Returns list of scores
     
     func getHighScore() -> Int {                                                                            // Return Highest Score
-        var list = userDefaults.object(forKey: highscore) as? [Int] ?? [Int]()
+        var list = getScores()
+        for itm in list { print("list: ",itm) }
+        list = list.sorted { $0 > $1 }
         return list[0]
     }
     
