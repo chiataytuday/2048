@@ -121,15 +121,17 @@ class InfoScene: SKScene {
         
         // add home button
         let howToCopy = """
-                        gfdkgjb
-                        gdfgdfgd
-                        89bv9cg89f8 fg 8f g9f
+                        Swipe up, down and
+                        side to side to pair
+                        two adjacent tiles with
+                        the same number in the
+                        direction of the swiping action.
                         """
         let howtoTxt = SCNText(string: howToCopy, extrusionDepth: 8)
         howtoTxt.font = UIFont(name: "Ionicons", size: 20)
         let howtoNode = SCNNode(geometry: howtoTxt)
         howtoNode.name = "howto"
-        howtoNode.scale = SCNVector3Make(0.035, 0.035, 0.035)
+        howtoNode.scale = SCNVector3Make(0.025, 0.025, 0.025)
         howtoNode.position = SCNVector3Make(0.0, -1.65, 0.55)
         howtoTxt.flatness = 0.1
         howtoTxt.chamferRadius = 0.1
