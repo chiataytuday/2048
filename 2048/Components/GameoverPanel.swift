@@ -14,37 +14,27 @@ import GameplayKit
 class GameoverPanel : SCNNode {
 
     var backPanel:SCNNode! = nil                // Primitive panel
-    
     var gameoverHeaderNode:SCNNode! = nil       // Title text
     var gameoverHeaderTxt:SCNText! = nil
-    
     var scoreTitleNode:SCNNode! = nil           // Current gamescore text
     var scoreTitleTxt:SCNText! = nil
     var scoreNode:SCNNode! = nil                // Current gamescore text
     var scoreTxt:SCNText! = nil
-    
     var highScoreTitleNode:SCNNode! = nil       // Current gamescore text
     var highScoreTitleTxt:SCNText! = nil
     var highScoreNode:SCNNode! = nil            // Current gamescore text
     var highScoreTxt:SCNText! = nil
-    
-    
     // buttons
     var replayBtnNode:SCNNode! = nil            // Replay Button
     var replayBtnTxt:SCNText! = nil
-    
     var highscoreBtnNode:SCNNode! = nil         // Highscore Button
     var highscoreBtnTxt:SCNText! = nil
-    
     var homeBtnNode:SCNNode! = nil              // Home Button
     var homeBtnTxt:SCNText! = nil
     
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
+    required init(coder: NSCoder) { fatalError("NSCoding not supported") }
     
     init(name:String,position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3){
-        print("Scoreboard Init")
         scoreBgMat.diffuse.contents = UIColor.clear
         super.init()
         self.geometry = SCNBox(width: scoreBoardWidth, height: scoreBoardHeight, length: scoreBoardDepth, chamferRadius: scoreBoardRadius)
@@ -86,7 +76,6 @@ class GameoverPanel : SCNNode {
         gameoverHeaderTxt.firstMaterial!.diffuse.contents = UIColor.white
         gameoverHeaderTxt.firstMaterial!.specular.contents = UIColor.white
         
-        
         // Add current score
         scoreTitleTxt = SCNText(string: "Current Score", extrusionDepth: 8)
         scoreTitleTxt.font = UIFont(name: "Hangar-Flat", size: 20)
@@ -108,8 +97,6 @@ class GameoverPanel : SCNNode {
         scoreTitleTxt.firstMaterial!.diffuse.contents = UIColor.white
         scoreTitleTxt.firstMaterial!.specular.contents = UIColor.white
 
-
-
         scoreTxt = SCNText(string: "1240", extrusionDepth: 8)
         scoreTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         scoreNode = SCNNode(geometry: scoreTxt)
@@ -129,7 +116,6 @@ class GameoverPanel : SCNNode {
         }
         scoreTxt.firstMaterial!.diffuse.contents = UIColor.white
         scoreTxt.firstMaterial!.specular.contents = UIColor.white
-
 
         // Add Highest score
         highScoreTitleTxt = SCNText(string: "Best Score", extrusionDepth: 8)
@@ -151,7 +137,6 @@ class GameoverPanel : SCNNode {
         }
         highScoreTitleTxt.firstMaterial!.diffuse.contents = UIColor.white
         highScoreTitleTxt.firstMaterial!.specular.contents = UIColor.white
-        
 
         highScoreTxt = SCNText(string: "2048", extrusionDepth: 8)
         highScoreTxt.font = UIFont(name: "Hangar-Flat", size: 20)
@@ -172,7 +157,6 @@ class GameoverPanel : SCNNode {
         }
         highScoreTxt.firstMaterial!.diffuse.contents = UIColor.white
         highScoreTxt.firstMaterial!.specular.contents = UIColor.white
-
 
         // Add Replay button
         replayBtnTxt = SCNText(string: "\u{f21c}", extrusionDepth: 8)
@@ -195,7 +179,6 @@ class GameoverPanel : SCNNode {
         replayBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
         replayBtnTxt.firstMaterial!.specular.contents = UIColor.white
 
-
         // Add highscore button
         highscoreBtnTxt = SCNText(string: "\u{f348}", extrusionDepth: 8)
         highscoreBtnTxt.font = UIFont(name: "Ionicons", size: 20)
@@ -217,7 +200,6 @@ class GameoverPanel : SCNNode {
         highscoreBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
         highscoreBtnTxt.firstMaterial!.specular.contents = UIColor.white
         
-        
         // Add home button
         homeBtnTxt = SCNText(string: "\u{f38f}", extrusionDepth: 8)
         homeBtnTxt.font = UIFont(name: "Ionicons", size: 20)
@@ -238,7 +220,6 @@ class GameoverPanel : SCNNode {
         }
         homeBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
         homeBtnTxt.firstMaterial!.specular.contents = UIColor.white
-        
         
         self.addChildNode(backPanel)
         self.addChildNode(gameoverHeaderNode)

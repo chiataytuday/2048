@@ -15,23 +15,19 @@ class HomeScene: SKScene {
     // Environment Objects
     var overlayView:SKView! = nil
     var overlayScene:SKScene! = nil
-    
     var sceneView:SCNView! = nil
     var scnScene:SCNScene! = nil
     // Light and Camera
     var cameraNode:SCNNode! = nil
     var light:SCNLight! = nil
-    
     // navigation items
     var playButton:SCNNode! = nil
     var settingsButton:SCNNode! = nil
     var infoButton:SCNNode! = nil
     var highscoreButton:SCNNode! = nil
-    
     // Floor - HomeScene
     var floorNode:SCNNode! = nil
     var sceneFloor:SCNFloor! = nil
-    
     // Logo
     var logoNode:SCNNode! = nil
     // Cube reference
@@ -44,23 +40,15 @@ class HomeScene: SKScene {
     }
     var history:[TouchInfo]?
     
-    // ViewController reference
-    var gameViewController : GameViewController!
+    var gameViewController : GameViewController!  // ViewController reference
     
     override func didMove(to view: SKView) {
-        
         homeScene = self;
         self.view?.backgroundColor = UIColor.clear
-        print("HomeScene - didMove")
         setupBg()                           //  background addition
         assignTextures()                    // prepare textures
         addStructure()                      // Add prerequisites
-
-        GameScoreManager.sharedInstance.getHighScore()
-        
         addNavigation()
-//        printFonts()
-        
     }
     
     func printFonts() {
@@ -74,11 +62,9 @@ class HomeScene: SKScene {
     }
     
     func addNavigation(){
-        // color materials
-        navFaceMat.diffuse.contents = logoBlue
+        navFaceMat.diffuse.contents = logoBlue // color materials
         navExtrutionMat.diffuse.contents = UIColor.white
-        // Play Text
-        let playTxt = SCNText(string: "Play", extrusionDepth: 8)
+        let playTxt = SCNText(string: "Play", extrusionDepth: 8) // Play Text
         playTxt.font = UIFont(name: "Hangar-Flat", size: 30)
         playButton = SCNNode(geometry: playTxt)
         playButton.name = "play"
@@ -142,7 +128,6 @@ class HomeScene: SKScene {
         scnScene.rootNode.addChildNode(infoButton)
     }
     
-    
     func setupBg() {
         let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
@@ -153,27 +138,18 @@ class HomeScene: SKScene {
         sceneView = SCNView(frame: (self.view?.frame)!)
         sceneView.backgroundColor = UIColor.clear
         self.view?.insertSubview(sceneView, at: 0)                  // add sceneView as SubView
-        
         scnScene = SCNScene()
         sceneView.scene = scnScene
-        
-//        overlayScene = SKScene(size: (self.view?.bounds.size)!)     // create overlay and add to sceneView
-//        sceneView.overlaySKScene = overlayScene
-//        sceneView.overlaySKScene!.isUserInteractionEnabled = false;
-
         addCubeElement()
         addLogo()
     }
     
-    
     func animateSceneIn() {
-        
         run(SKAction.sequence([
             SKAction.wait(forDuration: 1),
             SKAction.run() {
                 SCNTransaction.begin()
                 SCNTransaction.animationDuration = 3.0
-
                 self.light.intensity = 1200
                 SCNTransaction.commit()
             },
@@ -204,14 +180,12 @@ class HomeScene: SKScene {
     
     
     func removeSceneAnim(){
-        // animate cube out
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1.0
         cameraNode.position = homeCameraOut
         logoNode.position = homeLogoOut
         light.intensity = 0
         SCNTransaction.commit()
-        // animate logo out
     }
     
     func assignTextures(){
@@ -296,8 +270,6 @@ class HomeScene: SKScene {
         animateSceneIn() // transition in
     }
     
-    
-    
     func addCubeElement(){
         let camera = SCNCamera()                        // Camera
         cameraNode = SCNNode()
@@ -339,15 +311,10 @@ class HomeScene: SKScene {
         scnScene.rootNode.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cubeNode)
         scnScene.rootNode.addChildNode(floorNode)
-        
-        
     }
     
     
-    func touchDown(atPoint pos : CGPoint) {
-        // detect object at point
-        print("touchDown")
-    }
+    func touchDown(atPoint pos : CGPoint) { print("touchDown") }
     
     func exitToScene(scene:CGFloat){
         run(SKAction.sequence([
@@ -362,20 +329,6 @@ class HomeScene: SKScene {
             ]), withKey:"transitioning")
     }
     
-    
-    
-    
-//    let touch = touches.first
-//    if let touchPoint = touch?.locationInView(self.sceneView),
-//    hitTestResult = self.sceneView.hitTest(touchPoint, options: nil).first {
-//        let hitNode = hitTestResult.node
-//        hitNode.paused = !hitNode.paused
-//    }
-//    
-    
-    
-    
-    
     // TOUCHES
     // -----------------------------------------------------------------------------
     func touchMoved(toPoint pos : CGPoint) {print("touchMoved")}
@@ -384,7 +337,6 @@ class HomeScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-//            self.touchDown(atPoint: t.location(in: self))
             history = [TouchInfo(location:t.location(in: self), time:t.timestamp)]
         }
         let touch = touches.first
@@ -445,9 +397,6 @@ class HomeScene: SKScene {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     // -----------------------------------------------------------------------------
-    
-    
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered

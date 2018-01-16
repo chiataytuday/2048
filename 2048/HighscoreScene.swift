@@ -52,7 +52,6 @@ class HighscoreScene: SKScene {
     }
     
     func addStructure(){
-        print("addStructure")
         scoreView = SCNView(frame: (self.view?.frame)!)
         scoreView.backgroundColor = UIColor.clear
         self.view?.insertSubview(scoreView, at: 0)       // add sceneView as SubView
@@ -88,8 +87,6 @@ class HighscoreScene: SKScene {
         scoreSCNScene.rootNode.addChildNode(cameraNode)
     }
     
-
-    
     func addBackPanel(){
         endpanelBgMat.diffuse.contents = col2048
         let panelGeometry = SCNBox(width: panelWidth, height: panelHeight, length: panelDepth, chamferRadius: panelRadius)  // Cube Anim
@@ -120,7 +117,6 @@ class HighscoreScene: SKScene {
         }
         headerTxt.firstMaterial!.diffuse.contents = UIColor.white
         headerTxt.firstMaterial!.specular.contents = UIColor.white
-        
         scoreSCNScene.rootNode.addChildNode(headerNode)
         
         // add home button
@@ -143,7 +139,6 @@ class HighscoreScene: SKScene {
         }
         homeBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
         homeBtnTxt.firstMaterial!.specular.contents = UIColor.white
-        
         scoreSCNScene.rootNode.addChildNode(homeBtnNode)
     }
     
@@ -153,7 +148,6 @@ class HighscoreScene: SKScene {
             var score = 0
             if index<scoreList.count { score = scoreList[index] }
             createScoreItem(score:score, pos:index)
-            print("SCORE IS : ", score)
         }
     }
     
@@ -203,7 +197,6 @@ class HighscoreScene: SKScene {
         if let touchPoint = touch?.location(in: self.scoreView),
             let hitTestResult = self.scoreView.hitTest(touchPoint, options: nil).first {
             let hitNode = hitTestResult.node
-            print("Name : ",hitNode.name as Any)
             var exit:CGFloat? = nil
             if hitNode.name == "homeBtn" { exit = scenes.home }
             if exit != nil {
@@ -221,20 +214,15 @@ class HighscoreScene: SKScene {
                 self.removeSceneAnim()
             },
             SKAction.wait(forDuration: 1.0),
-            SKAction.run() {
-                self.gameViewController.moveToScene(to: scene)
-            }
-            ]), withKey:"transitioning")
+            SKAction.run() { self.gameViewController.moveToScene(to: scene) } ]), withKey:"transitioning")
     }
     
     func removeSceneAnim(){
-        // animate cube out
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1.0
         cameraNode.position = highscoreCameraOut
         light.intensity = 0
         SCNTransaction.commit()
-        // animate logo out
     }
     
     override func update(_ currentTime: TimeInterval) {

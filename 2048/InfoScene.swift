@@ -19,21 +19,15 @@ class InfoScene: SKScene {
     var light:SCNLight! = nil
     var lightNode:SCNNode! = nil
     var lockNode:SCNNode! = nil
-    
     var backPanel:SCNNode! = nil
     
     let copyList: [String] = ["Swipe up, down and side", "to side to pair two tiles", "adjacent with the same", "number in the direction", "of the swiping action.", "For each swipe action", "one new tile will be", "added to the grid.", "Once the grid is full,", "the game is over."]
     
-    
-    
     var gameViewController : GameViewController!
     
     override func didMove(to view: SKView) {
-        
         infoScene = self;
-        
         self.view?.backgroundColor = UIColor.clear
-        print("InfoScene - didMove")
         setupBg()                           //  background addition
         addStructure()                      // Add prerequisites
         addContent()
@@ -47,7 +41,6 @@ class InfoScene: SKScene {
     }
     
     func addStructure(){
-        print("addStructure")
         infoView = SCNView(frame: (self.view?.frame)!)
         infoView.backgroundColor = UIColor.clear
         self.view?.insertSubview(infoView, at: 0)       // add sceneView as SubView
@@ -115,20 +108,14 @@ class InfoScene: SKScene {
         }
         headerTxt.firstMaterial!.diffuse.contents = UIColor.white
         headerTxt.firstMaterial!.specular.contents = UIColor.white
-        
         infoSCNScene.rootNode.addChildNode(headerNode)
         
         // Copy
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        
-         for index in 0...copyList.count-1 {
-            addCopyItem(txt: copyList[index], pos: index)
-        }
-
+         for index in 0...copyList.count-1 { addCopyItem(txt: copyList[index], pos: index) }
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        
         
         // add home button
         let homeBtnTxt = SCNText(string: "\u{f38f}", extrusionDepth: 8)
@@ -150,7 +137,6 @@ class InfoScene: SKScene {
         }
         homeBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
         homeBtnTxt.firstMaterial!.specular.contents = UIColor.white
-        
         infoSCNScene.rootNode.addChildNode(homeBtnNode)
     }
     
@@ -200,7 +186,6 @@ class InfoScene: SKScene {
         if let touchPoint = touch?.location(in: self.infoView),
             let hitTestResult = self.infoView.hitTest(touchPoint, options: nil).first {
             let hitNode = hitTestResult.node
-            print("Name : ",hitNode.name as Any)
             var exit:CGFloat? = nil
             if hitNode.name == "homeBtn" { exit = scenes.home }
             if exit != nil {
@@ -219,20 +204,15 @@ class InfoScene: SKScene {
                 self.removeSceneAnim()
             },
             SKAction.wait(forDuration: 1.0),
-            SKAction.run() {
-                self.gameViewController.moveToScene(to: scene)
-            }
-            ]), withKey:"transitioning")
+            SKAction.run() { self.gameViewController.moveToScene(to: scene) } ]), withKey:"transitioning")
     }
     
     func removeSceneAnim(){
-        // animate cube out
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1.0
         cameraNode.position = highscoreCameraOut
         light.intensity = 0
         SCNTransaction.commit()
-        // animate logo out
     }
     
     override func update(_ currentTime: TimeInterval) {

@@ -15,7 +15,6 @@ class GameScene: SKScene {
     
     var bannerView: GADBannerView!
     var bannerDisplayed:Bool = false
-    
     var scoreboard:Scoreboard! = nil
     var scoreManager:GameScoreManager! = nil
     var gameoverPanel:GameoverPanel! = nil
@@ -32,16 +31,13 @@ class GameScene: SKScene {
     let tileSize:CGFloat = 20
     let tilePosSize:CGFloat = 0.2
     var tiles:Array = [Tile]()
-    
     var homeBtnTxt:SCNText! = nil
     var homeBtnNode:SCNNode! = nil
-    
     // ViewController reference
     var gameViewController : GameViewController!
     
     override func didMove(to view: SKView) {
         gameScene = self;
-//        self.view?.backgroundColor = UIColor.red
         scoreManager = GameScoreManager.sharedInstance
         runSetup()
     }
@@ -69,9 +65,6 @@ class GameScene: SKScene {
             ]), withKey:"transitioning")
     }
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    
-    
-    
     
     // Build the environment for the scene
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -189,11 +182,6 @@ class GameScene: SKScene {
         gameSCNScene.rootNode.addChildNode(lightNode)
         gameSCNScene.rootNode.addChildNode(cameraNode)
     }
-    
-    func addEndPanel(){
-        
-    }
-    
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     
@@ -217,12 +205,7 @@ class GameScene: SKScene {
         scoreboard.score = 0
         scoreboard.highscore = 0
     }
-    
-    func returnToHome(){
-        
-    }
-    
-    
+
     // Logic helpers
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -388,7 +371,7 @@ class GameScene: SKScene {
             t.value = Int( (arc4random_uniform(2)+1)*2 )
             animateTileIn(tile: t)
             if empty.count == 0 {
-                print("no spots left ----->>>>>>> Any options? : ", self.evaluateGrid() )
+//                print("no spots left ----->>>>>>> Any options? : ", self.evaluateGrid() )
                 if self.evaluateGrid() { self.gameOver() }      // if evaluateGrid returns true - game is over
             }else{ /* nothing - move on */ }
         }
@@ -420,23 +403,16 @@ class GameScene: SKScene {
     // Highscore section
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    func gameOver(){
-        // finalize game
-        print("GAME OVER ! : ",self.scoreboard.highscore)
-        // store score
-        scoreManager.saveScore(score: self.scoreboard.highscore)
+    func gameOver(){ // finalize game
+        scoreManager.saveScore(score: self.scoreboard.highscore) // store score
         gameoverPanel.setScore(val:self.scoreboard.highscore)
-        // transition to end screen
-        moveToScore()
+        moveToScore() // transition to end screen
     }
     
     func moveToScore(){
-        // disable swip actions
-        self.swipeActive = false
-        // possibly reset game
-        resetGame()
-        // move to score panel
-        toScore()
+        self.swipeActive = false    // disable swip actions
+        resetGame() // possibly reset game
+        toScore()   // move to score panel
     }
     
     func toScore(){
@@ -512,7 +488,6 @@ class GameScene: SKScene {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if swipeActive { calculateRowCol(direction:swipe.right) }
-//                moveToScore()
             case UISwipeGestureRecognizerDirection.down:
                 if swipeActive { calculateRowCol(direction:swipe.down) }
             case UISwipeGestureRecognizerDirection.left:
@@ -539,7 +514,6 @@ class GameScene: SKScene {
         if let touchPoint = touch?.location(in: self.gameView),
             let hitTestResult = self.gameView.hitTest(touchPoint, options: nil).first {
             let hitNode = hitTestResult.node
-            print("Name : ",hitNode.name as Any)
             var exit:CGFloat? = nil
             if hitNode.name == "play" { exit = scenes.game }
             if hitNode.name == "info" { exit = scenes.info }
@@ -547,7 +521,6 @@ class GameScene: SKScene {
             if hitNode.name == "settings" { exit = scenes.settings }
             if hitNode.name == "replayBtn" {
                 exit = nil
-                // self.resetGame()
                 self.toGame()
             }
             if hitNode.name == "scoreBtn" { exit = scenes.score }
@@ -559,15 +532,11 @@ class GameScene: SKScene {
         }
     }
     
-    
-    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchMoved(toPoint: t.location(in: self)) } }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { for t in touches { self.touchUp(atPoint: t.location(in: self)) } }
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    
-    
     
     // Transition to scenes
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -578,22 +547,16 @@ class GameScene: SKScene {
                 self.removeSceneAnim()
             },
             SKAction.wait(forDuration: 1.0),
-            SKAction.run() {
-                self.gameViewController.moveToScene(to: scene)
-            }
-            ]), withKey:"transitioning")
+            SKAction.run() { self.gameViewController.moveToScene(to: scene) } ]), withKey:"transitioning")
     }
     
     func removeSceneAnim(){
-        // animate cube out
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1.0
         cameraNode.position = homeCameraOut
         light.intensity = 0
         SCNTransaction.commit()
-        // animate logo out
     }
-    
     
     // Animation Actions
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

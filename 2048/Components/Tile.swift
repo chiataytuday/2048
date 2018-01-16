@@ -13,29 +13,19 @@ import GameplayKit
 class Tile : SCNNode {
     
     var id : Int = 0 {
-        didSet {
-            //do something reactive
-//            backgroundColor = delegate.tileColor(value)
-//            numberLabel.textColor = delegate.tileNumberColor(value)
-//            numberLabel.text = "\(value)"
-        }
+        didSet { }
     }
     
     var row : Int = 0 {
-        didSet {
-
-        }
+        didSet { }
     }
     
     var col : Int = 0 {
-        didSet {
-            
-        }
+        didSet { }
     }
     
     var value : Int = 0{
         didSet {
-//            print(" value ",value)
             self.active = true
             switch value {
             case tilevalue.v2:
@@ -69,17 +59,13 @@ class Tile : SCNNode {
     
     var active : Bool = false {
         didSet {
-            if active {
-                self.show()
-            }else{
-                self.hide()
-            }
+            if active { self.show()}
+            else{ self.hide() }
         }
     }
     
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
+    required init(coder: NSCoder) { fatalError("NSCoding not supported") }
+    
     init(geometry: SCNBox, name:String, materials:Array<SCNMaterial>, position:SCNVector3, pivot:SCNMatrix4, scale:SCNVector3, id:Int, row:Int, col:Int){
             super.init()
             self.geometry = geometry
@@ -95,22 +81,13 @@ class Tile : SCNNode {
             self.hide()
     }
     
-    func setMaterial(materials:Array<SCNMaterial>){
-        self.geometry?.materials = materials
-    }
+    func setMaterial(materials:Array<SCNMaterial>){ self.geometry?.materials = materials }
     
+    func hide(){ self.opacity = 0.2 }
     
-    
-    func hide(){
-        self.opacity = 0.2
-    }
-    
-    func show(){
-        self.opacity = 1.0
-    }
+    func show(){ self.opacity = 1.0 }
     
     func setMaterialForValue(value:CGFloat){
-        
         switch value {
         case material.m2:
             self.geometry?.materials = [mat2]
