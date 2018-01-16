@@ -29,11 +29,8 @@
 		A4D18BF91F594E5D00D93B03 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BF81F594E5D00D93B03 /* HomeScene.swift */; };
 		A4D18BFB1F5954C600D93B03 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFA1F5954C600D93B03 /* Globals.swift */; };
 		A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */; };
-		A4D18C021F5B3EC300D93B03 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C011F5B3EC300D93B03 /* TileView.swift */; };
 		A4D18C041F5B42D800D93B03 /* AuxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C031F5B42D800D93B03 /* AuxModel.swift */; };
 		A4D18C061F5B43A000D93B03 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C051F5B43A000D93B03 /* GameModel.swift */; };
-		A4D18C081F5B466E00D93B03 /* ComponentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C071F5B466E00D93B03 /* ComponentsView.swift */; };
-		A4D18C0A1F5B46BC00D93B03 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C091F5B46BC00D93B03 /* GameBoardView.swift */; };
 		A4D18C0D1F5C9E1600D93B03 /* InfoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C0C1F5C9E1600D93B03 /* InfoScene.swift */; };
 		A4D18C0F1F5C9E3900D93B03 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C0E1F5C9E3900D93B03 /* SettingsScene.swift */; };
 		A4D18C111F5C9E5E00D93B03 /* HighscoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D18C101F5C9E5E00D93B03 /* HighscoreScene.swift */; };
@@ -101,11 +98,8 @@
 		A4D18BF81F594E5D00D93B03 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 		A4D18BFA1F5954C600D93B03 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		A4D18BFF1F5AB4F000D93B03 /* StyleDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleDefinitions.swift; sourceTree = "<group>"; };
-		A4D18C011F5B3EC300D93B03 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		A4D18C031F5B42D800D93B03 /* AuxModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuxModel.swift; sourceTree = "<group>"; };
 		A4D18C051F5B43A000D93B03 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		A4D18C071F5B466E00D93B03 /* ComponentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsView.swift; sourceTree = "<group>"; };
-		A4D18C091F5B46BC00D93B03 /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		A4D18C0C1F5C9E1600D93B03 /* InfoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScene.swift; sourceTree = "<group>"; };
 		A4D18C0E1F5C9E3900D93B03 /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
 		A4D18C101F5C9E5E00D93B03 /* HighscoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighscoreScene.swift; sourceTree = "<group>"; };
@@ -256,9 +250,6 @@
 		A4D18BFD1F5957E900D93B03 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A4D18C011F5B3EC300D93B03 /* TileView.swift */,
-				A4D18C071F5B466E00D93B03 /* ComponentsView.swift */,
-				A4D18C091F5B46BC00D93B03 /* GameBoardView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -391,7 +382,7 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = ZWJY3MNGM6;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					A4864DC71F58A75B00645483 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -623,16 +614,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4D18C0D1F5C9E1600D93B03 /* InfoScene.swift in Sources */,
-				A4D18C081F5B466E00D93B03 /* ComponentsView.swift in Sources */,
 				A41836E91F862AE90021561E /* GameScoreManager.swift in Sources */,
 				A41836EB1F97C8E20021561E /* GameoverPanel.swift in Sources */,
 				A4D18C041F5B42D800D93B03 /* AuxModel.swift in Sources */,
 				A451568A1F79931300467A06 /* Tile.swift in Sources */,
 				A4D18C001F5AB4F000D93B03 /* StyleDefinitions.swift in Sources */,
 				A4364DC2200CE8650004E61B /* Audio.swift in Sources */,
-				A4D18C0A1F5B46BC00D93B03 /* GameBoardView.swift in Sources */,
 				A4D18C061F5B43A000D93B03 /* GameModel.swift in Sources */,
-				A4D18C021F5B3EC300D93B03 /* TileView.swift in Sources */,
 				A41836E71F845B3A0021561E /* Scoreboard.swift in Sources */,
 				A4D18C0F1F5C9E3900D93B03 /* SettingsScene.swift in Sources */,
 				A4864DB81F58A75B00645483 /* GameScene.swift in Sources */,
@@ -807,11 +795,15 @@
 			baseConfigurationReference = 72D81F3507E6B029516C4555 /* Pods-2048.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = ZWJY3MNGM6;
 				INFOPLIST_FILE = 2048/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambaviking.-048";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambaviking.20483D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "2048 3D Prod Profile";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -822,11 +814,15 @@
 			baseConfigurationReference = 60499CCF1A70031637A8810A /* Pods-2048.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SAMBAVIKING PTY. LTD. (ZWJY3MNGM6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SAMBAVIKING PTY. LTD. (ZWJY3MNGM6)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = ZWJY3MNGM6;
 				INFOPLIST_FILE = 2048/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambaviking.-048";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambaviking.20483D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "2048 3D Prod Profile";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
