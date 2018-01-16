@@ -569,39 +569,13 @@ class GameScene: SKScene {
     // Animation Actions
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    func bounce(item:Tile){
-        run(SKAction.sequence([
-            SKAction.run() {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.05
-                item.scale = SCNVector3Make(0.12, 0.12, 0.12)
-                SCNTransaction.commit()
-            },
-            SKAction.run() {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.1
-                item.scale = SCNVector3Make(0.1, 0.1, 0.1)
-                SCNTransaction.commit()
-            }
-            ]), withKey:"bouncing")
-    }
-    
     func animateTileIn(tile:Tile){
-        let tileInAction = SKAction.run() {
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.2
-            tile.position.z = 1.7
-            SCNTransaction.commit()
-        }
-        let tileOutAction = SKAction.run() {
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.3
-            tile.position.z = 1.5
-            SCNTransaction.commit()
-        }
-        tileInAction.timingMode = SKActionTimingMode.easeIn;
-        tileOutAction.timingMode = SKActionTimingMode.easeOut;
-        run(SKAction.sequence([ tileInAction, tileOutAction ]), withKey:"transitionIn")
+        let moveUp = SCNAction.moveBy(x: 0, y: 0, z: 0.2, duration: 0.15)
+        moveUp.timingMode = .easeOut;
+        let moveDown = SCNAction.moveBy(x: 0, y: 0, z: -0.2, duration: 0.3)
+        moveDown.timingMode = .easeIn;
+        let moveSequence = SCNAction.sequence([moveUp,moveDown])
+        tile.runAction(moveSequence)
     }
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
