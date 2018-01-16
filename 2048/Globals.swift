@@ -11,10 +11,6 @@ import SpriteKit
 import SceneKit
 import UIKit
 
-// Textures
-let GameLogo = SKTexture(imageNamed: "GameLogo.png")
-let homePlayBtn = SKTexture(imageNamed: "NewGame.png")
-let metalMapTexture = SKTexture(imageNamed: "kMetalMap.png")
 
 let defaultGridValue:Int = 1000
 
