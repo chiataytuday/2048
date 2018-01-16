@@ -22,6 +22,9 @@ class InfoScene: SKScene {
     
     var backPanel:SCNNode! = nil
     
+    let copyList: [String] = ["Swipe up, down and side", "to side to pair two tiles", "adjacent with the same", "number in the direction", "of the swiping action.", "For each swipe action", "one new tile will be", "added to the grid.", "Once the grid is full,", "the game is over."]
+    
+    
     
     var gameViewController : GameViewController!
     
@@ -93,12 +96,12 @@ class InfoScene: SKScene {
         
         infoSCNScene.rootNode.addChildNode(backPanel)
         
-        let headerTxt = SCNText(string: "HIGHSCORE", extrusionDepth: 8)
+        let headerTxt = SCNText(string: "HOW TO PLAY", extrusionDepth: 8)
         headerTxt.font = UIFont(name: "Hangar-Flat", size: 20)
         let headerNode = SCNNode(geometry: headerTxt)
         headerNode.name = "gameoverHeader"
-        headerNode.scale = SCNVector3Make(0.03, 0.03, 0.03)
-        headerNode.position = SCNVector3Make(0.0, 1.35, 0.55)
+        headerNode.scale = SCNVector3Make(0.025, 0.025, 0.025)
+        headerNode.position = SCNVector3Make(0.0, 1.37, 0.55)
         headerTxt.flatness = 0.1
         headerTxt.chamferRadius = 0.1
         var goMinVec = SCNVector3Zero
@@ -119,34 +122,10 @@ class InfoScene: SKScene {
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         
-        // add home button
-        let howToCopy = """
-                        Swipe up, down and
-                        side to side to pair
-                        two adjacent tiles with
-                        the same number in the
-                        direction of the swiping action.
-                        """
-        let howtoTxt = SCNText(string: howToCopy, extrusionDepth: 8)
-        howtoTxt.font = UIFont(name: "Ionicons", size: 20)
-        let howtoNode = SCNNode(geometry: howtoTxt)
-        howtoNode.name = "howto"
-        howtoNode.scale = SCNVector3Make(0.025, 0.025, 0.025)
-        howtoNode.position = SCNVector3Make(0.0, -1.65, 0.55)
-        howtoTxt.flatness = 0.1
-        howtoTxt.chamferRadius = 0.1
-        var htMinVec = SCNVector3Zero
-        var htMaxVec = SCNVector3Zero
-        if howtoNode.__getBoundingBoxMin(&htMinVec, max: &htMaxVec) {
-            let distance = SCNVector3(
-                x: htMaxVec.x - htMinVec.x,
-                y: htMaxVec.y - htMinVec.y,
-                z: htMaxVec.z - htMinVec.z)
-            howtoNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+         for index in 0...copyList.count-1 {
+            addCopyItem(txt: copyList[index], pos: index)
         }
-        howtoTxt.firstMaterial!.diffuse.contents = UIColor.white
-        howtoTxt.firstMaterial!.specular.contents = UIColor.white
-        infoSCNScene.rootNode.addChildNode(howtoNode)
+
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         
@@ -157,7 +136,7 @@ class InfoScene: SKScene {
         let homeBtnNode = SCNNode(geometry: homeBtnTxt)
         homeBtnNode.name = "homeBtn"
         homeBtnNode.scale = SCNVector3Make(0.035, 0.035, 0.035)
-        homeBtnNode.position = SCNVector3Make(0.0, -1.65, 0.55)
+        homeBtnNode.position = SCNVector3Make(0.0, -1.67, 0.55)
         homeBtnTxt.flatness = 0.1
         homeBtnTxt.chamferRadius = 0.1
         var hbMinVec = SCNVector3Zero
@@ -175,7 +154,21 @@ class InfoScene: SKScene {
         infoSCNScene.rootNode.addChildNode(homeBtnNode)
     }
     
-    
+    func addCopyItem(txt:String, pos:Int){
+        let startPos = 1.05
+        let stepPos:Float = Float(startPos-(0.24*Double(pos)))
+        let txt = SCNText(string: String(txt), extrusionDepth: 8)
+        txt.font = UIFont(name: "Ionicons", size: 20)
+        let node = SCNNode(geometry: txt)
+        node.name = "txt"+String(pos)
+        node.scale = SCNVector3Make(0.011, 0.011, 0.011)
+        node.position = SCNVector3Make(-1.2, stepPos , 0.40)
+        txt.flatness = 0.1
+        txt.chamferRadius = 0.1
+        txt.firstMaterial!.diffuse.contents = UIColor.white
+        txt.firstMaterial!.specular.contents = UIColor.white
+        infoSCNScene.rootNode.addChildNode(node)
+    }
     
     func animateIn(){
         SCNTransaction.begin()

@@ -33,6 +33,9 @@ class GameScene: SKScene {
     let tilePosSize:CGFloat = 0.2
     var tiles:Array = [Tile]()
     
+    var homeBtnTxt:SCNText! = nil
+    var homeBtnNode:SCNNode! = nil
+    
     // ViewController reference
     var gameViewController : GameViewController!
     
@@ -54,6 +57,7 @@ class GameScene: SKScene {
             SKAction.wait(forDuration: 0.2),
             SKAction.run() {
                 self.buildGrid()
+                self.addNav()
                 self.addScoreboard()
                 self.addEndScore()
                 self.addGestureListeners()
@@ -103,6 +107,32 @@ class GameScene: SKScene {
         }
     }
     
+    func addNav(){
+        
+        // Add home button
+        homeBtnTxt = SCNText(string: "\u{f38f}", extrusionDepth: 8)
+        homeBtnTxt.font = UIFont(name: "Ionicons", size: 20)
+        homeBtnNode = SCNNode(geometry: homeBtnTxt)
+        homeBtnNode.name = "homeBtn"
+        homeBtnNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
+        homeBtnNode.position = SCNVector3Make(0.0, -1.10, 0.55)
+        homeBtnTxt.flatness = 0.1
+        homeBtnTxt.chamferRadius = 0.1
+        var hbMinVec = SCNVector3Zero
+        var hbMaxVec = SCNVector3Zero
+        if homeBtnNode.__getBoundingBoxMin(&hbMinVec, max: &hbMaxVec) {
+            let distance = SCNVector3(
+                x: hbMaxVec.x - hbMinVec.x,
+                y: hbMaxVec.y - hbMinVec.y,
+                z: hbMaxVec.z - hbMinVec.z)
+            homeBtnNode.pivot = SCNMatrix4MakeTranslation(distance.x / 2, distance.y / 3, distance.z / 2)
+        }
+        homeBtnTxt.firstMaterial!.diffuse.contents = UIColor.white
+        homeBtnTxt.firstMaterial!.specular.contents = UIColor.white
+        
+        gameSCNScene.rootNode.addChildNode(homeBtnNode)
+    }
+    
     func addGestureListeners(){
         let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture)) // swipe UP
         swipeUP.direction = UISwipeGestureRecognizerDirection.up
@@ -125,7 +155,6 @@ class GameScene: SKScene {
     }
     
     func addStructure() {
-        print("addStructure")
         gameView = SCNView(frame: (self.view?.frame)!)
         gameView.backgroundColor = UIColor.clear
         self.view?.insertSubview(gameView, at: 0)       // add sceneView as SubView

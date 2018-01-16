@@ -39,7 +39,6 @@ class HighscoreScene: SKScene {
         scoreManager = GameScoreManager.sharedInstance
         
         setupBg()                           //  background addition
-        assignTextures()                    // prepare textures
         addStructure()                      // Add prerequisites
         addBackPanel()
         populateScore()
@@ -50,10 +49,6 @@ class HighscoreScene: SKScene {
         let bg = SKSpriteNode(color: UIColor.black, size: CGSize(width: screenW, height: screenH))
         bg.position = CGPoint(x: screenW / 2, y: screenH / 2)
         self.addChild(bg)
-    }
-    
-    func assignTextures(){
-        
     }
     
     func addStructure(){
@@ -153,15 +148,10 @@ class HighscoreScene: SKScene {
     }
     
     func populateScore(){
-        // get score from scoremanager
-        let scoreList = scoreManager.getScores()
-        print("scoreList is : ", type(of: scoreList))
-        // loop through the scores and create decending scoreboard
-        for index in 0...4 {
+        let scoreList = scoreManager.getScores()    // get score from scoremanager
+        for index in 0...4 {    // loop through the scores and create decending scoreboard
             var score = 0
-            if index<scoreList.count {
-                score = scoreList[index]
-            }
+            if index<scoreList.count { score = scoreList[index] }
             createScoreItem(score:score, pos:index)
             print("SCORE IS : ", score)
         }
@@ -175,12 +165,11 @@ class HighscoreScene: SKScene {
         let node = SCNNode(geometry: txt)
         node.name = "node"+String(pos)
         node.scale = SCNVector3Make(0.023, 0.023, 0.023)
-        node.position = SCNVector3Make(-1.1, stepPos , 0.45)
+        node.position = SCNVector3Make(-1.1, stepPos , 0.42)
         txt.flatness = 0.1
         txt.chamferRadius = 0.1
         txt.firstMaterial!.diffuse.contents = UIColor.white
         txt.firstMaterial!.specular.contents = UIColor.white
-        
         scoreSCNScene.rootNode.addChildNode(node)
     }
     
